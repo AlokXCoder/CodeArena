@@ -20,8 +20,8 @@ const ProfilePage = () => {
 
             try {
                 const [resProfile, resStats] = await Promise.all([
-                    fetch('http://localhost:5000/api/user/profile', { headers: { 'Authorization': `Bearer ${token}` } }),
-                    fetch('http://localhost:5000/api/user/profile/stats', { headers: { 'Authorization': `Bearer ${token}` } })
+                    fetch(`${import.meta.env.VITE_API_URL}/api/user/profile`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                    fetch(`${import.meta.env.VITE_API_URL}/api/user/profile/stats`, { headers: { 'Authorization': `Bearer ${token}` } })
                 ]);
 
                 if (resProfile.ok && resStats.ok) {

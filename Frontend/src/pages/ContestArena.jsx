@@ -13,7 +13,7 @@ const ContestArena = () => {
     useEffect(() => {
         const fetchContest = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/api/contests/${contestId}`);
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contests/${contestId}`);
                 if (res.ok) {
                     const data = await res.json();
                     setContest(data);
