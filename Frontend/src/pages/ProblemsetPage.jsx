@@ -90,6 +90,7 @@ const ProblemsetPage = () => {
             : <ChevronDown size={13} className="ml-1 text-[var(--color-primary)]" />;
     };
 
+<<<<<<< HEAD
     // Seed button
     const handleSeedData = async () => {
         setLoading(true);
@@ -102,6 +103,8 @@ const ProblemsetPage = () => {
         }
     };
 
+=======
+>>>>>>> 2a8b26ca01fe473d62ed4440bf717300ed11a4e0
     // Difficulty color
     const diffColor = (d) => d === 'Easy' ? 'text-emerald-400' : d === 'Medium' ? 'text-amber-400' : 'text-red-400';
     const diffBg = (d) => d === 'Easy' ? 'bg-emerald-500/10 border-emerald-500/30' : d === 'Medium' ? 'bg-amber-500/10 border-amber-500/30' : 'bg-red-500/10 border-red-500/30';
@@ -117,7 +120,7 @@ const ProblemsetPage = () => {
 
     return (
 
-        <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-8 custom-scrollbar text-sm bg-transparent min-h-full">
+        <div className="flex-1 overflow-y-auto w-full mx-auto bg-black p-4 md:p-8 custom-scrollbar text-sm min-h-screen">
             <div className="max-w-6xl mx-auto flex flex-col gap-6">
 
                 {/* Header */}
@@ -131,11 +134,6 @@ const ProblemsetPage = () => {
                             )}
                         </p>
                     </div>
-                    {problems.length === 0 && !loading && totalCount === 0 && (
-                        <button onClick={handleSeedData} className="bg-[var(--color-primary)] text-white px-4 py-2 rounded font-bold text-xs shadow-[0_0_15px_rgba(246,107,21,0.3)]">
-                            Auto-Seed DB
-                        </button>
-                    )}
                 </div>
 
                 {/* Toolbar */}
