@@ -1,9 +1,9 @@
 import React from 'react';
-import { RotateCw, Settings, Expand, ChevronDown } from 'lucide-react';
+import { RotateCw, Settings, Expand, Minimize2, ChevronDown } from 'lucide-react';
 
-const CodeEditorPane = ({ code, setCode, disabled }) => {
+const CodeEditorPane = ({ code, setCode, disabled, isMaximized, onMaximize }) => {
     return (
-        <div className={`flex-[2] flex flex-col min-h-0 border border-[var(--color-dark-border)] rounded-md overflow-hidden relative ${disabled ? 'bg-red-900/10 opacity-80' : 'bg-[var(--color-dark-surface)]'}`}>
+        <div className={`flex flex-col min-h-0 h-full border border-[var(--color-dark-border)] rounded-md overflow-hidden relative ${disabled ? 'bg-red-900/10 opacity-80' : 'bg-black'}`}>
             {/* Top Bar */}
             <div className="flex items-center justify-between bg-[#1a1a1a] border-b border-[var(--color-dark-border)] px-3 py-2">
                 <div className="flex items-center gap-3">
@@ -26,17 +26,21 @@ const CodeEditorPane = ({ code, setCode, disabled }) => {
 
                 <div className="flex items-center gap-3 text-xs text-gray-500 font-medium tracking-wide">
                     <span>Saved to local storage</span>
-                    <button className="p-1.5 hover:text-white hover:bg-[#2a2a2a] rounded transition-colors" title="Full Screen">
-                        <Expand size={14} />
+                    <button
+                        onClick={onMaximize}
+                        className="p-1.5 hover:text-white hover:bg-[#2a2a2a] rounded transition-colors"
+                        title={isMaximized ? 'Restore' : 'Maximize Editor'}
+                    >
+                        {isMaximized ? <Minimize2 size={14} /> : <Expand size={14} />}
                     </button>
                 </div>
             </div>
 
-            {/* Code Editor Area */}
-            <div className="flex-1 overflow-y-auto bg-[#1e1e1e] text-sm font-mono flex">
+            {/* Code Editor Area - BLACK background */}
+            <div className="flex-1 overflow-y-auto bg-black text-sm font-mono flex">
                 {/* Line Numbers */}
-                <div className="w-12 flex-shrink-0 bg-[#1e1e1e] text-[#5a6069] text-right pr-4 py-4 select-none border-r border-[#2d2d2d] flex flex-col">
-                    {[...Array(16)].map((_, i) => (
+                <div className="w-12 flex-shrink-0 bg-black text-[#5a6069] text-right pr-4 py-4 select-none border-r border-[#2d2d2d] flex flex-col">
+                    {[...Array(Math.max(16, code.split('\n').length))].map((_, i) => (
                         <div key={i} className="leading-6">{i + 1}</div>
                     ))}
                 </div>

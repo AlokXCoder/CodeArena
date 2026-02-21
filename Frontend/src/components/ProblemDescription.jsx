@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, Lightbulb, History, Star, Share2, Copy, Sparkles, Loader2, Bot, CheckCircle2, XCircle } from 'lucide-react';
+import { FileText, Lightbulb, History, Star, Share2, Copy, Sparkles, Loader2, Bot, CheckCircle2, XCircle, Expand, Minimize2 } from 'lucide-react';
 import { marked } from 'marked';
 
-const ProblemDescription = ({ problem, isLoading, wrongAttempts, showHintOverlay, setShowHintOverlay, submissions, requestTabChange }) => {
+const ProblemDescription = ({ problem, isLoading, wrongAttempts, showHintOverlay, setShowHintOverlay, submissions, requestTabChange, isMaximized, onMaximize }) => {
     const [activeTab, setActiveTab] = useState('Description');
     const [isExplaining, setIsExplaining] = useState(false);
     const [explanation, setExplanation] = useState(null);
@@ -151,6 +151,17 @@ const ProblemDescription = ({ problem, isLoading, wrongAttempts, showHintOverlay
                         )}
                     </button>
                 )}
+
+                {/* Maximize/Restore Button */}
+                <div className="ml-auto flex items-center pr-2">
+                    <button
+                        onClick={onMaximize}
+                        className="p-1.5 text-gray-500 hover:text-white hover:bg-[#2a2a2a] rounded transition-colors"
+                        title={isMaximized ? 'Restore' : 'Maximize'}
+                    >
+                        {isMaximized ? <Minimize2 size={14} /> : <Expand size={14} />}
+                    </button>
+                </div>
             </div>
 
             {/* Content Scroll Area */}
@@ -203,19 +214,32 @@ const ProblemDescription = ({ problem, isLoading, wrongAttempts, showHintOverlay
                             <div className="mt-8 space-y-6">
                                 {problem.testCases?.filter(tc => !tc.isHidden).map((testCase, index) => (
                                     <div key={index} className="rounded-lg border border-[var(--color-dark-border)] overflow-hidden">
-                                        <div className="px-4 py-2 bg-[#1f1f1f] text-xs font-bold text-gray-400 flex justify-between items-center group">
-                                            EXAMPLE {index + 1}
-                                            <button className="hover:text-white opacity-0 group-hover:opacity-100 transition-opacity"><Copy size={14} /></button>
+                                        <div className="px-4 py-2.5 bg-[#1f1f1f] text-xs font-bold text-gray-400 flex justify-between items-center group">
+                                            <span>Example {index + 1}</span>
+                                            <button className="hover:text-white opacity-0 group-hover:opacity-100 transition-opacity" title="Copy"><Copy size={14} /></button>
                                         </div>
-                                        <div className="p-4 bg-[#1a1a1a] font-mono text-sm space-y-2">
-                                            <div className="whitespace-pre-wrap"><span className="text-gray-500">Input:</span><br />{testCase.input}</div>
+                                        <div className="p-4 bg-[#1a1a1a] font-mono text-sm space-y-3">
+                                            <div>
+                                                <span className="text-gray-500 text-xs font-semibold not-italic">Input:</span>
+                                                <pre className="mt-1 text-gray-300 whitespace-pre-wrap bg-[#141414] rounded px-3 py-2 border border-[#2a2a2a]">{testCase.input}</pre>
+                                            </div>
+                                            <div>
+                                                <span className="text-gray-500 text-xs font-semibold not-italic">Output:</span>
+                                                <pre className="mt-1 text-gray-300 whitespace-pre-wrap bg-[#141414] rounded px-3 py-2 border border-[#2a2a2a]">{testCase.expectedOutput}</pre>
+                                            </div>
+                                            {testCase.explanation && (
+                                                <div>
+                                                    <span className="text-gray-500 text-xs font-semibold not-italic">Explanation:</span>
+                                                    <p className="mt-1 text-gray-400 text-sm leading-relaxed">{testCase.explanation}</p>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 ))}
                             </div>
                         </div>
 
-                        {/* Constraints Placeholder */}
+                        {/* Constraints */}
                         <div className="mt-10">
                             <div className="flex items-center gap-2 mb-4">
                                 <div className="w-1 h-3.5 bg-[var(--color-primary)] rounded"></div>

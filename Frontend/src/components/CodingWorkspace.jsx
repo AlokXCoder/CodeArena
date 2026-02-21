@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { Timer, AlertCircle, ScanFace } from 'lucide-react';
 import ProblemDescription from './ProblemDescription';
@@ -35,6 +35,71 @@ const CodingWorkspace = () => {
     const setupVideoRef = useRef(null);
     const setupCanvasRef = useRef(null);
     const setupStreamRef = useRef(null);
+
+    // Resizable panel states
+    const [leftWidth, setLeftWidth] = useState(45); // percentage
+    const [editorHeight, setEditorHeight] = useState(55); // percentage
+    const [maximizedPanel, setMaximizedPanel] = useState(null); // null | 'problem' | 'editor' | 'console'
+    const containerRef = useRef(null);
+    const rightPaneRef = useRef(null);
+    const isDraggingH = useRef(false);
+    const isDraggingV = useRef(false);
+
+    // Horizontal resize handler (left/right panes)
+    const handleHMouseDown = useCallback((e) => {
+        e.preventDefault();
+        isDraggingH.current = true;
+        document.body.style.cursor = 'col-resize';
+        document.body.style.userSelect = 'none';
+
+        const onMouseMove = (e) => {
+            if (!isDraggingH.current || !containerRef.current) return;
+            const rect = containerRef.current.getBoundingClientRect();
+            const pct = ((e.clientX - rect.left) / rect.width) * 100;
+            setLeftWidth(Math.min(Math.max(pct, 20), 75));
+        };
+
+        const onMouseUp = () => {
+            isDraggingH.current = false;
+            document.body.style.cursor = '';
+            document.body.style.userSelect = '';
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+        };
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+    }, []);
+
+    // Vertical resize handler (editor/console in right pane)
+    const handleVMouseDown = useCallback((e) => {
+        e.preventDefault();
+        isDraggingV.current = true;
+        document.body.style.cursor = 'row-resize';
+        document.body.style.userSelect = 'none';
+
+        const onMouseMove = (e) => {
+            if (!isDraggingV.current || !rightPaneRef.current) return;
+            const rect = rightPaneRef.current.getBoundingClientRect();
+            const pct = ((e.clientY - rect.top) / rect.height) * 100;
+            setEditorHeight(Math.min(Math.max(pct, 20), 85));
+        };
+
+        const onMouseUp = () => {
+            isDraggingV.current = false;
+            document.body.style.cursor = '';
+            document.body.style.userSelect = '';
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+        };
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+    }, []);
+
+    const handleMaximize = useCallback((panel) => {
+        setMaximizedPanel(prev => prev === panel ? null : panel);
+    }, []);
 
     useEffect(() => {
         const fetchWorkspaceData = async () => {
@@ -280,37 +345,95 @@ const CodingWorkspace = () => {
                 </div>
             )}
 
-            <div className="flex-1 flex flex-col md:flex-row gap-2 p-2 h-full overflow-hidden relative">
+            <div ref={containerRef} className="flex-1 flex flex-col md:flex-row p-2 h-full overflow-hidden relative">
                 {/* Left Pane: Problem Description */}
-                <div className={`flex-1 w-full md:max-w-[50%] md:min-w-[30%] flex flex-col min-h-0 rounded-md transition-all duration-300 ${showHintOverlay ? 'z-[101] ring-2 ring-indigo-500/60 shadow-[0_0_40px_rgba(99,102,241,0.2)]' : 'z-10'}`}>
-                    <ProblemDescription
-                        problem={problem}
-                        isLoading={loading}
-                        wrongAttempts={wrongAttempts}
-                        showHintOverlay={showHintOverlay}
-                        setShowHintOverlay={setShowHintOverlay}
-                        submissions={submissions}
-                        requestTabChange={requestTabChange}
-                    />
-                </div>
+                {maximizedPanel !== 'editor' && maximizedPanel !== 'console' && (
+                    <div
+                        className={`flex flex-col min-h-0 rounded-md transition-all duration-200 ${showHintOverlay ? 'z-[101] ring-2 ring-indigo-500/60 shadow-[0_0_40px_rgba(99,102,241,0.2)]' : 'z-10'}`}
+                        style={{
+                            width: maximizedPanel === 'problem' ? '100%' : `${leftWidth}%`,
+                            flexShrink: 0,
+                        }}
+                    >
+                        <ProblemDescription
+                            problem={problem}
+                            isLoading={loading}
+                            wrongAttempts={wrongAttempts}
+                            showHintOverlay={showHintOverlay}
+                            setShowHintOverlay={setShowHintOverlay}
+                            submissions={submissions}
+                            requestTabChange={requestTabChange}
+                            isMaximized={maximizedPanel === 'problem'}
+                            onMaximize={() => handleMaximize('problem')}
+                        />
+                    </div>
+                )}
+
+                {/* Horizontal Resize Handle */}
+                {!maximizedPanel && (
+                    <div
+                        className="hidden md:flex w-[6px] cursor-col-resize items-center justify-center group shrink-0 mx-0 z-20 relative"
+                        onMouseDown={handleHMouseDown}
+                    >
+                        <div className="w-[3px] h-10 rounded-full bg-[#2d1e16] group-hover:bg-[var(--color-primary)] group-active:bg-[var(--color-primary)] transition-colors" />
+                    </div>
+                )}
 
                 {/* Right Pane: Code Editor and Console */}
-                <div className="flex-1 flex flex-col gap-2 min-h-0 z-10 w-full">
-                    <CodeEditorPane code={code} setCode={setCode} disabled={isLocked} />
-                    <ConsoleTestCasePane
-                        testCases={problem?.testCases || []}
-                        code={code}
-                        problemId={problem?._id}
-                        isLoading={loading}
-                        wrongAttempts={wrongAttempts}
-                        setWrongAttempts={setWrongAttempts}
-                        setShowHintOverlay={setShowHintOverlay}
-                        submissions={submissions}
-                        setSubmissions={setSubmissions}
-                        setRequestTabChange={setRequestTabChange}
-                        disabled={isLocked}
-                    />
-                </div>
+                {maximizedPanel !== 'problem' && (
+                    <div
+                        ref={rightPaneRef}
+                        className="flex flex-col min-h-0 z-10 h-full"
+                        style={{
+                            width: maximizedPanel === 'editor' || maximizedPanel === 'console' ? '100%' : `${100 - leftWidth}%`,
+                            flexShrink: 0,
+                        }}
+                    >
+                        {/* Editor */}
+                        {maximizedPanel !== 'console' && (
+                            <div style={{ flex: maximizedPanel === 'editor' ? '1 1 100%' : `${editorHeight} 1 0%`, minHeight: 0, overflow: 'hidden' }}>
+                                <CodeEditorPane
+                                    code={code}
+                                    setCode={setCode}
+                                    disabled={isLocked}
+                                    isMaximized={maximizedPanel === 'editor'}
+                                    onMaximize={() => handleMaximize('editor')}
+                                />
+                            </div>
+                        )}
+
+                        {/* Vertical Resize Handle */}
+                        {!maximizedPanel && (
+                            <div
+                                className="h-[6px] cursor-row-resize flex items-center justify-center group shrink-0 my-0 z-20 relative"
+                                onMouseDown={handleVMouseDown}
+                            >
+                                <div className="h-[3px] w-10 rounded-full bg-[#2d1e16] group-hover:bg-[var(--color-primary)] group-active:bg-[var(--color-primary)] transition-colors" />
+                            </div>
+                        )}
+
+                        {/* Console */}
+                        {maximizedPanel !== 'editor' && (
+                            <div style={{ flex: maximizedPanel === 'console' ? '1 1 100%' : `${100 - editorHeight} 1 0%`, minHeight: 0, overflow: 'hidden' }}>
+                                <ConsoleTestCasePane
+                                    testCases={problem?.testCases || []}
+                                    code={code}
+                                    problemId={problem?._id}
+                                    isLoading={loading}
+                                    wrongAttempts={wrongAttempts}
+                                    setWrongAttempts={setWrongAttempts}
+                                    setShowHintOverlay={setShowHintOverlay}
+                                    submissions={submissions}
+                                    setSubmissions={setSubmissions}
+                                    setRequestTabChange={setRequestTabChange}
+                                    disabled={isLocked}
+                                    isMaximized={maximizedPanel === 'console'}
+                                    onMaximize={() => handleMaximize('console')}
+                                />
+                            </div>
+                        )}
+                    </div>
+                )}
 
                 {/* Overall Screen Backdrop for Arena Bot Spotlight */}
                 {showHintOverlay && (
