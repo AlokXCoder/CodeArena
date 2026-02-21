@@ -51,7 +51,7 @@ const ProblemsetPage = () => {
             if (difficultyFilter !== 'All') params.set('difficulty', difficultyFilter);
             if (debouncedSearch) params.set('search', debouncedSearch);
 
-            const res = await fetch(`http://localhost:5000/api/problems?${params}`);
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/problems?${params}`);
             if (res.ok) {
                 const data = await res.json();
                 setProblems(data.problems || []);
@@ -94,7 +94,7 @@ const ProblemsetPage = () => {
     const handleSeedData = async () => {
         setLoading(true);
         try {
-            await fetch('http://localhost:5000/api/problems/seed', { method: 'POST' });
+            await fetch(`${import.meta.env.VITE_API_URL}/api/problems/seed`, { method: 'POST' });
             window.location.reload();
         } catch (e) {
             console.error(e);

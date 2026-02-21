@@ -41,7 +41,7 @@ const SuperadminDashboard = () => {
 
         setIsCreatingProb(true);
         try {
-            const res = await fetch('http://localhost:5000/api/problems/superadmin', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/problems/superadmin`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({

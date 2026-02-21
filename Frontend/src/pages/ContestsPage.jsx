@@ -11,7 +11,7 @@ const ContestsPage = () => {
     useEffect(() => {
         const fetchContests = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/contests');
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contests`);
                 if (res.ok) {
                     const data = await res.json();
                     setContests(data);
@@ -49,7 +49,7 @@ const ContestsPage = () => {
         if (!token) { navigate('/auth'); return; }
 
         try {
-            const res = await fetch(`http://localhost:5000/api/contests/${contestId}/register`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contests/${contestId}/register`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` }
             });

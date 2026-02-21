@@ -17,7 +17,7 @@ const LeaderboardPage = () => {
         try {
             const params = new URLSearchParams({ page, limit });
             if (searchQuery) params.append('search', searchQuery);
-            const res = await fetch(`http://localhost:5000/api/leaderboard?${params}`);
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/leaderboard?${params}`);
             const data = await res.json();
             setLeaderboard(data.leaderboard || []);
             setTotalPages(data.totalPages || 1);
