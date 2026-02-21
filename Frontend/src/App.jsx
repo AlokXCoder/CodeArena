@@ -10,15 +10,16 @@ import ProblemsetPage from './pages/ProblemsetPage';
 import ContestsPage from './pages/ContestsPage';
 import CompanyDashboard from './pages/CompanyDashboard';
 import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
     <Router>
       <div className="flex flex-col h-screen bg-[var(--color-dark-bg)] text-white font-sans overflow-hidden">
         <Navbar />
-        <main className="flex-1 flex flex-col min-h-0 overflow-hidden">
+        <main className="flex-1 flex flex-col pt-16 overflow-hidden">
           <Routes>
-            <Route path="/" element={<ProblemsetPage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/problemset" element={<ProblemsetPage />} />
             <Route path="/contests" element={<ContestsPage />} />
             <Route path="/company/dashboard" element={<CompanyDashboard />} />
