@@ -46,7 +46,7 @@ const ProblemsetPage = () => {
     };
 
     return (
-        <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-8 custom-scrollbar text-sm bg-transparent min-h-full">
+        <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-8 custom-scrollbar text-sm bg-black min-h-screen">
             <div className="max-w-6xl mx-auto flex flex-col gap-8">
 
                 {/* Header */}

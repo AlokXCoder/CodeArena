@@ -40,12 +40,10 @@ const Navbar = () => {
                 }`}
         >
             <div className="max-w-screen-2xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
-                {/* Left Section - Logo */}
                 <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                     <img src="/code-arena_logo.png" alt="logo png" width={180} height={180} />
                 </Link>
 
-                {/* Center Section - Navigation Links (Desktop) */}
                 <div className="hidden md:flex flex-1 justify-center items-center gap-8">
                     {navLinks.map((link) => (
                         <Link
@@ -62,7 +60,6 @@ const Navbar = () => {
                     ))}
                 </div>
 
-                {/* Right Section (Always Visible) */}
                 <div className="flex items-center gap-4 ml-auto">
                     <Link
                         to="/ai-roadmap"
@@ -71,7 +68,6 @@ const Navbar = () => {
                         <Bot size={14} />
                         AI Roadmap
                     </Link>
-                    {/* Profile */}
                     {localStorage.getItem('token') ? (
                         <>
                             <Link

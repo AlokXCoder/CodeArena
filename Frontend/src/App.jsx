@@ -9,10 +9,10 @@ import OnboardingPage from './pages/OnboardingPage';
 import ProblemsetPage from './pages/ProblemsetPage';
 import ContestsPage from './pages/ContestsPage';
 import CompanyDashboard from './pages/CompanyDashboard';
-import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import SuperadminDashboard from './pages/SuperadminDashboard';
 import AiRoadmapPage from './pages/AiRoadmapPage';
+import HomepageFooter from './components/homepage/HomepageFooter';
 
 function App() {
   return (
@@ -20,7 +20,6 @@ function App() {
       <div
         className="flex flex-col h-screen bg-[var(--color-dark-bg)] text-white font-sans relative"
       >
-        {/* Global Background Gradient */}
         <div className="pointer-events-none fixed inset-0 z-0">
           <div
             className="absolute inset-0"
@@ -48,7 +47,9 @@ function App() {
               <Route path="/ai-roadmap" element={<AiRoadmapPage />} />
             </Routes>
           </main>
-          <Footer />
+          <div className='bg-black'>
+            <HomepageFooter />
+          </div>
         </div>
       </div>
     </Router>

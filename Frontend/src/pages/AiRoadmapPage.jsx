@@ -96,7 +96,6 @@ const AiRoadmapPage = () => {
         setError('');
     };
 
-    // ---------- LOADING STATE ----------
     if (loading) {
         return (
             <div className="flex-1 flex items-center justify-center min-h-screen p-6">
@@ -115,19 +114,15 @@ const AiRoadmapPage = () => {
         );
     }
 
-    // ---------- ROADMAP RESULT ----------
     if (roadmap) {
         return (
-            <div className="flex-1 min-h-screen p-4 md:p-8 relative">
-                {/* Ambient background glow */}
+            <div className="flex-1 bg-black min-h-screen p-4 md:p-8 relative">
                 <div className="pointer-events-none fixed inset-0 z-0">
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[var(--color-primary)]/8 rounded-full blur-[120px]" />
                 </div>
 
                 <div className="max-w-4xl mx-auto relative z-10">
-                    {/* Hero Header Card */}
                     <div className="relative mb-8 rounded-2xl overflow-hidden">
-                        {/* Animated gradient top border */}
                         <div className="h-1 w-full bg-gradient-to-r from-orange-600 via-[var(--color-primary)] to-yellow-500"
                             style={{ backgroundSize: '200% 100%', animation: 'gradient-shift 3s ease infinite' }} />
 

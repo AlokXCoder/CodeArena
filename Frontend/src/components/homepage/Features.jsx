@@ -531,13 +531,13 @@ export default function Features() {
                         </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                             <a
-                                href="#"
+                                href="/auth"
                                 className="bg-osu hover:bg-osu-light text-white font-semibold px-8 py-3 rounded-lg transition-all hover:shadow-lg hover:shadow-osu/30"
                             >
                                 Create Free Account
                             </a>
                             <a
-                                href="#"
+                                href="/problemset"
                                 className="border border-white/30 text-white font-medium px-8 py-3 rounded-lg hover:bg-white/5 transition-all"
                             >
                                 Explore Problems

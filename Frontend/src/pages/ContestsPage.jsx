@@ -72,7 +72,7 @@ const ContestsPage = () => {
     };
 
     return (
-        <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-8 custom-scrollbar text-sm bg-transparent min-h-full">
+        <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-8 custom-scrollbar text-sm bg-black min-h-screen">
             <div className="max-w-6xl mx-auto flex flex-col gap-8">
 
                 {/* Header Section */}
@@ -176,8 +176,8 @@ const ContestsPage = () => {
                                                 onClick={() => contest.participants?.includes(user?._id) ? null : handleRegister(contest._id)}
                                                 disabled={contest.participants?.includes(user?._id)}
                                                 className={`w-full py-3 font-bold rounded-lg transition-all ${contest.participants?.includes(user?._id)
-                                                        ? 'bg-green-500/10 text-green-500 cursor-not-allowed border border-green-500/20'
-                                                        : 'bg-[var(--color-primary)]/10 text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white'
+                                                    ? 'bg-green-500/10 text-green-500 cursor-not-allowed border border-green-500/20'
+                                                    : 'bg-[var(--color-primary)]/10 text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white'
                                                     }`}
                                             >
                                                 {contest.participants?.includes(user?._id) ? '✓ Registered' : 'Register Now'}

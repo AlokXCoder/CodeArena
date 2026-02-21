@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Swords } from "lucide-react";
 
 const languageLogos = [
     { name: "Python", icon: "/icons/python.svg" },
@@ -22,7 +21,6 @@ const languageLogos = [
 export default function Hero() {
     return (
         <section className="relative w-full overflow-hidden pt-24 lg:pt-36 pb-12">
-            {/* Background gradient overlay */}
             <div className="absolute inset-0 -z-10">
                 <div
                     className="absolute inset-0"
@@ -43,25 +41,9 @@ export default function Hero() {
                 </div>
             </div>
 
-            {/* Hero content */}
             <div className="relative z-10 py-12 md:pb-24 lg:pb-28">
                 <div className="mx-auto flex w-full max-w-screen-2xl flex-col px-6 lg:flex-row lg:items-center lg:gap-12 lg:px-12">
                     <div className="mx-auto max-w-lg text-center lg:mx-0 lg:max-w-2xl lg:flex-1 lg:text-left">
-                        {/* Badge */}
-                        <a href="#early-access" className="inline-block mx-auto lg:mx-0">
-                            <span className="ring-1 ring-white/30 no-underline group cursor-pointer relative shadow-2xl shadow-orange-600/50 rounded-full p-px text-xs font-semibold leading-6 text-white inline-block">
-                                <span className="absolute inset-0 overflow-hidden rounded-full">
-                                    <span className="absolute inset-0 rounded-full opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(75% 100% at 50% 0%, rgba(220,68,5,0.3) 0%, rgba(0,0,0,0.5) 75%)" }} />
-                                </span>
-                                <span className="relative flex space-x-2 items-center z-10 rounded-full py-0.5 px-4 ring-1 ring-white/20">
-                                    <span>Reserve Your Spot</span>
-                                    <svg fill="none" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.75 8.75L14.25 12L10.75 15.25" stroke="#dc4405" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
-                                    </svg>
-                                </span>
-                                <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-orange-600/0 via-orange-600/90 to-orange-600/0 transition-opacity duration-500 group-hover:opacity-40" />
-                            </span>
-                        </a>
 
                         <h1 className="mt-8 max-w-2xl text-balance text-3xl font-medium text-white sm:text-3xl md:text-4xl lg:mt-6 lg:text-5xl">
                             Host and participate in online coding contests{" "}
@@ -76,31 +58,20 @@ export default function Hero() {
 
                         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:mt-12 sm:flex-row lg:justify-start">
                             <a
-                                href="#try-it"
+                                href={localStorage.getItem('token') ? '/dashboard' : '/auth'}
                                 className="bg-osu hover:bg-osu-light text-white font-semibold px-6 py-3 rounded-lg transition-all hover:shadow-lg hover:shadow-osu/30 flex items-center gap-2"
                             >
                                 Try It Now
                             </a>
-                            <a
-                                href="#features"
-                                className="border border-white/20 text-white font-medium px-6 py-3 rounded-lg hover:bg-white/5 transition-all flex items-center gap-2"
-                            >
-                                Documentation
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M7 17l9.2-9.2M17 17V8H8" />
-                                </svg>
-                            </a>
                         </div>
                     </div>
 
-                    {/* Demo terminal on right side */}
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                         <DemoTerminal />
                     </div>
                 </div>
             </div>
 
-            {/* Language logo carousel */}
             <div className="relative pb-6 select-none" aria-hidden>
                 <div className="group relative m-auto max-w-6xl px-6">
                     <div className="flex flex-col items-center md:flex-row">
