@@ -134,13 +134,13 @@ const ConsoleTestCasePane = ({
                                     onClick={() => setActiveTab(index)}
                                     className={`whitespace-nowrap px-4 py-1.5 rounded-md font-medium transition-colors ${activeTab === index
                                         ? 'bg-[#2a2a2a] text-[var(--color-primary)] font-semibold border border-[var(--color-primary)]/30'
-                                        : 'bg-transparent text-gray-400 hover:text-gray-200 hover:bg-[#2a2a2a]'
+                                        : 'bg-black text-gray-400 hover:text-gray-200 hover:bg-[#2a2a2a]'
                                         }`}
                                 >
                                     Case {index + 1}
                                 </button>
                             ))}
-                            <button className="px-4 py-1.5 rounded-md bg-transparent text-[var(--color-primary)]/80 hover:text-[var(--color-primary)] font-medium transition-colors flex items-center gap-1 ml-auto whitespace-nowrap">
+                            <button className="px-4 py-1.5 rounded-md bg-black text-[var(--color-primary)]/80 hover:text-[var(--color-primary)] font-medium transition-colors flex items-center gap-1 ml-auto whitespace-nowrap">
                                 <Plus size={14} /> Custom
                             </button>
                         </div>
