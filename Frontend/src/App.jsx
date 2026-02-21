@@ -30,7 +30,7 @@ function App() {
           />
         </div>
 
-        <div className="z-10 flex flex-col h-full w-full relative">
+        <div className="z-10 flex flex-col h-full w-full relative bg-black">
           <Navbar />
           <main className="flex-1 flex flex-col pt-16">
             <Routes>
