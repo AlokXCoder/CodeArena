@@ -12,6 +12,7 @@ import CompanyDashboard from './pages/CompanyDashboard';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import SuperadminDashboard from './pages/SuperadminDashboard';
+import ContestArena from './pages/ContestArena';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
               <Route path="/company/dashboard" element={<CompanyDashboard />} />
               <Route path="/superadmin" element={<SuperadminDashboard />} />
               <Route path="/workspace/practice/:problemId" element={<CodingWorkspace />} />
+              <Route path="/workspace/contest/:contestId" element={<ContestArena />} />
               <Route path="/workspace/contest/:contestId/:problemId" element={<CodingWorkspace />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/leaderboard" element={<LeaderboardPage />} />

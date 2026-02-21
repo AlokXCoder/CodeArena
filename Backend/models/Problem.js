@@ -23,6 +23,10 @@ const problemSchema = new mongoose.Schema({
         expectedOutput: { type: String, required: true },
         isHidden: { type: Boolean, default: false } // Hidden test cases for evaluation
     }],
+    timeLimit: {
+        type: Number,
+        default: 0 // 0 means no limit (global contest timer relies on contest end time instead)
+    },
     companyId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User', // If created by a company

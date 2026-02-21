@@ -1,5 +1,6 @@
 import express from 'express';
 import Contest from '../models/Contest.js';
+import Problem from '../models/Problem.js';
 import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
@@ -23,7 +24,7 @@ router.get('/:id', async (req, res) => {
     try {
         const contest = await Contest.findById(req.params.id)
             .populate('companyId', 'name')
-            .populate('problems', 'title difficulty category');
+            .populate('problems', 'title difficulty category timeLimit');
 
         if (!contest) return res.status(404).json({ message: 'Contest not found' });
         res.status(200).json(contest);
@@ -43,11 +44,28 @@ router.post('/', protect, async (req, res) => {
 
         const { title, description, problems, startTime, endTime, strictValidation } = req.body;
 
+        // problems is now an array of complete Problem objects containing Title, Desc, TimeLimit, TestCases
+        const createdProblemIds = [];
+        for (const probData of problems) {
+            const newProblem = new Problem({
+                title: probData.title,
+                description: probData.description,
+                difficulty: probData.difficulty || 'Medium',
+                category: probData.category || 'Contest Specific',
+                testCases: probData.testCases,
+                timeLimit: probData.timeLimit || 0,
+                companyId: req.user._id,
+                isMock: false
+            });
+            const savedProb = await newProblem.save();
+            createdProblemIds.push(savedProb._id);
+        }
+
         const contest = new Contest({
             title,
             description,
             companyId: req.user._id,
-            problems,
+            problems: createdProblemIds,
             startTime,
             endTime,
             strictValidation

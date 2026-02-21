@@ -9,6 +9,47 @@ const router = express.Router();
 // Initialize Groq client
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
+// ----------------------------------------------------------------------
+// Load Balancer / Concurrency Queue for AI Compiler
+// ----------------------------------------------------------------------
+// Prevent Groq API Rate Limiting by forcing submissions into an async queue.
+// If 50 students submit code at once, they will only be sent to Groq
+// 'concurrency' number of times concurrently. The rest wait harmlessly.
+class AsyncQueue {
+    constructor(concurrency = 3) {
+        this.concurrency = concurrency;
+        this.running = 0;
+        this.queue = [];
+    }
+
+    add(taskFunction) {
+        return new Promise((resolve, reject) => {
+            this.queue.push({ taskFunction, resolve, reject });
+            this.next();
+        });
+    }
+
+    async next() {
+        if (this.running >= this.concurrency || this.queue.length === 0) return;
+
+        this.running++;
+        const { taskFunction, resolve, reject } = this.queue.shift();
+
+        try {
+            const result = await taskFunction();
+            resolve(result);
+        } catch (error) {
+            reject(error);
+        } finally {
+            this.running--;
+            this.next(); // Trigger the next queued item recursively
+        }
+    }
+}
+
+// We globally allow 3 Groq evaluations to run in parallel.
+const evaluationQueue = new AsyncQueue(3);
+
 // @desc    Evaluate code submission using Groq AI and track in DB
 // @route   POST /api/submissions/:problemId
 // @access  Private
@@ -60,21 +101,24 @@ Respond strictly with a JSON object in the following format. DO NOT wrap the JSO
 }
 `;
 
-        const chatCompletion = await groq.chat.completions.create({
-            messages: [
-                {
-                    role: 'system',
-                    content: 'You are a strict but helpful AI coding judge that only outputs raw JSON.',
-                },
-                {
-                    role: 'user',
-                    content: prompt,
-                }
-            ],
-            model: 'llama-3.3-70b-versatile',
-            temperature: 0.1,
-            max_completion_tokens: 500,
-            response_format: { type: 'json_object' }
+        // Process AI Evaluation through our Concurrency Queue to prevent 429 Rate Limits
+        const chatCompletion = await evaluationQueue.add(async () => {
+            return await groq.chat.completions.create({
+                messages: [
+                    {
+                        role: 'system',
+                        content: 'You are a strict but helpful AI coding judge that only outputs raw JSON.',
+                    },
+                    {
+                        role: 'user',
+                        content: prompt,
+                    }
+                ],
+                model: 'llama-3.3-70b-versatile',
+                temperature: 0.1,
+                max_completion_tokens: 500,
+                response_format: { type: 'json_object' }
+            });
         });
 
         const aiResponse = chatCompletion.choices[0]?.message?.content;

@@ -1,9 +1,9 @@
 import React from 'react';
 import { RotateCw, Settings, Expand, ChevronDown } from 'lucide-react';
 
-const CodeEditorPane = ({ code, setCode }) => {
+const CodeEditorPane = ({ code, setCode, disabled }) => {
     return (
-        <div className="flex-[2] flex flex-col min-h-0 bg-[var(--color-dark-surface)] border border-[var(--color-dark-border)] rounded-md overflow-hidden relative">
+        <div className={`flex-[2] flex flex-col min-h-0 border border-[var(--color-dark-border)] rounded-md overflow-hidden relative ${disabled ? 'bg-red-900/10 opacity-80' : 'bg-[var(--color-dark-surface)]'}`}>
             {/* Top Bar */}
             <div className="flex items-center justify-between bg-[#1a1a1a] border-b border-[var(--color-dark-border)] px-3 py-2">
                 <div className="flex items-center gap-3">
@@ -45,9 +45,10 @@ const CodeEditorPane = ({ code, setCode }) => {
                 <textarea
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
-                    className="flex-1 p-4 bg-transparent text-[#d4d4d4] font-mono leading-6 resize-none focus:outline-none custom-scrollbar whitespace-pre"
+                    disabled={disabled}
+                    className="flex-1 p-4 bg-transparent text-[#d4d4d4] font-mono leading-6 resize-none focus:outline-none custom-scrollbar whitespace-pre disabled:cursor-not-allowed"
                     spellCheck="false"
-                    placeholder="// Start coding here..."
+                    placeholder={disabled ? "// TIME LIMIT EXCEEDED. EDITOR LOCKED." : "// Start coding here..."}
                 />
             </div>
         </div>

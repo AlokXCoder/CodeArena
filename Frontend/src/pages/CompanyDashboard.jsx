@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, ToggleLeft, ToggleRight, Building2, Server, Save, Loader2 } from 'lucide-react';
+import { Plus, ToggleLeft, X, ToggleRight, Building2, Server, Save, Loader2, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const CompanyDashboard = () => {
@@ -9,16 +9,11 @@ const CompanyDashboard = () => {
     const [endTime, setEndTime] = useState('');
     const [strictValidation, setStrictValidation] = useState(false);
 
-    const [availableProblems, setAvailableProblems] = useState([]);
-    const [selectedProblems, setSelectedProblems] = useState([]);
-
-    // New Problem State
-    const [probTitle, setProbTitle] = useState('');
-    const [probDesc, setProbDesc] = useState('');
-    const [probDiff, setProbDiff] = useState('Medium');
-    const [probCat, setProbCat] = useState('Arrays');
+    // Problem Specifics (Contest Title/Desc match the Problem Title/Desc visually)
+    const [timeLimit, setTimeLimit] = useState(0);
+    const [difficulty, setDifficulty] = useState('Medium');
+    const [category, setCategory] = useState('Arrays');
     const [testCases, setTestCases] = useState([{ input: '', expectedOutput: '', isHidden: false }]);
-    const [isCreatingProb, setIsCreatingProb] = useState(false);
 
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState({ text: '', type: '' });
@@ -30,90 +25,30 @@ const CompanyDashboard = () => {
     useEffect(() => {
         if (!user || user.preference !== 'company') {
             navigate('/profile');
-            return;
         }
+    }, [user, navigate]);
 
-        const fetchProbs = async () => {
-            try {
-                // Fetch Global Mock Problems
-                const resGlobal = await fetch('http://localhost:5000/api/problems?isMock=true');
-                const globalData = resGlobal.ok ? await resGlobal.json() : [];
-
-                // Fetch Company Custom Problems
-                const resCompany = await fetch('http://localhost:5000/api/problems/me', {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                const companyData = resCompany.ok ? await resCompany.json() : [];
-
-                setAvailableProblems([...globalData, ...companyData]);
-            } catch (err) {
-                console.error(err);
-            }
-        };
-        fetchProbs();
-    }, [user, navigate, token]);
-
-    const handleAddTestCase = () => setTestCases([...testCases, { input: '', expectedOutput: '', isHidden: false }]);
-    const handleRemoveTestCase = (index) => setTestCases(testCases.filter((_, i) => i !== index));
-    const handleTestCaseChange = (index, field, val) => {
-        const newTC = [...testCases];
-        newTC[index][field] = val;
-        setTestCases(newTC);
+    // Problem Handlers
+    const addTestCase = () => {
+        setTestCases([...testCases, { input: '', expectedOutput: '', isHidden: false }]);
     };
 
-    const handleCreateProblem = async (e) => {
-        e.preventDefault();
-        setMsg({ text: '', type: '' });
-
-        if (!probTitle || !probDesc || testCases.length === 0) {
-            return setMsg({ text: 'Fill all problem fields and add at least 1 test case.', type: 'error' });
-        }
-
-        setIsCreatingProb(true);
-        try {
-            const res = await fetch('http://localhost:5000/api/problems', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-                body: JSON.stringify({
-                    title: probTitle,
-                    description: probDesc,
-                    difficulty: probDiff,
-                    category: probCat,
-                    testCases: testCases,
-                    isMock: false
-                })
-            });
-
-            if (res.ok) {
-                const newProb = await res.json();
-                setAvailableProblems(prev => [...prev, newProb]);
-                setMsg({ text: 'Problem created & added to your repository!', type: 'success' });
-                // Reset form
-                setProbTitle(''); setProbDesc(''); setTestCases([{ input: '', expectedOutput: '', isHidden: false }]);
-            } else {
-                setMsg({ text: 'Failed to create problem', type: 'error' });
-            }
-        } catch (err) {
-            setMsg({ text: 'Server error', type: 'error' });
-        } finally {
-            setIsCreatingProb(false);
-        }
+    const removeTestCase = (tcIndex) => {
+        setTestCases(testCases.filter((_, i) => i !== tcIndex));
     };
 
-    const toggleProblem = (id) => {
-        if (selectedProblems.includes(id)) {
-            setSelectedProblems(selectedProblems.filter(p => p !== id));
-        } else {
-            setSelectedProblems([...selectedProblems, id]);
-        }
+    const updateTestCase = (tcIndex, field, value) => {
+        const updated = [...testCases];
+        updated[tcIndex][field] = value;
+        setTestCases(updated);
     };
 
     const handleDeployContest = async (e) => {
         e.preventDefault();
         setMsg({ text: '', type: '' });
 
-        if (!title || !description || !startTime || !endTime || selectedProblems.length === 0) {
-            return setMsg({ text: 'Please fill all fields and select at least 1 problem.', type: 'error' });
+        if (!title || !description || !startTime || !endTime || testCases.length === 0) {
+            return setMsg({ text: 'Please fill all contest fields and add at least 1 test case.', type: 'error' });
         }
 
         setLoading(true);
@@ -125,12 +60,20 @@ const CompanyDashboard = () => {
                     'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    title, description, startTime, endTime, strictValidation, problems: selectedProblems
+                    title, description, startTime, endTime, strictValidation,
+                    problems: [{
+                        title: title,  // Direct mapping to save users from duplicate entry
+                        description: description,
+                        timeLimit,
+                        difficulty,
+                        category,
+                        testCases
+                    }]
                 })
             });
 
             if (res.ok) {
-                setMsg({ text: 'Contest Deployed Successfully!', type: 'success' });
+                setMsg({ text: 'Contest & Custom Problems Deployed Successfully!', type: 'success' });
                 setTimeout(() => navigate('/contests'), 1500);
             } else {
                 const data = await res.json();
@@ -153,7 +96,7 @@ const CompanyDashboard = () => {
                     </div>
                     <div>
                         <h1 className="text-3xl font-bold text-white tracking-tight">Organization Dashboard</h1>
-                        <p className="text-gray-400">Deploy Contests & Problems</p>
+                        <p className="text-gray-400">Deploy Contests with Custom Tailored Problems</p>
                     </div>
                 </div>
 
@@ -163,159 +106,118 @@ const CompanyDashboard = () => {
                     </div>
                 )}
 
-                <div className="bg-[#1a1310] border border-[#2d1e16] rounded-xl shadow-xl overflow-hidden mb-8">
-                    <div className="p-6 border-b border-[#2d1e16] bg-[#120a06]">
-                        <h2 className="text-lg font-bold text-white flex items-center gap-2"><Plus size={18} className="text-green-500" /> Organization Problem Studio</h2>
-                        <p className="text-xs text-gray-500 mt-1">Author proprietary questions with hidden validation test cases.</p>
-                    </div>
+                <form onSubmit={handleDeployContest} className="space-y-6">
+                    <div className="bg-[#1a1310] border border-[#2d1e16] rounded-xl shadow-xl overflow-hidden">
+                        <div className="p-6 border-b border-[#2d1e16] bg-[#120a06]">
+                            <h2 className="text-lg font-bold text-white flex items-center gap-2"><Server size={18} className="text-[var(--color-primary)]" /> Deploy Contest Challenge</h2>
+                            <p className="text-xs text-gray-500 mt-1">Configure your challenge. This serves as the contest and the single problem students must solve.</p>
+                        </div>
+                        <div className="p-6 md:p-8 space-y-6">
 
-                    <form onSubmit={handleCreateProblem} className="p-6 md:p-8 space-y-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Problem Title</label>
-                                <input type="text" value={probTitle} onChange={(e) => setProbTitle(e.target.value)} className="w-full bg-[#120a06] border border-[#2d1e16] text-white rounded-lg px-4 py-3 focus:border-[var(--color-primary)] outline-none" placeholder="e.g. Reverse Linked List" />
+                            {/* Line 1: Title and Strict Mode */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Challenge Title</label>
+                                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="w-full bg-[#120a06] border border-[#2d1e16] text-white rounded-lg px-4 py-3 focus:border-[var(--color-primary)] outline-none" placeholder="e.g. Weekly Hacker Cup: Linked Lists" />
+                                </div>
+
+                                <div className="bg-[#120a06] border border-[#2d1e16] rounded-lg p-4 flex items-center justify-between">
+                                    <div>
+                                        <div className="text-sm font-bold text-white flex items-center gap-2">Strict Face Validation <span className="bg-red-500/20 text-red-500 text-[10px] px-2 py-0.5 rounded uppercase font-bold tracking-wider">PRO</span></div>
+                                        <div className="text-xs text-gray-500 mt-1">Require webcam cheating prevention.</div>
+                                    </div>
+                                    <button type="button" onClick={() => setStrictValidation(!strictValidation)} className="text-[var(--color-primary)] hover:scale-105 transition-transform">
+                                        {strictValidation ? <ToggleRight size={40} /> : <ToggleLeft size={40} className="text-gray-600" />}
+                                    </button>
+                                </div>
                             </div>
-                            <div className="grid grid-cols-2 gap-4">
+
+                            {/* Line 2: Start, End, and Local Limit */}
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Start Time</label>
+                                    <input type="datetime-local" value={startTime} onChange={(e) => setStartTime(e.target.value)} className="w-full bg-[#120a06] border border-[#2d1e16] text-white rounded-lg px-4 py-3 focus:border-[var(--color-primary)] outline-none [color-scheme:dark]" />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">End Time</label>
+                                    <input type="datetime-local" value={endTime} onChange={(e) => setEndTime(e.target.value)} className="w-full bg-[#120a06] border border-[#2d1e16] text-white rounded-lg px-4 py-3 focus:border-[var(--color-primary)] outline-none [color-scheme:dark]" />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 flex items-center gap-1"><Clock size={12} /> Time Limit (Mins)</label>
+                                    <input type="number" min="0" value={timeLimit} onChange={(e) => setTimeLimit(e.target.value)} className="w-full bg-[#120a06] border border-[#2d1e16] text-white rounded-lg px-4 py-3 focus:border-[var(--color-primary)] outline-none" placeholder="0 = infinite" />
+                                </div>
+                            </div>
+
+                            {/* Line 3: Difficulty and Category */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Difficulty</label>
-                                    <select value={probDiff} onChange={(e) => setProbDiff(e.target.value)} className="w-full bg-[#120a06] border border-[#2d1e16] text-white rounded-lg px-4 py-3 focus:border-[var(--color-primary)] outline-none">
+                                    <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)} className="w-full bg-[#120a06] border border-[#2d1e16] text-white rounded-lg px-4 py-3 focus:border-[var(--color-primary)] outline-none">
                                         <option>Easy</option><option>Medium</option><option>Hard</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Category</label>
-                                    <select value={probCat} onChange={(e) => setProbCat(e.target.value)} className="w-full bg-[#120a06] border border-[#2d1e16] text-white rounded-lg px-4 py-3 focus:border-[var(--color-primary)] outline-none">
+                                    <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full bg-[#120a06] border border-[#2d1e16] text-white rounded-lg px-4 py-3 focus:border-[var(--color-primary)] outline-none">
                                         <option>Arrays</option><option>Dynamic Programming</option><option>Graphs</option><option>Trees</option>
                                     </select>
                                 </div>
                             </div>
-                        </div>
 
-                        <div>
-                            <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Description / Problem Statement (Markdown)</label>
-                            <textarea value={probDesc} onChange={(e) => setProbDesc(e.target.value)} className="w-full bg-[#120a06] border border-[#2d1e16] text-white rounded-lg px-4 py-3 focus:border-[var(--color-primary)] outline-none min-h-[100px]" placeholder="Given an array of integers..."></textarea>
-                        </div>
-
-                        {/* Test Cases Builder */}
-                        <div className="pt-4 border-t border-[#2d1e16]">
-                            <div className="flex justify-between items-center mb-4">
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider">Test Cases Validation</label>
-                                <button type="button" onClick={handleAddTestCase} className="text-xs bg-[var(--color-primary)]/20 text-[var(--color-primary)] px-3 py-1.5 rounded flex items-center gap-1 hover:bg-[var(--color-primary)] hover:text-white transition-colors"><Plus size={14} /> Add Case</button>
+                            {/* Description */}
+                            <div>
+                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Problem Statement / Contest Rules (Markdown)</label>
+                                <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="w-full bg-[#120a06] border border-[#2d1e16] text-white rounded-lg px-4 py-3 focus:border-[var(--color-primary)] outline-none min-h-[150px]" placeholder="Given an array of integers... You must solve this within the time limit."></textarea>
                             </div>
 
-                            <div className="space-y-4">
-                                {testCases.map((tc, idx) => (
-                                    <div key={idx} className="p-4 bg-[#120a06] border border-[#2d1e16] rounded-lg relative">
-                                        <button type="button" onClick={() => handleRemoveTestCase(idx)} className="absolute top-3 right-3 text-red-500 hover:text-red-400 p-1"><X size={16} /></button>
-                                        <div className="text-xs font-bold text-gray-500 mb-3 uppercase tracking-wider">Test Case {idx + 1}</div>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <div>
-                                                <label className="block text-[10px] text-gray-400 mb-1">Input Data</label>
-                                                <input type="text" value={tc.input} onChange={e => handleTestCaseChange(idx, 'input', e.target.value)} className="w-full bg-black border border-[#2d1e16] text-white text-xs rounded px-3 py-2 font-mono" placeholder="[1, 2, 3]" />
-                                            </div>
-                                            <div>
-                                                <label className="block text-[10px] text-gray-400 mb-1">Expected Output</label>
-                                                <input type="text" value={tc.expectedOutput} onChange={e => handleTestCaseChange(idx, 'expectedOutput', e.target.value)} className="w-full bg-black border border-[#2d1e16] text-white text-xs rounded px-3 py-2 font-mono" placeholder="6" />
-                                            </div>
-                                        </div>
-                                        <div className="mt-4 flex items-center justify-between bg-black/50 p-3 rounded border border-[#2d1e16]">
-                                            <div>
-                                                <span className="text-xs font-bold text-white">Hide Test Case from Students?</span>
-                                                <p className="text-[10px] text-gray-500">If hidden, the student's dashboard will show "Hidden Test Case". Only evaluated server-side securely.</p>
-                                            </div>
-                                            <button type="button" onClick={() => handleTestCaseChange(idx, 'isHidden', !tc.isHidden)} className="text-[var(--color-primary)]">
-                                                {tc.isHidden ? <ToggleRight size={32} /> : <ToggleLeft size={32} className="text-gray-600" />}
-                                            </button>
-                                        </div>
+                            {/* Test Cases */}
+                            <div className="bg-[#120a06] border border-[#2d1e16] rounded-lg p-6">
+                                <div className="flex justify-between items-center mb-4">
+                                    <div>
+                                        <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider">Test Cases Validation</label>
+                                        <p className="text-[10px] text-gray-500 mt-1">Provide expected outputs. Private test cases will be evaluated server-side to prevent cheating.</p>
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        <button type="submit" disabled={isCreatingProb} className="w-full py-3 bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white font-bold rounded-xl transition-all shadow-lg flex justify-center py-3">
-                            {isCreatingProb ? <Loader2 size={18} className="animate-spin" /> : 'Author Problem into DB'}
-                        </button>
-                    </form>
-                </div>
-
-                <div className="bg-[#1a1310] border border-[#2d1e16] rounded-xl shadow-xl overflow-hidden">
-                    <div className="p-6 border-b border-[#2d1e16] bg-[#120a06]">
-                        <h2 className="text-lg font-bold text-white flex items-center gap-2"><Server size={18} className="text-[var(--color-primary)]" /> Deploy New Contest</h2>
-                    </div>
-
-                    <form onSubmit={handleDeployContest} className="p-6 md:p-8 space-y-6">
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Contest Title</label>
-                                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="w-full bg-[#120a06] border border-[#2d1e16] text-white rounded-lg px-4 py-3 focus:border-[var(--color-primary)] outline-none" placeholder="e.g. Weekly Hacker Cup" />
-                            </div>
-
-                            <div className="bg-[#120a06] border border-[#2d1e16] rounded-lg p-4 flex items-center justify-between">
-                                <div>
-                                    <div className="text-sm font-bold text-white flex items-center gap-2">Strict Face Validation <span className="bg-red-500/20 text-red-500 text-[10px] px-2 py-0.5 rounded uppercase font-bold tracking-wider">PRO</span></div>
-                                    <div className="text-xs text-gray-500 mt-1">Require webcam face recognition during the contest to prevent cheating.</div>
+                                    <button type="button" onClick={addTestCase} className="text-xs bg-[var(--color-primary)]/20 text-[var(--color-primary)] px-3 py-1.5 rounded flex items-center gap-1 hover:bg-[var(--color-primary)] hover:text-white transition-colors"><Plus size={14} /> Add Case</button>
                                 </div>
-                                <button type="button" onClick={() => setStrictValidation(!strictValidation)} className="text-[var(--color-primary)] hover:scale-105 transition-transform">
-                                    {strictValidation ? <ToggleRight size={40} /> : <ToggleLeft size={40} className="text-gray-600" />}
-                                </button>
-                            </div>
-                        </div>
 
-                        <div>
-                            <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Description / Rules</label>
-                            <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="w-full bg-[#120a06] border border-[#2d1e16] text-white rounded-lg px-4 py-3 focus:border-[var(--color-primary)] outline-none min-h-[100px]" placeholder="Explain the contest rules..."></textarea>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Start Time</label>
-                                <input type="datetime-local" value={startTime} onChange={(e) => setStartTime(e.target.value)} className="w-full bg-[#120a06] border border-[#2d1e16] text-white rounded-lg px-4 py-3 focus:border-[var(--color-primary)] outline-none [color-scheme:dark]" />
-                            </div>
-                            <div>
-                                <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">End Time</label>
-                                <input type="datetime-local" value={endTime} onChange={(e) => setEndTime(e.target.value)} className="w-full bg-[#120a06] border border-[#2d1e16] text-white rounded-lg px-4 py-3 focus:border-[var(--color-primary)] outline-none [color-scheme:dark]" />
-                            </div>
-                        </div>
-
-                        <div className="pt-4 border-t border-[#2d1e16]">
-                            <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Select Problems for Contest</label>
-                            {availableProblems.length === 0 ? (
-                                <div className="text-xs text-yellow-500 bg-yellow-500/10 p-3 rounded">No problems found. Create one using the Problem Studio above.</div>
-                            ) : (
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
-                                    {availableProblems.map(p => (
-                                        <div
-                                            key={p._id}
-                                            onClick={() => toggleProblem(p._id)}
-                                            className={`p-4 rounded-lg border cursor-pointer transition-all flex items-center justify-between ${selectedProblems.includes(p._id)
-                                                ? 'bg-[var(--color-primary)]/10 border-[var(--color-primary)] text-white shadow-[0_0_10px_rgba(246,107,21,0.2)]'
-                                                : 'bg-[#120a06] border-[#2d1e16] text-gray-400 hover:border-gray-600'
-                                                }`}
-                                        >
-                                            <div>
-                                                <div className="font-bold text-sm mb-1">{p.title}</div>
-                                                <div className="text-[10px] uppercase font-bold tracking-wider flex items-center gap-2">
-                                                    {p.difficulty} • {p.category} {p.companyId === user?._id && <span className="text-[8px] bg-blue-500/20 text-blue-500 px-1 py-0.5 rounded">CUSTOM</span>}
+                                <div className="space-y-4">
+                                    {testCases.map((tc, tcIndex) => (
+                                        <div key={tcIndex} className="p-4 bg-black border border-[#2d1e16] rounded-lg relative">
+                                            {testCases.length > 1 && (
+                                                <button type="button" onClick={() => removeTestCase(tcIndex)} className="absolute top-2 right-2 text-red-500 hover:text-red-400 p-1"><X size={14} /></button>
+                                            )}
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div>
+                                                    <label className="block text-[10px] text-gray-500 mb-1">Input Data</label>
+                                                    <input type="text" value={tc.input} onChange={e => updateTestCase(tcIndex, 'input', e.target.value)} className="w-full bg-[#1a1310] border border-[#2d1e16] text-white text-xs rounded px-3 py-2 font-mono" placeholder="[1, 2, 3]" />
+                                                </div>
+                                                <div>
+                                                    <label className="block text-[10px] text-gray-500 mb-1">Expected Output</label>
+                                                    <input type="text" value={tc.expectedOutput} onChange={e => updateTestCase(tcIndex, 'expectedOutput', e.target.value)} className="w-full bg-[#1a1310] border border-[#2d1e16] text-white text-xs rounded px-3 py-2 font-mono" placeholder="6" />
                                                 </div>
                                             </div>
-                                            {selectedProblems.includes(p._id) && <div className="w-5 h-5 rounded-full bg-[var(--color-primary)] flex items-center justify-center text-[#120a06]"><Plus size={14} className="rotate-45" /></div>}
+                                            <div className="mt-3 flex items-center gap-2">
+                                                <button type="button" onClick={() => updateTestCase(tcIndex, 'isHidden', !tc.isHidden)} className="text-[var(--color-primary)]">
+                                                    {tc.isHidden ? <ToggleRight size={24} /> : <ToggleLeft size={24} className="text-gray-600" />}
+                                                </button>
+                                                <span className="text-xs text-gray-500">Hide from students (Private validation case)</span>
+                                            </div>
                                         </div>
                                     ))}
                                 </div>
-                            )}
+                            </div>
                         </div>
+                    </div>
 
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="w-full py-4 bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white font-bold rounded-xl shadow-[0_0_20px_rgba(246,107,21,0.3)] transition-all flex items-center justify-center gap-2 mt-6 disabled:opacity-50"
-                        >
-                            {loading ? <Loader2 size={18} className="animate-spin" /> : <><Save size={18} /> Deploy Contest Live</>}
-                        </button>
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full py-4 bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white font-bold rounded-xl shadow-[0_0_20px_rgba(246,107,21,0.3)] transition-all flex items-center justify-center gap-2 mt-6 disabled:opacity-50"
+                    >
+                        {loading ? <Loader2 size={18} className="animate-spin" /> : <><Save size={18} /> Deploy Challenge Live</>}
+                    </button>
 
-                    </form>
-                </div>
+                </form>
 
             </div>
         </div>
