@@ -7,24 +7,35 @@ const ConsoleTestCasePane = ({
     wrongAttempts, setWrongAttempts, setShowHintOverlay,
     submissions, setSubmissions, setRequestTabChange
 }) => {
-    const visibleCases = testCases.filter(tc => !tc.isHidden);
+    const visibleCases = testCases || [];
     const [activeTab, setActiveTab] = useState(0);
     const [viewMode, setViewMode] = useState('TESTCASE'); // TESTCASE or CONSOLE
     const [loading, setLoading] = useState(false);
     const [aiResult, setAiResult] = useState(null);
 
     const handleSubmit = async () => {
-        if (!code.trim() || !problemId) return;
+        if (!problemId) return;
+
+        const cleanCode = code ? code.replace('// Write your solution here', '').trim() : '';
+        if (!cleanCode) {
+            setViewMode('CONSOLE');
+            setAiResult({ status: 'Error', message: 'Compiler input is empty. Please write your solution before submitting.' });
+            return;
+        }
 
         setLoading(true);
         setViewMode('CONSOLE');
         setAiResult(null);
 
         try {
+            const token = localStorage.getItem('token');
             const res = await fetch(`http://localhost:5000/api/submissions/${problemId}`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ code })
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ code: cleanCode })
             });
 
             const data = await res.json();
@@ -136,18 +147,30 @@ const ConsoleTestCasePane = ({
 
                         {visibleCases.length > 0 ? (
                             <div className="space-y-4">
-                                <div>
-                                    <div className="text-xs text-gray-400 mb-1.5 font-mono">Input:</div>
-                                    <div className="w-full bg-[#1a1a1a] border border-[#333] rounded-md px-3 py-2 text-gray-300 font-mono text-sm focus-within:border-[var(--color-primary)] transition-colors whitespace-pre-wrap outline-none" contentEditable suppressContentEditableWarning>
-                                        {visibleCases[activeTab]?.input}
+                                {visibleCases[activeTab]?.isHidden ? (
+                                    <div className="flex flex-col items-center justify-center p-8 bg-[#1a1a1a] border border-[#333] rounded-md text-center">
+                                        <div className="w-12 h-12 rounded-full bg-indigo-500/10 flex items-center justify-center mb-4 border border-indigo-500/20">
+                                            <Bot size={24} className="text-indigo-500" />
+                                        </div>
+                                        <h3 className="text-white font-bold text-lg mb-2">Hidden Test Case</h3>
+                                        <p className="text-sm text-gray-500 max-w-sm mx-auto">This input and expected output are hidden to prevent hardcoding. Our AI Judge will automatically evaluate this case securely on the server upon submission.</p>
                                     </div>
-                                </div>
-                                <div>
-                                    <div className="text-xs text-gray-400 mb-1.5 font-mono mt-4">Expected Output:</div>
-                                    <div className="w-full bg-[#1a1a1a] border border-[#333] rounded-md px-3 py-2 text-gray-300 font-mono text-sm whitespace-pre-wrap outline-none">
-                                        {visibleCases[activeTab]?.expectedOutput}
-                                    </div>
-                                </div>
+                                ) : (
+                                    <>
+                                        <div>
+                                            <div className="text-xs text-gray-400 mb-1.5 font-mono">Input:</div>
+                                            <div className="w-full bg-[#1a1a1a] border border-[#333] rounded-md px-3 py-2 text-gray-300 font-mono text-sm focus-within:border-[var(--color-primary)] transition-colors whitespace-pre-wrap outline-none" contentEditable suppressContentEditableWarning>
+                                                {visibleCases[activeTab]?.input}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className="text-xs text-gray-400 mb-1.5 font-mono mt-4">Expected Output:</div>
+                                            <div className="w-full bg-[#1a1a1a] border border-[#333] rounded-md px-3 py-2 text-gray-300 font-mono text-sm whitespace-pre-wrap outline-none">
+                                                {visibleCases[activeTab]?.expectedOutput}
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         ) : (
                             <div className="text-gray-500 text-sm py-4 italic">No public test cases available for this problem.</div>

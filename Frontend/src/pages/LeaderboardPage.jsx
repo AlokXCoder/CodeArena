@@ -3,7 +3,7 @@ import { Search, ChevronDown, Users, Globe2, Clock, Check } from 'lucide-react';
 
 const LeaderboardPage = () => {
     return (
-        <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-10 custom-scrollbar text-sm bg-[#120a06] min-h-full">
+        <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-10 custom-scrollbar text-sm bg-transparent min-h-full">
             <div className="max-w-6xl mx-auto flex flex-col gap-8 pb-10">
 
                 {/* Header */}

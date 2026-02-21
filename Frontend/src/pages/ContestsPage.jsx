@@ -35,8 +35,44 @@ const ContestsPage = () => {
         return `${diffHrs}h ${diffMins > 0 ? diffMins + 'm' : ''}`;
     };
 
+    const handleRegister = async (contestId) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/auth');
+            return;
+        }
+
+        try {
+            const res = await fetch(`http://localhost:5000/api/contests/${contestId}/register`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (res.ok) {
+                // Update local state to reflect registration
+                setContests(prevContests =>
+                    prevContests.map(c => {
+                        if (c._id === contestId) {
+                            return { ...c, participants: [...(c.participants || []), user?._id] };
+                        }
+                        return c;
+                    })
+                );
+                alert('Successfully registered!');
+            } else {
+                const data = await res.json();
+                alert(data.message || 'Registration failed');
+            }
+        } catch (error) {
+            console.error("Failed to register", error);
+            alert("Network error occurred.");
+        }
+    };
+
     return (
-        <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-8 custom-scrollbar text-sm bg-[#120a06] min-h-full">
+        <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-8 custom-scrollbar text-sm bg-transparent min-h-full">
             <div className="max-w-6xl mx-auto flex flex-col gap-8">
 
                 {/* Header Section */}
@@ -111,22 +147,42 @@ const ContestsPage = () => {
                                             </div>
                                         </div>
 
-                                        <p className="text-sm text-gray-400 mb-6 flex-1 line-clamp-2">
+                                        <p className="text-sm text-gray-400 mb-4 flex-1 line-clamp-2">
                                             {contest.description}
                                         </p>
 
-                                        <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-gray-400 bg-[#120a06] p-3 rounded-lg border border-[#2d1e16] mb-6">
+                                        {contest.strictValidation && (
+                                            <div className="text-xs text-red-500 font-bold bg-red-500/10 border border-red-500/20 p-3 rounded-lg flex items-start gap-2 mb-6">
+                                                <ShieldAlert size={16} className="shrink-0 mt-0.5" />
+                                                <p>Strict Face Validation is ACTIVE. Do not look away, tilt your head sideways, or attempt to cheat, otherwise your contest session will immediately terminate.</p>
+                                            </div>
+                                        )}
+
+                                        <div className={`flex flex-wrap items-center gap-4 text-xs font-medium text-gray-400 bg-[#120a06] p-3 rounded-lg border border-[#2d1e16] mb-6 ${contest.strictValidation ? 'mt-auto' : 'mb-6 mt-auto'}`}>
                                             <div className="flex items-center gap-1.5"><Clock size={14} className="text-gray-500" /> Duration: {getDuration(contest.startTime, contest.endTime)}</div>
                                             <div className="w-[1px] h-3 bg-gray-600"></div>
                                             <div className="flex items-center gap-1.5"><Users size={14} className="text-gray-500" /> Opens: {new Date(contest.startTime).toLocaleDateString()}</div>
                                         </div>
 
-                                        <button
-                                            onClick={() => navigate(`/workspace/contest/${contest._id}`)}
-                                            className="w-full py-3 bg-[var(--color-primary)]/10 text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white font-bold rounded-lg transition-all"
-                                        >
-                                            {status === 'Live Now' ? 'Enter Contest Arena' : (status === 'Ended' ? 'View Leaderboard' : 'Register Now')}
-                                        </button>
+                                        {status === 'Live Now' || status === 'Ended' ? (
+                                            <button
+                                                onClick={() => navigate(`/workspace/contest/${contest._id}`)}
+                                                className="w-full py-3 bg-[var(--color-primary)]/10 text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white font-bold rounded-lg transition-all"
+                                            >
+                                                {status === 'Live Now' ? 'Enter Contest Arena' : 'View Leaderboard'}
+                                            </button>
+                                        ) : (
+                                            <button
+                                                onClick={() => contest.participants?.includes(user?._id) ? null : handleRegister(contest._id)}
+                                                disabled={contest.participants?.includes(user?._id)}
+                                                className={`w-full py-3 font-bold rounded-lg transition-all ${contest.participants?.includes(user?._id)
+                                                        ? 'bg-green-500/10 text-green-500 cursor-not-allowed border border-green-500/20'
+                                                        : 'bg-[var(--color-primary)]/10 text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white'
+                                                    }`}
+                                            >
+                                                {contest.participants?.includes(user?._id) ? '✓ Registered' : 'Register Now'}
+                                            </button>
+                                        )}
                                     </div>
                                 );
                             })}

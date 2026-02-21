@@ -1,5 +1,6 @@
 import express from 'express';
 import Problem from '../models/Problem.js';
+import Submission from '../models/Submission.js';
 import Groq from 'groq-sdk';
 import { protect } from '../middleware/authMiddleware.js';
 
@@ -8,10 +9,10 @@ const router = express.Router();
 // Initialize Groq client
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
-// @desc    Evaluate code submission using Groq AI
+// @desc    Evaluate code submission using Groq AI and track in DB
 // @route   POST /api/submissions/:problemId
-// @access  Public (or Private depending on needs, using protect if required)
-router.post('/:problemId', async (req, res) => {
+// @access  Private
+router.post('/:problemId', protect, async (req, res) => {
     try {
         const { problemId } = req.params;
         const { code } = req.body;
@@ -54,6 +55,7 @@ Analyze the code and evaluate if its logic effectively solves the problem and pa
 Respond strictly with a JSON object in the following format. DO NOT wrap the JSON in markdown blocks (e.g., no \`\`\`json). Just the raw JSON string:
 {
   "status": "Accepted" | "Wrong Answer" | "Compile Error",
+  "language": "The inferred programming language, e.g., Python 3, C++ 17, Java, JavaScript",
   "message": "A brief explanation of why it failed or a congratulatory message if it passed."
 }
 `;
@@ -79,6 +81,18 @@ Respond strictly with a JSON object in the following format. DO NOT wrap the JSO
 
         try {
             const parsedResponse = JSON.parse(aiResponse);
+
+            // Save the submission record to the database
+            const submission = new Submission({
+                user: req.user._id,
+                problem: problemId,
+                code: code,
+                language: parsedResponse.language || 'Auto-Inferred',
+                status: parsedResponse.status,
+                message: parsedResponse.message
+            });
+            await submission.save();
+
             return res.status(200).json(parsedResponse);
         } catch (parseError) {
             console.error("Failed to parse AI response:", aiResponse);

@@ -83,10 +83,10 @@ const CodingWorkspace = () => {
 
             {/* Contest Header Toolbar */}
             {contest && (
-                <div className="bg-[#1a1310] border-b border-[#2d1e16] px-4 py-2 flex justify-between items-center shadow-lg z-10">
+                <div className="bg-[#1a1310] border-b border-[#2d1e16] px-4 py-3 md:py-2 flex flex-col sm:flex-row justify-between items-center gap-3 shadow-lg z-10">
                     <div className="flex items-center gap-3">
                         <span className="bg-red-500/20 text-red-500 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Live Contest</span>
-                        <span className="text-white font-bold text-sm">{contest.title}</span>
+                        <span className="text-white font-bold text-sm text-center">{contest.title}</span>
                     </div>
                     <div className="flex items-center gap-2 bg-[#2a1a10] text-[var(--color-primary)] px-4 py-1.5 rounded-md font-mono font-bold text-lg border border-[#4a2311] shadow-[0_0_15px_rgba(246,107,21,0.2)]">
                         <Timer size={18} />
@@ -95,9 +95,9 @@ const CodingWorkspace = () => {
                 </div>
             )}
 
-            <div className="flex-1 flex gap-2 p-2 h-full overflow-hidden relative">
+            <div className="flex-1 flex flex-col md:flex-row gap-2 p-2 h-full overflow-hidden relative">
                 {/* Left Pane: Problem Description */}
-                <div className={`flex-1 max-w-[50%] min-w-[30%] h-full flex flex-col min-h-0 rounded-md transition-all duration-300 ${showHintOverlay ? 'z-[101] ring-2 ring-indigo-500/60 shadow-[0_0_40px_rgba(99,102,241,0.2)]' : 'z-10'}`}>
+                <div className={`flex-1 w-full md:max-w-[50%] md:min-w-[30%] flex flex-col min-h-0 rounded-md transition-all duration-300 ${showHintOverlay ? 'z-[101] ring-2 ring-indigo-500/60 shadow-[0_0_40px_rgba(99,102,241,0.2)]' : 'z-10'}`}>
                     <ProblemDescription
                         problem={problem}
                         isLoading={loading}
@@ -110,7 +110,7 @@ const CodingWorkspace = () => {
                 </div>
 
                 {/* Right Pane: Code Editor and Console */}
-                <div className="flex-1 flex flex-col gap-2 h-full min-h-0 z-10">
+                <div className="flex-1 flex flex-col gap-2 min-h-0 z-10 w-full">
                     <CodeEditorPane code={code} setCode={setCode} />
                     <ConsoleTestCasePane
                         testCases={problem?.testCases || []}

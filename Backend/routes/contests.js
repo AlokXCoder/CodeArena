@@ -60,4 +60,31 @@ router.post('/', protect, async (req, res) => {
     }
 });
 
+// @desc    Register for a contest
+// @route   POST /api/contests/:id/register
+// @access  Private
+router.post('/:id/register', protect, async (req, res) => {
+    try {
+        const contest = await Contest.findById(req.params.id);
+        if (!contest) return res.status(404).json({ message: 'Contest not found' });
+
+        // Check if contest already ended
+        if (new Date() > new Date(contest.endTime)) {
+            return res.status(400).json({ message: 'Contest has already ended' });
+        }
+
+        // Check if user already registered
+        if (contest.participants.includes(req.user._id)) {
+            return res.status(400).json({ message: 'You are already registered for this contest' });
+        }
+
+        contest.participants.push(req.user._id);
+        await contest.save();
+
+        res.status(200).json({ message: 'Successfully registered for the contest!' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server Error during registration' });
+    }
+});
+
 export default router;

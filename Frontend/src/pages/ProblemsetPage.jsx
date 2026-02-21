@@ -46,7 +46,7 @@ const ProblemsetPage = () => {
     };
 
     return (
-        <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-8 custom-scrollbar text-sm bg-[#120a06] min-h-full">
+        <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-8 custom-scrollbar text-sm bg-transparent min-h-full">
             <div className="max-w-6xl mx-auto flex flex-col gap-8">
 
                 {/* Header */}
@@ -90,7 +90,7 @@ const ProblemsetPage = () => {
                 </div>
 
                 {/* Problem List */}
-                <div className="bg-[#1a1310] border border-[#2d1e16] rounded-xl overflow-hidden shadow-xl">
+                <div className="bg-[#1a1310] border border-[#2d1e16] rounded-xl overflow-x-auto shadow-xl">
                     {loading ? (
                         <div className="animate-pulse">
                             <table className="w-full text-left whitespace-nowrap">

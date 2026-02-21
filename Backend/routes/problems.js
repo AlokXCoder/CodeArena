@@ -29,9 +29,66 @@ router.get('/:id', async (req, res) => {
     try {
         const problem = await Problem.findById(req.params.id);
         if (!problem) return res.status(404).json({ message: 'Problem not found' });
-        res.status(200).json(problem);
+
+        // Security: Deep clone to avoid mutating mongoose cache/doc
+        const safeProblem = JSON.parse(JSON.stringify(problem));
+
+        // Strip out expectedOutputs for hidden test cases
+        if (safeProblem.testCases) {
+            safeProblem.testCases = safeProblem.testCases.map(tc => {
+                if (tc.isHidden) {
+                    delete tc.expectedOutput;
+                }
+                return tc;
+            });
+        }
+
+        res.status(200).json(safeProblem);
     } catch (error) {
         res.status(500).json({ message: 'Server Error fetching problem' });
+    }
+});
+
+// @desc    Get all problems authored by current company
+// @route   GET /api/problems/me
+// @access  Private (Company)
+router.get('/me', protect, async (req, res) => {
+    try {
+        if (req.user.preference !== 'company') {
+            return res.status(403).json({ message: 'Only companies can access authored problems' });
+        }
+
+        const problems = await Problem.find({ companyId: req.user._id });
+        res.status(200).json(problems);
+    } catch (error) {
+        res.status(500).json({ message: 'Server Error fetching company problems' });
+    }
+});
+
+// @desc    Create a new global practice problem (Superadmin only)
+// @route   POST /api/problems/superadmin
+// @access  Private (Superadmin)
+router.post('/superadmin', protect, async (req, res) => {
+    try {
+        if (req.user.role !== 'superadmin') {
+            return res.status(403).json({ message: 'Only superadmins can create practice problems' });
+        }
+
+        const { title, description, difficulty, category, testCases } = req.body;
+
+        const problem = new Problem({
+            title,
+            description,
+            difficulty,
+            category,
+            testCases,
+            isMock: true // Force it to be a global practice question
+        });
+
+        const createdProblem = await problem.save();
+        res.status(201).json(createdProblem);
+    } catch (error) {
+        res.status(500).json({ message: 'Server Error creating superadmin problem', error: error.message });
     }
 });
 

