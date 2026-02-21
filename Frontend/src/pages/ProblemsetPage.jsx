@@ -70,8 +70,8 @@ const ProblemsetPage = () => {
                                 key={cat}
                                 onClick={() => setCategoryFilter(cat)}
                                 className={`whitespace-nowrap px-4 py-2 rounded-lg text-sm font-semibold transition-all ${categoryFilter === cat
-                                        ? 'bg-[var(--color-primary)]/20 border border-[var(--color-primary)] text-[var(--color-primary)]'
-                                        : 'bg-[#120a06] border border-[#2d1e16] text-gray-400 hover:text-white hover:border-gray-500'
+                                    ? 'bg-[var(--color-primary)]/20 border border-[var(--color-primary)] text-[var(--color-primary)]'
+                                    : 'bg-[#120a06] border border-[#2d1e16] text-gray-400 hover:text-white hover:border-gray-500'
                                     }`}
                             >
                                 {cat}
@@ -92,9 +92,39 @@ const ProblemsetPage = () => {
                 {/* Problem List */}
                 <div className="bg-[#1a1310] border border-[#2d1e16] rounded-xl overflow-hidden shadow-xl">
                     {loading ? (
-                        <div className="p-10 text-center text-gray-500 flex flex-col items-center">
-                            <div className="w-8 h-8 border-4 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin mb-4"></div>
-                            Loading problems...
+                        <div className="animate-pulse">
+                            <table className="w-full text-left whitespace-nowrap">
+                                <thead className="text-xs text-gray-500 uppercase tracking-widest border-b border-[#2d1e16] bg-[#120a06]">
+                                    <tr>
+                                        <th className="px-6 py-4 font-bold w-12 text-center">Status</th>
+                                        <th className="px-6 py-4 font-bold">Title</th>
+                                        <th className="px-6 py-4 font-bold">Category</th>
+                                        <th className="px-6 py-4 font-bold">Difficulty</th>
+                                        <th className="px-6 py-4 font-bold text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-[#2d1e16] text-sm">
+                                    {[...Array(5)].map((_, i) => (
+                                        <tr key={i} className="hover:bg-[#1f1510] transition-colors">
+                                            <td className="px-6 py-4 text-center">
+                                                <div className="w-6 h-6 rounded border border-[#2d1e16] mx-auto bg-[#2d1e16]"></div>
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <div className="w-48 h-5 bg-[#2d1e16] rounded"></div>
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <div className="w-24 h-5 bg-[#2d1e16] rounded-full"></div>
+                                            </td>
+                                            <td className="px-6 py-4">
+                                                <div className="w-16 h-5 bg-[#2d1e16] rounded"></div>
+                                            </td>
+                                            <td className="px-6 py-4 text-right">
+                                                <div className="w-20 h-8 bg-[#2d1e16] rounded-lg ml-auto"></div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     ) : filteredProblems.length > 0 ? (
                         <table className="w-full text-left whitespace-nowrap">
@@ -126,7 +156,7 @@ const ProblemsetPage = () => {
                                         </td>
                                         <td className="px-6 py-4">
                                             <span className={`font-bold ${problem.difficulty === 'Easy' ? 'text-green-500' :
-                                                    problem.difficulty === 'Medium' ? 'text-yellow-500' : 'text-red-500'
+                                                problem.difficulty === 'Medium' ? 'text-yellow-500' : 'text-red-500'
                                                 }`}>
                                                 {problem.difficulty}
                                             </span>

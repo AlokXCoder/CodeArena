@@ -13,10 +13,9 @@ const Navbar = () => {
 
     return (
         <nav className="flex items-center justify-between px-6 py-4 bg-[var(--color-dark-bg)] border-b border-[var(--color-dark-border)] text-white select-none sticky top-0 z-50">
-            {/* Left Section - Logo */}
             <div className="flex items-center cursor-pointer hover:opacity-80 transition-opacity">
                 <Link to="/">
-                    <img src="/codearena-logo.png" alt="CodeArena Logo" className="h-[36px] w-auto object-contain" />
+                    <img src="/codearena-logo.png" alt="CodeArena Logo" className="w-[150px] h-auto object-contain" />
                 </Link>
             </div>
 

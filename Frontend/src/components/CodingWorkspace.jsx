@@ -12,6 +12,13 @@ const CodingWorkspace = () => {
     const [contest, setContest] = useState(null);
     const [loading, setLoading] = useState(true);
     const [timeLeft, setTimeLeft] = useState('');
+    const [code, setCode] = useState('// Write your solution here\n');
+
+    // Shared State for Left Pane Tabs & Arena Bot
+    const [wrongAttempts, setWrongAttempts] = useState(0);
+    const [showHintOverlay, setShowHintOverlay] = useState(false);
+    const [submissions, setSubmissions] = useState([]); // track run history
+    const [requestTabChange, setRequestTabChange] = useState(null); // Signal ProblemDescription to change tab
 
     useEffect(() => {
         const fetchWorkspaceData = async () => {
@@ -63,15 +70,7 @@ const CodingWorkspace = () => {
         return () => clearInterval(interval);
     }, [contest]);
 
-    if (loading) {
-        return (
-            <div className="flex-1 flex justify-center items-center h-full bg-[#120a06]">
-                <div className="text-[var(--color-primary)] animate-pulse font-bold text-xl">Loading Workspace...</div>
-            </div>
-        );
-    }
-
-    if (!problem) {
+    if (!loading && !problem) {
         return (
             <div className="flex-1 flex justify-center items-center h-full bg-[#120a06] text-red-500 font-bold">
                 <AlertCircle size={24} className="mr-2" /> Problem not found or incorrect ID.
@@ -96,17 +95,51 @@ const CodingWorkspace = () => {
                 </div>
             )}
 
-            <div className="flex-1 flex gap-2 p-2 h-full overflow-hidden">
+            <div className="flex-1 flex gap-2 p-2 h-full overflow-hidden relative">
                 {/* Left Pane: Problem Description */}
-                <div className="flex-1 max-w-[50%] min-w-[30%] h-full flex flex-col">
-                    <ProblemDescription problem={problem} />
+                <div className={`flex-1 max-w-[50%] min-w-[30%] h-full flex flex-col min-h-0 rounded-md transition-all duration-300 ${showHintOverlay ? 'z-[101] ring-2 ring-indigo-500/60 shadow-[0_0_40px_rgba(99,102,241,0.2)]' : 'z-10'}`}>
+                    <ProblemDescription
+                        problem={problem}
+                        isLoading={loading}
+                        wrongAttempts={wrongAttempts}
+                        showHintOverlay={showHintOverlay}
+                        setShowHintOverlay={setShowHintOverlay}
+                        submissions={submissions}
+                        requestTabChange={requestTabChange}
+                    />
                 </div>
 
                 {/* Right Pane: Code Editor and Console */}
-                <div className="flex-1 flex flex-col gap-2 h-full">
-                    <CodeEditorPane />
-                    <ConsoleTestCasePane testCases={problem.testCases} />
+                <div className="flex-1 flex flex-col gap-2 h-full min-h-0 z-10">
+                    <CodeEditorPane code={code} setCode={setCode} />
+                    <ConsoleTestCasePane
+                        testCases={problem?.testCases || []}
+                        code={code}
+                        problemId={problem?._id}
+                        isLoading={loading}
+                        wrongAttempts={wrongAttempts}
+                        setWrongAttempts={setWrongAttempts}
+                        setShowHintOverlay={setShowHintOverlay}
+                        submissions={submissions}
+                        setSubmissions={setSubmissions}
+                        setRequestTabChange={setRequestTabChange}
+                    />
                 </div>
+
+                {/* Overall Screen Backdrop for Arena Bot Spotlight */}
+                {showHintOverlay && (
+                    <div
+                        className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm pointer-events-auto flex justify-center items-center"
+                        onClick={() => setShowHintOverlay(false)}
+                    >
+                        <div className="absolute top-[200px] left-[15%] md:left-[25%] flex flex-col items-center pointer-events-none">
+                            <div className="bg-[#1e1a3b] text-indigo-100 font-bold p-4 rounded-lg shadow-2xl mb-4 text-center max-w-sm border border-indigo-500/50 relative text-lg animate-bounce">
+                                Arena Bot noticed you might be stuck! I've opened a hint for you on the left.
+                                <div className="absolute -top-3 left-[20%] w-6 h-6 bg-[#1e1a3b] border-t border-l border-indigo-500/50 transform rotate-45"></div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
 
             {/* Strict Validation Face Recognition Wrapper */}

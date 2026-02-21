@@ -6,6 +6,10 @@ import authRoutes from './routes/auth.js';
 import userRoutes from './routes/user.js';
 import problemRoutes from './routes/problems.js';
 import contestRoutes from './routes/contests.js';
+import submissionRoutes from './routes/submissions.js';
+import explainRoutes from './routes/explain.js';
+import hintRoutes from './routes/hint.js';
+import editorialRoutes from './routes/editorial.js';
 
 dotenv.config();
 
@@ -23,6 +27,10 @@ app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/problems', problemRoutes);
 app.use('/api/contests', contestRoutes);
+app.use('/api/submissions', submissionRoutes);
+app.use('/api/explain', explainRoutes);
+app.use('/api/hint', hintRoutes);
+app.use('/api/editorial', editorialRoutes);
 
 const PORT = process.env.PORT || 5000;
 

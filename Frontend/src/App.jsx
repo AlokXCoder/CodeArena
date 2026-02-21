@@ -14,9 +14,9 @@ import Footer from './components/Footer';
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen bg-[var(--color-dark-bg)] text-white font-sans overflow-hidden">
+      <div className="flex flex-col h-screen bg-[var(--color-dark-bg)] text-white font-sans overflow-hidden">
         <Navbar />
-        <main className="flex-1 flex flex-col h-[calc(100vh-[auto])] overflow-hidden">
+        <main className="flex-1 flex flex-col min-h-0 overflow-hidden">
           <Routes>
             <Route path="/" element={<ProblemsetPage />} />
             <Route path="/problemset" element={<ProblemsetPage />} />
