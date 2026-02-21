@@ -41,13 +41,13 @@ const CodingWorkspace = () => {
             try {
                 // Fetch Problem Data
                 if (problemId) {
-                    const res = await fetch(`http://localhost:5000/api/problems/${problemId}`);
+                    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/problems/${problemId}`);
                     if (res.ok) setProblem(await res.json());
                 }
 
                 // Fetch Contest Data if in contest mode
                 if (contestId) {
-                    const cres = await fetch(`http://localhost:5000/api/contests/${contestId}`);
+                    const cres = await fetch(`${import.meta.env.VITE_API_URL}/api/contests/${contestId}`);
                     if (cres.ok) {
                         const cdata = await cres.json();
                         setContest(cdata);

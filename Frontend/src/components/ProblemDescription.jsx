@@ -30,7 +30,7 @@ const ProblemDescription = ({ problem, isLoading, wrongAttempts, showHintOverlay
         setIsExplaining(true);
         setExplanation(null);
         try {
-            const res = await fetch(`http://localhost:5000/api/explain/${problem._id}`);
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/explain/${problem._id}`);
             const data = await res.json();
             if (data.explanation) {
                 setExplanation(data.explanation);
@@ -49,7 +49,7 @@ const ProblemDescription = ({ problem, isLoading, wrongAttempts, showHintOverlay
         if (!problem || editorialData) return;
         setEditorialLoading(true);
         try {
-            const res = await fetch(`http://localhost:5000/api/editorial/${problem._id}`);
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/editorial/${problem._id}`);
             const data = await res.json();
             setEditorialData(data.editorial || "Editorial is currently unavailable.");
         } catch (error) {
@@ -63,7 +63,7 @@ const ProblemDescription = ({ problem, isLoading, wrongAttempts, showHintOverlay
         if (!problem || hintData) return;
         setHintLoading(true);
         try {
-            const res = await fetch(`http://localhost:5000/api/hint/${problem._id}`);
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/hint/${problem._id}`);
             const data = await res.json();
             setHintData(data.hint || "Couldn't generate hint.");
         } catch (err) {
