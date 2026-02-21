@@ -1,0 +1,822 @@
+[
+    {
+        "title": "Clone Graph",
+        "description": "Given a reference of a node in a connected undirected graph, return a deep copy (clone) of the graph. Each node in the graph contains a value and a list of its neighbors.",
+        "difficulty": "Medium",
+        "category": "Graphs",
+        "tags": [
+            "Graphs",
+            "Depth-First Search",
+            "Breadth-First Search",
+            "Hash Table"
+        ],
+        "testCases": [
+            {
+                "input": "[[2,4],[1,3],[2,4],[1,3]]",
+                "expectedOutput": "[[2,4],[1,3],[2,4],[1,3]]"
+            }
+        ]
+    },
+    {
+        "title": "Word Ladder",
+        "description": "Given two words beginWord and endWord, and a dictionary wordList, return the number of words in the shortest transformation sequence from beginWord to endWord, changing one letter at a time.",
+        "difficulty": "Hard",
+        "category": "Graphs",
+        "tags": [
+            "Strings",
+            "Breadth-First Search",
+            "Hash Table"
+        ],
+        "testCases": [
+            {
+                "input": "hit\ncog\n[\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]",
+                "expectedOutput": "5"
+            }
+        ]
+    },
+    {
+        "title": "Surrounded Regions",
+        "description": "Given an `m x n` matrix board containing 'X' and 'O', capture all regions that are 4-directionally surrounded by 'X'. A region is captured by flipping all 'O's into 'X's.",
+        "difficulty": "Medium",
+        "category": "Graphs",
+        "tags": [
+            "Arrays",
+            "Depth-First Search",
+            "Breadth-First Search",
+            "Matrix"
+        ],
+        "testCases": [
+            {
+                "input": "[[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"O\",\"X\"],[\"X\",\"X\",\"O\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]",
+                "expectedOutput": "[[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"X\",\"X\",\"X\"],[\"X\",\"O\",\"X\",\"X\"]]"
+            }
+        ]
+    },
+    {
+        "title": "Gas Station",
+        "description": "There are `n` gas stations along a circular route. You are given two integer arrays `gas` and `cost`. Return the starting gas station's index if you can travel around the circuit once, otherwise return -1.",
+        "difficulty": "Medium",
+        "category": "Greedy",
+        "tags": [
+            "Arrays",
+            "Greedy"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3,4,5]\n[3,4,5,1,2]",
+                "expectedOutput": "3"
+            },
+            {
+                "input": "[2,3,4]\n[3,4,3]",
+                "expectedOutput": "-1"
+            }
+        ]
+    },
+    {
+        "title": "Copy List with Random Pointer",
+        "description": "A linked list of length `n` is given such that each node contains an additional random pointer which could point to any node or null. Construct a deep copy of the list.",
+        "difficulty": "Medium",
+        "category": "Linked List",
+        "tags": [
+            "Linked List",
+            "Hash Table"
+        ],
+        "testCases": [
+            {
+                "input": "[[7,null],[13,0],[11,4],[10,2],[1,0]]",
+                "expectedOutput": "[[7,null],[13,0],[11,4],[10,2],[1,0]]"
+            }
+        ]
+    },
+    {
+        "title": "Word Break II",
+        "description": "Given a string `s` and a dictionary of strings `wordDict`, add spaces in `s` to construct sentences where each word is a valid dictionary word. Return all such possible sentences in any order.",
+        "difficulty": "Hard",
+        "category": "Dynamic Programming",
+        "tags": [
+            "Strings",
+            "Dynamic Programming",
+            "Backtracking",
+            "Hash Table",
+            "Trie"
+        ],
+        "testCases": [
+            {
+                "input": "catsanddog\n[\"cat\",\"cats\",\"and\",\"sand\",\"dog\"]",
+                "expectedOutput": "[\"cats and dog\",\"cat sand dog\"]"
+            }
+        ]
+    },
+    {
+        "title": "Reorder List",
+        "description": "You are given the head of a singly linked-list. Reorder the list to be: L0 → Ln → L1 → Ln-1 → L2 → Ln-2 → … You may not modify the values, only nodes themselves may be changed.",
+        "difficulty": "Medium",
+        "category": "Linked List",
+        "tags": [
+            "Linked List",
+            "Two Pointers",
+            "Stacks"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3,4]",
+                "expectedOutput": "[1,4,2,3]"
+            },
+            {
+                "input": "[1,2,3,4,5]",
+                "expectedOutput": "[1,5,2,4,3]"
+            }
+        ]
+    },
+    {
+        "title": "Maximum Product Subarray",
+        "description": "Given an integer array `nums`, find a subarray that has the largest product, and return the product.",
+        "difficulty": "Medium",
+        "category": "Dynamic Programming",
+        "tags": [
+            "Arrays",
+            "Dynamic Programming"
+        ],
+        "testCases": [
+            {
+                "input": "[2,3,-2,4]",
+                "expectedOutput": "6"
+            },
+            {
+                "input": "[-2,0,-1]",
+                "expectedOutput": "0"
+            }
+        ]
+    },
+    {
+        "title": "Rotate Array",
+        "description": "Given an integer array `nums`, rotate the array to the right by `k` steps, where `k` is non-negative.",
+        "difficulty": "Medium",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Math",
+            "Two Pointers"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3,4,5,6,7]\n3",
+                "expectedOutput": "[5,6,7,1,2,3,4]"
+            },
+            {
+                "input": "[-1,-100,3,99]\n2",
+                "expectedOutput": "[3,99,-1,-100]"
+            }
+        ]
+    },
+    {
+        "title": "Number of Connected Components in an Undirected Graph",
+        "description": "You have a graph of `n` nodes and a list of undirected edges. Return the number of connected components in the graph.",
+        "difficulty": "Medium",
+        "category": "Graphs",
+        "tags": [
+            "Graphs",
+            "Depth-First Search",
+            "Breadth-First Search",
+            "Union Find"
+        ],
+        "testCases": [
+            {
+                "input": "5\n[[0,1],[1,2],[3,4]]",
+                "expectedOutput": "2"
+            },
+            {
+                "input": "5\n[[0,1],[1,2],[2,3],[3,4]]",
+                "expectedOutput": "1"
+            }
+        ]
+    },
+    {
+        "title": "Graph Valid Tree",
+        "description": "You have a graph of `n` nodes labeled from 0 to n-1. You are given `n` and a list of undirected edges. Determine whether these edges make up a valid tree.",
+        "difficulty": "Medium",
+        "category": "Graphs",
+        "tags": [
+            "Graphs",
+            "Depth-First Search",
+            "Breadth-First Search",
+            "Union Find"
+        ],
+        "testCases": [
+            {
+                "input": "5\n[[0,1],[0,2],[0,3],[1,4]]",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "5\n[[0,1],[1,2],[2,3],[1,3],[1,4]]",
+                "expectedOutput": "false"
+            }
+        ]
+    },
+    {
+        "title": "Alien Dictionary",
+        "description": "There is a new alien language that uses the English alphabet. The order among the letters are unknown. Given a list of sorted words from the alien dictionary, derive the order of letters. Return a string of the unique letters sorted in the alien language order.",
+        "difficulty": "Hard",
+        "category": "Graphs",
+        "tags": [
+            "Strings",
+            "Graphs",
+            "Topological Sort",
+            "Breadth-First Search"
+        ],
+        "testCases": [
+            {
+                "input": "[\"wrt\",\"wrf\",\"er\",\"ett\",\"rftt\"]",
+                "expectedOutput": "wertf"
+            }
+        ]
+    },
+    {
+        "title": "Encode and Decode Strings",
+        "description": "Design an algorithm to encode a list of strings to a single string. The encoded string is then decoded back to the original list of strings.",
+        "difficulty": "Medium",
+        "category": "Strings",
+        "tags": [
+            "Strings",
+            "Design"
+        ],
+        "testCases": [
+            {
+                "input": "[\"lint\",\"code\",\"love\",\"you\"]",
+                "expectedOutput": "[\"lint\",\"code\",\"love\",\"you\"]"
+            }
+        ]
+    },
+    {
+        "title": "Meeting Rooms II",
+        "description": "Given an array of meeting time intervals consisting of start and end times, find the minimum number of conference rooms required.",
+        "difficulty": "Medium",
+        "category": "Sorting",
+        "tags": [
+            "Arrays",
+            "Sorting",
+            "Heap",
+            "Two Pointers",
+            "Greedy"
+        ],
+        "testCases": [
+            {
+                "input": "[[0,30],[5,10],[15,20]]",
+                "expectedOutput": "2"
+            },
+            {
+                "input": "[[7,10],[2,4]]",
+                "expectedOutput": "1"
+            }
+        ]
+    },
+    {
+        "title": "Longest Repeating Character Replacement",
+        "description": "You are given a string `s` and an integer `k`. You can choose any character and change it to any other uppercase English character at most `k` times. Return the length of the longest substring containing the same letter you can get.",
+        "difficulty": "Medium",
+        "category": "Strings",
+        "tags": [
+            "Strings",
+            "Sliding Window",
+            "Hash Table"
+        ],
+        "testCases": [
+            {
+                "input": "ABAB\n2",
+                "expectedOutput": "4"
+            },
+            {
+                "input": "AABABBA\n1",
+                "expectedOutput": "4"
+            }
+        ]
+    },
+    {
+        "title": "Non-overlapping Intervals",
+        "description": "Given an array of intervals where `intervals[i] = [starti, endi]`, return the minimum number of intervals you need to remove to make the rest non-overlapping.",
+        "difficulty": "Medium",
+        "category": "Greedy",
+        "tags": [
+            "Arrays",
+            "Dynamic Programming",
+            "Greedy",
+            "Sorting"
+        ],
+        "testCases": [
+            {
+                "input": "[[1,2],[2,3],[3,4],[1,3]]",
+                "expectedOutput": "1"
+            },
+            {
+                "input": "[[1,2],[1,2],[1,2]]",
+                "expectedOutput": "2"
+            }
+        ]
+    },
+    {
+        "title": "Insert Interval",
+        "description": "You are given an array of non-overlapping intervals sorted by start time. Insert a new interval into the intervals list (merge if necessary).",
+        "difficulty": "Medium",
+        "category": "Arrays",
+        "tags": [
+            "Arrays"
+        ],
+        "testCases": [
+            {
+                "input": "[[1,3],[6,9]]\n[2,5]",
+                "expectedOutput": "[[1,5],[6,9]]"
+            },
+            {
+                "input": "[[1,2],[3,5],[6,7],[8,10],[12,16]]\n[4,8]",
+                "expectedOutput": "[[1,2],[3,10],[12,16]]"
+            }
+        ]
+    },
+    {
+        "title": "Minimum Number of Arrows to Burst Balloons",
+        "description": "Given balloons stuck on a flat wall represented as 2D coordinates, find the minimum number of arrows that must be shot to burst all balloons.",
+        "difficulty": "Medium",
+        "category": "Greedy",
+        "tags": [
+            "Arrays",
+            "Greedy",
+            "Sorting"
+        ],
+        "testCases": [
+            {
+                "input": "[[10,16],[2,8],[1,6],[7,12]]",
+                "expectedOutput": "2"
+            },
+            {
+                "input": "[[1,2],[3,4],[5,6],[7,8]]",
+                "expectedOutput": "4"
+            }
+        ]
+    },
+    {
+        "title": "Longest Valid Parentheses",
+        "description": "Given a string containing just the characters '(' and ')', return the length of the longest valid (well-formed) parentheses substring.",
+        "difficulty": "Hard",
+        "category": "Stacks",
+        "tags": [
+            "Strings",
+            "Dynamic Programming",
+            "Stacks"
+        ],
+        "testCases": [
+            {
+                "input": "(()",
+                "expectedOutput": "2"
+            },
+            {
+                "input": ")()())",
+                "expectedOutput": "4"
+            }
+        ]
+    },
+    {
+        "title": "Search a 2D Matrix",
+        "description": "You are given an `m x n` integer matrix where each row is sorted and the first integer of each row is greater than the last integer of the previous row. Given an integer target, return true if target is in the matrix.",
+        "difficulty": "Medium",
+        "category": "Binary Search",
+        "tags": [
+            "Arrays",
+            "Binary Search",
+            "Matrix"
+        ],
+        "testCases": [
+            {
+                "input": "[[1,3,5,7],[10,11,16,20],[23,30,34,60]]\n3",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "[[1,3,5,7],[10,11,16,20],[23,30,34,60]]\n13",
+                "expectedOutput": "false"
+            }
+        ]
+    },
+    {
+        "title": "Construct Binary Tree from Preorder and Inorder Traversal",
+        "description": "Given two integer arrays `preorder` and `inorder` where preorder is the preorder traversal and inorder is the inorder traversal of the same tree, construct and return the binary tree.",
+        "difficulty": "Medium",
+        "category": "Trees",
+        "tags": [
+            "Arrays",
+            "Trees",
+            "Hash Table",
+            "Divide and Conquer"
+        ],
+        "testCases": [
+            {
+                "input": "[3,9,20,15,7]\n[9,3,15,20,7]",
+                "expectedOutput": "[3,9,20,null,null,15,7]"
+            }
+        ]
+    },
+    {
+        "title": "Kth Smallest Element in a BST",
+        "description": "Given the root of a binary search tree, and an integer `k`, return the `kth` smallest value (1-indexed) of all the values of the nodes in the tree.",
+        "difficulty": "Medium",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Depth-First Search",
+            "Binary Search Tree"
+        ],
+        "testCases": [
+            {
+                "input": "[3,1,4,null,2]\n1",
+                "expectedOutput": "1"
+            },
+            {
+                "input": "[5,3,6,2,4,null,null,1]\n3",
+                "expectedOutput": "3"
+            }
+        ]
+    },
+    {
+        "title": "Delete Node in a BST",
+        "description": "Given a root node reference of a BST and a key, delete the node with the given key in the BST. Return the root node reference (possibly updated) of the BST.",
+        "difficulty": "Medium",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Binary Search Tree"
+        ],
+        "testCases": [
+            {
+                "input": "[5,3,6,2,4,null,7]\n3",
+                "expectedOutput": "[5,4,6,2,null,null,7]"
+            }
+        ]
+    },
+    {
+        "title": "Implement Stack using Queues",
+        "description": "Implement a last-in-first-out (LIFO) stack using only two queues. The implemented stack should support push, top, pop, and empty.",
+        "difficulty": "Easy",
+        "category": "Stacks",
+        "tags": [
+            "Stacks",
+            "Design",
+            "Queue"
+        ],
+        "testCases": [
+            {
+                "input": "[\"MyStack\",\"push\",\"push\",\"top\",\"pop\",\"empty\"]\n[[],[1],[2],[],[],[]]",
+                "expectedOutput": "[null,null,null,2,2,false]"
+            }
+        ]
+    },
+    {
+        "title": "Basic Calculator",
+        "description": "Given a string `s` representing a valid expression, implement a basic calculator to evaluate it. The expression may contain +, -, (, ) and spaces.",
+        "difficulty": "Hard",
+        "category": "Stacks",
+        "tags": [
+            "Stacks",
+            "Math",
+            "Strings",
+            "Recursion"
+        ],
+        "testCases": [
+            {
+                "input": "1 + 1",
+                "expectedOutput": "2"
+            },
+            {
+                "input": "(1+(4+5+2)-3)+(6+8)",
+                "expectedOutput": "23"
+            }
+        ]
+    },
+    {
+        "title": "Sliding Window Maximum",
+        "description": "You are given an array of integers `nums` and a sliding window of size `k` which moves from left to right. Return the max value in each window.",
+        "difficulty": "Hard",
+        "category": "Sliding Window",
+        "tags": [
+            "Arrays",
+            "Queue",
+            "Sliding Window",
+            "Heap",
+            "Monotonic Queue"
+        ],
+        "testCases": [
+            {
+                "input": "[1,3,-1,-3,5,3,6,7]\n3",
+                "expectedOutput": "[3,3,5,5,6,7]"
+            },
+            {
+                "input": "[1]\n1",
+                "expectedOutput": "[1]"
+            }
+        ]
+    },
+    {
+        "title": "Course Schedule II",
+        "description": "There are `numCourses` courses you have to take. Given prerequisites, return the ordering of courses you should take to finish all courses. If it is impossible, return an empty array.",
+        "difficulty": "Medium",
+        "category": "Graphs",
+        "tags": [
+            "Depth-First Search",
+            "Breadth-First Search",
+            "Graph",
+            "Topological Sort"
+        ],
+        "testCases": [
+            {
+                "input": "4\n[[1,0],[2,0],[3,1],[3,2]]",
+                "expectedOutput": "[0,2,1,3]"
+            },
+            {
+                "input": "1\n[]",
+                "expectedOutput": "[0]"
+            }
+        ]
+    },
+    {
+        "title": "Network Delay Time",
+        "description": "You are given a network of `n` nodes with times (edges with weights). Sending a signal from a given node, how long will it take for all nodes to receive the signal? Return -1 if impossible.",
+        "difficulty": "Medium",
+        "category": "Graphs",
+        "tags": [
+            "Graphs",
+            "Depth-First Search",
+            "Breadth-First Search",
+            "Heap",
+            "Shortest Path"
+        ],
+        "testCases": [
+            {
+                "input": "[[2,1,1],[2,3,1],[3,4,1]]\n4\n2",
+                "expectedOutput": "2"
+            },
+            {
+                "input": "[[1,2,1]]\n2\n1",
+                "expectedOutput": "1"
+            }
+        ]
+    },
+    {
+        "title": "Minimum Height Trees",
+        "description": "A tree is an undirected graph in which any two vertices are connected by exactly one path. Given n nodes and edges, find all roots that create minimum height trees. Return their labels.",
+        "difficulty": "Medium",
+        "category": "Graphs",
+        "tags": [
+            "Graphs",
+            "Breadth-First Search",
+            "Topological Sort"
+        ],
+        "testCases": [
+            {
+                "input": "4\n[[1,0],[1,2],[1,3]]",
+                "expectedOutput": "[1]"
+            },
+            {
+                "input": "6\n[[3,0],[3,1],[3,2],[3,4],[5,4]]",
+                "expectedOutput": "[3,4]"
+            }
+        ]
+    },
+    {
+        "title": "Happy Number",
+        "description": "Write an algorithm to determine if a number `n` is happy. A happy number reaches 1 after repeatedly replacing it with the sum of the squares of its digits. If it loops endlessly it is not happy.",
+        "difficulty": "Easy",
+        "category": "Math",
+        "tags": [
+            "Math",
+            "Hash Table",
+            "Two Pointers"
+        ],
+        "testCases": [
+            {
+                "input": "19",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "false"
+            }
+        ]
+    },
+    {
+        "title": "Plus One",
+        "description": "You are given a large integer represented as an integer array `digits`, where each `digits[i]` is a digit. Increment the large integer by one and return the resulting array.",
+        "difficulty": "Easy",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Math"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3]",
+                "expectedOutput": "[1,2,4]"
+            },
+            {
+                "input": "[9]",
+                "expectedOutput": "[1,0]"
+            }
+        ]
+    },
+    {
+        "title": "Sqrt(x)",
+        "description": "Given a non-negative integer `x`, return the square root of `x` rounded down to the nearest integer. You must not use any built-in exponent function or operator.",
+        "difficulty": "Easy",
+        "category": "Binary Search",
+        "tags": [
+            "Math",
+            "Binary Search"
+        ],
+        "testCases": [
+            {
+                "input": "4",
+                "expectedOutput": "2"
+            },
+            {
+                "input": "8",
+                "expectedOutput": "2"
+            }
+        ]
+    },
+    {
+        "title": "Excel Sheet Column Number",
+        "description": "Given a string `columnTitle` that represents the column title as it appears in an Excel sheet, return its corresponding column number. A -> 1, B -> 2, ..., Z -> 26, AA -> 27, AB -> 28, ...",
+        "difficulty": "Easy",
+        "category": "Math",
+        "tags": [
+            "Math",
+            "Strings"
+        ],
+        "testCases": [
+            {
+                "input": "A",
+                "expectedOutput": "1"
+            },
+            {
+                "input": "AB",
+                "expectedOutput": "28"
+            },
+            {
+                "input": "ZY",
+                "expectedOutput": "701"
+            }
+        ]
+    },
+    {
+        "title": "Factorial Trailing Zeroes",
+        "description": "Given an integer `n`, return the number of trailing zeroes in `n!`.",
+        "difficulty": "Medium",
+        "category": "Math",
+        "tags": [
+            "Math"
+        ],
+        "testCases": [
+            {
+                "input": "3",
+                "expectedOutput": "0"
+            },
+            {
+                "input": "5",
+                "expectedOutput": "1"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0"
+            }
+        ]
+    },
+    {
+        "title": "Dungeon Game",
+        "description": "The demons had captured the princess and imprisoned her in the bottom-right corner of a dungeon. Write a function to determine the knight's minimum initial health so that he can rescue the princess.",
+        "difficulty": "Hard",
+        "category": "Dynamic Programming",
+        "tags": [
+            "Arrays",
+            "Dynamic Programming",
+            "Matrix"
+        ],
+        "testCases": [
+            {
+                "input": "[[-2,-3,3],[-5,-10,1],[10,30,-5]]",
+                "expectedOutput": "7"
+            }
+        ]
+    },
+    {
+        "title": "Isomorphic Strings",
+        "description": "Given two strings `s` and `t`, determine if they are isomorphic. Two strings are isomorphic if the characters in `s` can be replaced to get `t` with a consistent mapping.",
+        "difficulty": "Easy",
+        "category": "Strings",
+        "tags": [
+            "Strings",
+            "Hash Table"
+        ],
+        "testCases": [
+            {
+                "input": "egg\nadd",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "foo\nbar",
+                "expectedOutput": "false"
+            }
+        ]
+    },
+    {
+        "title": "Reverse Bits",
+        "description": "Reverse bits of a given 32 bits unsigned integer.",
+        "difficulty": "Easy",
+        "category": "Bit Manipulation",
+        "tags": [
+            "Bit Manipulation",
+            "Divide and Conquer"
+        ],
+        "testCases": [
+            {
+                "input": "00000010100101000001111010011100",
+                "expectedOutput": "964176192"
+            },
+            {
+                "input": "11111111111111111111111111111101",
+                "expectedOutput": "3221225471"
+            }
+        ]
+    },
+    {
+        "title": "Bitwise AND of Numbers Range",
+        "description": "Given two integers `left` and `right` that represent the range [left, right], return the bitwise AND of all numbers in this range, inclusive.",
+        "difficulty": "Medium",
+        "category": "Bit Manipulation",
+        "tags": [
+            "Bit Manipulation"
+        ],
+        "testCases": [
+            {
+                "input": "5\n7",
+                "expectedOutput": "4"
+            },
+            {
+                "input": "0\n0",
+                "expectedOutput": "0"
+            }
+        ]
+    },
+    {
+        "title": "Remove Linked List Elements",
+        "description": "Given the head of a linked list and an integer `val`, remove all the nodes of the linked list that has `Node.val == val`, and return the new head.",
+        "difficulty": "Easy",
+        "category": "Linked List",
+        "tags": [
+            "Linked List",
+            "Recursion"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,6,3,4,5,6]\n6",
+                "expectedOutput": "[1,2,3,4,5]"
+            },
+            {
+                "input": "[7,7,7,7]\n7",
+                "expectedOutput": "[]"
+            }
+        ]
+    },
+    {
+        "title": "Count Complete Tree Nodes",
+        "description": "Given the root of a complete binary tree, return the number of the nodes in the tree. Design a solution that runs in less than O(n) time complexity.",
+        "difficulty": "Easy",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Binary Search",
+            "Bit Manipulation"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3,4,5,6]",
+                "expectedOutput": "6"
+            },
+            {
+                "input": "[]",
+                "expectedOutput": "0"
+            }
+        ]
+    },
+    {
+        "title": "Rectangle Area",
+        "description": "Given the coordinates of two rectilinear rectangles in a 2D plane, return the total area covered by the two rectangles.",
+        "difficulty": "Medium",
+        "category": "Math",
+        "tags": [
+            "Math",
+            "Geometry"
+        ],
+        "testCases": [
+            {
+                "input": "-3\n0\n3\n4\n0\n-1\n9\n2",
+                "expectedOutput": "45"
+            }
+        ]
+    }
+]
