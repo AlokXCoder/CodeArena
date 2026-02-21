@@ -1,0 +1,980 @@
+[
+    {
+        "title": "Min Stack",
+        "description": "Design a stack that supports push, pop, top, and retrieving the minimum element in constant time. Implement the MinStack class.",
+        "difficulty": "Medium",
+        "category": "Stacks",
+        "tags": [
+            "Stacks",
+            "Design"
+        ],
+        "testCases": [
+            {
+                "input": "[\"MinStack\",\"push\",\"push\",\"push\",\"getMin\",\"pop\",\"top\",\"getMin\"]\n[[],[-2],[0],[-3],[],[],[],[]]",
+                "expectedOutput": "[null,null,null,null,-3,null,0,-2]"
+            }
+        ]
+    },
+    {
+        "title": "Intersection of Two Linked Lists",
+        "description": "Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect. If the two linked lists have no intersection, return null.",
+        "difficulty": "Easy",
+        "category": "Linked List",
+        "tags": [
+            "Linked List",
+            "Two Pointers",
+            "Hash Table"
+        ],
+        "testCases": [
+            {
+                "input": "8\n[4,1,8,4,5]\n[5,6,1,8,4,5]\n2\n3",
+                "expectedOutput": "8"
+            }
+        ]
+    },
+    {
+        "title": "Majority Element",
+        "description": "Given an array `nums` of size `n`, return the majority element. The majority element is the element that appears more than ⌊n / 2⌋ times.",
+        "difficulty": "Easy",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Hash Table",
+            "Sorting",
+            "Divide and Conquer"
+        ],
+        "testCases": [
+            {
+                "input": "[3,2,3]",
+                "expectedOutput": "3"
+            },
+            {
+                "input": "[2,2,1,1,1,2,2]",
+                "expectedOutput": "2"
+            }
+        ]
+    },
+    {
+        "title": "House Robber",
+        "description": "You are a professional robber planning to rob houses along a street. Each house has a certain amount of money. Adjacent houses have security systems connected. Given an array representing money at each house, return the maximum amount you can rob without alerting police.",
+        "difficulty": "Medium",
+        "category": "Dynamic Programming",
+        "tags": [
+            "Arrays",
+            "Dynamic Programming"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3,1]",
+                "expectedOutput": "4"
+            },
+            {
+                "input": "[2,7,9,3,1]",
+                "expectedOutput": "12"
+            }
+        ]
+    },
+    {
+        "title": "Number of Islands",
+        "description": "Given an `m x n` 2D binary grid which represents a map of '1's (land) and '0's (water), return the number of islands. An island is surrounded by water and is formed by connecting adjacent lands.",
+        "difficulty": "Medium",
+        "category": "Graphs",
+        "tags": [
+            "Arrays",
+            "Depth-First Search",
+            "Breadth-First Search",
+            "Graph",
+            "Matrix"
+        ],
+        "testCases": [
+            {
+                "input": "[[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]",
+                "expectedOutput": "1"
+            },
+            {
+                "input": "[[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"1\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"1\",\"1\"]]",
+                "expectedOutput": "3"
+            }
+        ]
+    },
+    {
+        "title": "Reverse Linked List",
+        "description": "Given the head of a singly linked list, reverse the list, and return the reversed list.",
+        "difficulty": "Easy",
+        "category": "Linked List",
+        "tags": [
+            "Linked List",
+            "Recursion"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3,4,5]",
+                "expectedOutput": "[5,4,3,2,1]"
+            },
+            {
+                "input": "[1,2]",
+                "expectedOutput": "[2,1]"
+            }
+        ]
+    },
+    {
+        "title": "Course Schedule",
+        "description": "There are a total of `numCourses` courses you have to take. You are given an array prerequisites where `prerequisites[i] = [ai, bi]` indicates that you must take course bi first. Return true if you can finish all courses.",
+        "difficulty": "Medium",
+        "category": "Graphs",
+        "tags": [
+            "Depth-First Search",
+            "Breadth-First Search",
+            "Graph",
+            "Topological Sort"
+        ],
+        "testCases": [
+            {
+                "input": "2\n[[1,0]]",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "2\n[[1,0],[0,1]]",
+                "expectedOutput": "false"
+            }
+        ]
+    },
+    {
+        "title": "Implement Trie (Prefix Tree)",
+        "description": "A trie or prefix tree is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. Implement the Trie class with insert, search, and startsWith methods.",
+        "difficulty": "Medium",
+        "category": "Trie",
+        "tags": [
+            "Hash Table",
+            "Strings",
+            "Design",
+            "Trie"
+        ],
+        "testCases": [
+            {
+                "input": "[\"Trie\",\"insert\",\"search\",\"search\",\"startsWith\",\"insert\",\"search\"]\n[[],[\"apple\"],[\"apple\"],[\"app\"],[\"app\"],[\"app\"],[\"app\"]]",
+                "expectedOutput": "[null,null,true,false,true,null,true]"
+            }
+        ]
+    },
+    {
+        "title": "Kth Largest Element in an Array",
+        "description": "Given an integer array `nums` and an integer `k`, return the `kth` largest element in the array. Note that it is the kth largest element in the sorted order, not the kth distinct element.",
+        "difficulty": "Medium",
+        "category": "Sorting",
+        "tags": [
+            "Arrays",
+            "Sorting",
+            "Heap",
+            "Divide and Conquer"
+        ],
+        "testCases": [
+            {
+                "input": "[3,2,1,5,6,4]\n2",
+                "expectedOutput": "5"
+            },
+            {
+                "input": "[3,2,3,1,2,4,5,5,6]\n4",
+                "expectedOutput": "4"
+            }
+        ]
+    },
+    {
+        "title": "Contains Duplicate",
+        "description": "Given an integer array `nums`, return `true` if any value appears at least twice in the array, and return `false` if every element is distinct.",
+        "difficulty": "Easy",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Hash Table",
+            "Sorting"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3,1]",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "[1,2,3,4]",
+                "expectedOutput": "false"
+            }
+        ]
+    },
+    {
+        "title": "Invert Binary Tree",
+        "description": "Given the root of a binary tree, invert the tree, and return its root. Inverting means swapping left and right children at every node.",
+        "difficulty": "Easy",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Depth-First Search",
+            "Breadth-First Search"
+        ],
+        "testCases": [
+            {
+                "input": "[4,2,7,1,3,6,9]",
+                "expectedOutput": "[4,7,2,9,6,3,1]"
+            },
+            {
+                "input": "[2,1,3]",
+                "expectedOutput": "[2,3,1]"
+            }
+        ]
+    },
+    {
+        "title": "Palindrome Linked List",
+        "description": "Given the head of a singly linked list, return `true` if it is a palindrome or `false` otherwise.",
+        "difficulty": "Easy",
+        "category": "Linked List",
+        "tags": [
+            "Linked List",
+            "Two Pointers",
+            "Stacks",
+            "Recursion"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,2,1]",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "[1,2]",
+                "expectedOutput": "false"
+            }
+        ]
+    },
+    {
+        "title": "Lowest Common Ancestor of a Binary Search Tree",
+        "description": "Given a binary search tree (BST), find the lowest common ancestor (LCA) node of two given nodes in the BST.",
+        "difficulty": "Medium",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Depth-First Search",
+            "Binary Search Tree"
+        ],
+        "testCases": [
+            {
+                "input": "[6,2,8,0,4,7,9,null,null,3,5]\n2\n8",
+                "expectedOutput": "6"
+            },
+            {
+                "input": "[6,2,8,0,4,7,9,null,null,3,5]\n2\n4",
+                "expectedOutput": "2"
+            }
+        ]
+    },
+    {
+        "title": "Product of Array Except Self",
+        "description": "Given an integer array `nums`, return an array `answer` such that `answer[i]` is equal to the product of all the elements of `nums` except `nums[i]`. You must solve it in O(n) time without using division.",
+        "difficulty": "Medium",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Prefix Sum"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3,4]",
+                "expectedOutput": "[24,12,8,6]"
+            },
+            {
+                "input": "[-1,1,0,-3,3]",
+                "expectedOutput": "[0,0,9,0,0]"
+            }
+        ]
+    },
+    {
+        "title": "Move Zeroes",
+        "description": "Given an integer array `nums`, move all 0's to the end of it while maintaining the relative order of the non-zero elements. You must do this in-place.",
+        "difficulty": "Easy",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Two Pointers"
+        ],
+        "testCases": [
+            {
+                "input": "[0,1,0,3,12]",
+                "expectedOutput": "[1,3,12,0,0]"
+            },
+            {
+                "input": "[0]",
+                "expectedOutput": "[0]"
+            }
+        ]
+    },
+    {
+        "title": "Find Median from Data Stream",
+        "description": "The median is the middle value in an ordered integer list. Design a data structure that supports adding integers and finding the median efficiently.",
+        "difficulty": "Hard",
+        "category": "Heap",
+        "tags": [
+            "Two Pointers",
+            "Design",
+            "Sorting",
+            "Heap",
+            "Data Stream"
+        ],
+        "testCases": [
+            {
+                "input": "[\"MedianFinder\",\"addNum\",\"addNum\",\"findMedian\",\"addNum\",\"findMedian\"]\n[[],[1],[2],[],[3],[]]",
+                "expectedOutput": "[null,null,null,1.5,null,2.0]"
+            }
+        ]
+    },
+    {
+        "title": "Coin Change",
+        "description": "You are given an integer array `coins` representing coins of different denominations and an integer `amount`. Return the fewest number of coins needed to make up that amount. If it cannot be made, return -1.",
+        "difficulty": "Medium",
+        "category": "Dynamic Programming",
+        "tags": [
+            "Arrays",
+            "Dynamic Programming",
+            "Breadth-First Search"
+        ],
+        "testCases": [
+            {
+                "input": "[1,5,11]\n11",
+                "expectedOutput": "1"
+            },
+            {
+                "input": "[2]\n3",
+                "expectedOutput": "-1"
+            }
+        ]
+    },
+    {
+        "title": "Longest Increasing Subsequence",
+        "description": "Given an integer array `nums`, return the length of the longest strictly increasing subsequence.",
+        "difficulty": "Medium",
+        "category": "Dynamic Programming",
+        "tags": [
+            "Arrays",
+            "Binary Search",
+            "Dynamic Programming"
+        ],
+        "testCases": [
+            {
+                "input": "[10,9,2,5,3,7,101,18]",
+                "expectedOutput": "4"
+            },
+            {
+                "input": "[0,1,0,3,2,3]",
+                "expectedOutput": "4"
+            }
+        ]
+    },
+    {
+        "title": "Top K Frequent Elements",
+        "description": "Given an integer array `nums` and an integer `k`, return the `k` most frequent elements. You may return the answer in any order.",
+        "difficulty": "Medium",
+        "category": "Sorting",
+        "tags": [
+            "Arrays",
+            "Hash Table",
+            "Sorting",
+            "Heap",
+            "Bucket Sort"
+        ],
+        "testCases": [
+            {
+                "input": "[1,1,1,2,2,3]\n2",
+                "expectedOutput": "[1,2]"
+            },
+            {
+                "input": "[1]\n1",
+                "expectedOutput": "[1]"
+            }
+        ]
+    },
+    {
+        "title": "Decode String",
+        "description": "Given an encoded string, return its decoded string. The encoding rule is: `k[encoded_string]`, where the encoded_string inside the square brackets is repeated exactly k times.",
+        "difficulty": "Medium",
+        "category": "Stacks",
+        "tags": [
+            "Strings",
+            "Stacks",
+            "Recursion"
+        ],
+        "testCases": [
+            {
+                "input": "3[a]2[bc]",
+                "expectedOutput": "aaabcbc"
+            },
+            {
+                "input": "3[a2[c]]",
+                "expectedOutput": "accaccacc"
+            }
+        ]
+    },
+    {
+        "title": "Diameter of Binary Tree",
+        "description": "Given the root of a binary tree, return the length of the diameter of the tree. The diameter is the length of the longest path between any two nodes, which may or may not pass through the root.",
+        "difficulty": "Easy",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Depth-First Search"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3,4,5]",
+                "expectedOutput": "3"
+            },
+            {
+                "input": "[1,2]",
+                "expectedOutput": "1"
+            }
+        ]
+    },
+    {
+        "title": "Daily Temperatures",
+        "description": "Given an array of integers `temperatures` representing daily temperatures, return an array where `answer[i]` is the number of days you have to wait after the ith day to get a warmer temperature.",
+        "difficulty": "Medium",
+        "category": "Stacks",
+        "tags": [
+            "Arrays",
+            "Stacks",
+            "Monotonic Stack"
+        ],
+        "testCases": [
+            {
+                "input": "[73,74,75,71,69,72,76,73]",
+                "expectedOutput": "[1,1,4,2,1,1,0,0]"
+            },
+            {
+                "input": "[30,40,50,60]",
+                "expectedOutput": "[1,1,1,0]"
+            }
+        ]
+    },
+    {
+        "title": "Partition Equal Subset Sum",
+        "description": "Given an integer array `nums`, return `true` if you can partition the array into two subsets such that the sum of elements in both subsets is equal.",
+        "difficulty": "Medium",
+        "category": "Dynamic Programming",
+        "tags": [
+            "Arrays",
+            "Dynamic Programming"
+        ],
+        "testCases": [
+            {
+                "input": "[1,5,11,5]",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "[1,2,3,5]",
+                "expectedOutput": "false"
+            }
+        ]
+    },
+    {
+        "title": "Path Sum III",
+        "description": "Given the root of a binary tree and an integer `targetSum`, return the number of paths where the sum of the values along the path equals targetSum. The path does not need to start at root or end at leaf.",
+        "difficulty": "Medium",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Depth-First Search",
+            "Prefix Sum"
+        ],
+        "testCases": [
+            {
+                "input": "[10,5,-3,3,2,null,11,3,-2,null,1]\n8",
+                "expectedOutput": "3"
+            },
+            {
+                "input": "[5,4,8,11,null,13,4,7,2,null,null,5,1]\n22",
+                "expectedOutput": "3"
+            }
+        ]
+    },
+    {
+        "title": "Find All Anagrams in a String",
+        "description": "Given two strings `s` and `p`, return an array of all the start indices of `p`'s anagrams in `s`. You may return the answer in any order.",
+        "difficulty": "Medium",
+        "category": "Strings",
+        "tags": [
+            "Strings",
+            "Sliding Window",
+            "Hash Table"
+        ],
+        "testCases": [
+            {
+                "input": "cbaebabacd\nabc",
+                "expectedOutput": "[0,6]"
+            },
+            {
+                "input": "abab\nab",
+                "expectedOutput": "[0,1,2]"
+            }
+        ]
+    },
+    {
+        "title": "Task Scheduler",
+        "description": "Given a char array `tasks` representing CPU tasks and `n` representing cooldown between same tasks, return the minimum number of intervals the CPU will take to finish all tasks.",
+        "difficulty": "Medium",
+        "category": "Greedy",
+        "tags": [
+            "Arrays",
+            "Hash Table",
+            "Greedy",
+            "Sorting",
+            "Heap"
+        ],
+        "testCases": [
+            {
+                "input": "[\"A\",\"A\",\"A\",\"B\",\"B\",\"B\"]\n2",
+                "expectedOutput": "8"
+            },
+            {
+                "input": "[\"A\",\"A\",\"A\",\"B\",\"B\",\"B\"]\n0",
+                "expectedOutput": "6"
+            }
+        ]
+    },
+    {
+        "title": "Subarray Sum Equals K",
+        "description": "Given an array of integers `nums` and an integer `k`, return the total number of subarrays whose sum equals to `k`.",
+        "difficulty": "Medium",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Hash Table",
+            "Prefix Sum"
+        ],
+        "testCases": [
+            {
+                "input": "[1,1,1]\n2",
+                "expectedOutput": "2"
+            },
+            {
+                "input": "[1,2,3]\n3",
+                "expectedOutput": "2"
+            }
+        ]
+    },
+    {
+        "title": "Lowest Common Ancestor of a Binary Tree",
+        "description": "Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree. The LCA is defined as the lowest node that has both p and q as descendants.",
+        "difficulty": "Medium",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Depth-First Search"
+        ],
+        "testCases": [
+            {
+                "input": "[3,5,1,6,2,0,8,null,null,7,4]\n5\n1",
+                "expectedOutput": "3"
+            },
+            {
+                "input": "[3,5,1,6,2,0,8,null,null,7,4]\n5\n4",
+                "expectedOutput": "5"
+            }
+        ]
+    },
+    {
+        "title": "Word Break",
+        "description": "Given a string `s` and a dictionary of strings `wordDict`, return true if `s` can be segmented into a space-separated sequence of one or more dictionary words.",
+        "difficulty": "Medium",
+        "category": "Dynamic Programming",
+        "tags": [
+            "Strings",
+            "Dynamic Programming",
+            "Hash Table",
+            "Trie"
+        ],
+        "testCases": [
+            {
+                "input": "leetcode\n[\"leet\",\"code\"]",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "applepenapple\n[\"apple\",\"pen\"]",
+                "expectedOutput": "true"
+            }
+        ]
+    },
+    {
+        "title": "Binary Tree Maximum Path Sum",
+        "description": "A path in a binary tree is a sequence of nodes where each pair of adjacent nodes has an edge. Given root, return the maximum path sum of any non-empty path.",
+        "difficulty": "Hard",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Depth-First Search",
+            "Dynamic Programming"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3]",
+                "expectedOutput": "6"
+            },
+            {
+                "input": "[-10,9,20,null,null,15,7]",
+                "expectedOutput": "42"
+            }
+        ]
+    },
+    {
+        "title": "Serialize and Deserialize Binary Tree",
+        "description": "Design an algorithm to serialize and deserialize a binary tree. Serialization is converting a tree to a string. Deserialization is reconstructing the tree from the string.",
+        "difficulty": "Hard",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Design",
+            "Strings",
+            "Breadth-First Search"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3,null,null,4,5]",
+                "expectedOutput": "[1,2,3,null,null,4,5]"
+            },
+            {
+                "input": "[]",
+                "expectedOutput": "[]"
+            }
+        ]
+    },
+    {
+        "title": "Longest Consecutive Sequence",
+        "description": "Given an unsorted array of integers `nums`, return the length of the longest consecutive elements sequence. You must write an algorithm that runs in O(n) time.",
+        "difficulty": "Medium",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Hash Table",
+            "Union Find"
+        ],
+        "testCases": [
+            {
+                "input": "[100,4,200,1,3,2]",
+                "expectedOutput": "4"
+            },
+            {
+                "input": "[0,3,7,2,5,8,4,6,0,1]",
+                "expectedOutput": "9"
+            }
+        ]
+    },
+    {
+        "title": "Pacific Atlantic Water Flow",
+        "description": "Given an `m x n` rectangular island bordered by Pacific and Atlantic oceans, return all cells from which water can flow to both oceans. Water can only flow to cells with equal or lower heights.",
+        "difficulty": "Medium",
+        "category": "Graphs",
+        "tags": [
+            "Arrays",
+            "Depth-First Search",
+            "Breadth-First Search",
+            "Matrix"
+        ],
+        "testCases": [
+            {
+                "input": "[[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]]",
+                "expectedOutput": "[[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]"
+            }
+        ]
+    },
+    {
+        "title": "Reconstruct Itinerary",
+        "description": "You are given a list of airline `tickets` where `tickets[i] = [fromi, toi]`. Reconstruct the itinerary in order starting from JFK. If there are multiple valid itineraries, return the one with the smallest lexical order.",
+        "difficulty": "Hard",
+        "category": "Graphs",
+        "tags": [
+            "Depth-First Search",
+            "Graph",
+            "Eulerian Circuit"
+        ],
+        "testCases": [
+            {
+                "input": "[[\"MUC\",\"LHR\"],[\"JFK\",\"MUC\"],[\"SFO\",\"SJC\"],[\"LHR\",\"SFO\"]]",
+                "expectedOutput": "[\"JFK\",\"MUC\",\"LHR\",\"SFO\",\"SJC\"]"
+            }
+        ]
+    },
+    {
+        "title": "Implement Queue using Stacks",
+        "description": "Implement a first in first out (FIFO) queue using only two stacks. The implemented queue should support all the functions of a normal queue: push, peek, pop, and empty.",
+        "difficulty": "Easy",
+        "category": "Stacks",
+        "tags": [
+            "Stacks",
+            "Design",
+            "Queue"
+        ],
+        "testCases": [
+            {
+                "input": "[\"MyQueue\",\"push\",\"push\",\"peek\",\"pop\",\"empty\"]\n[[],[1],[2],[],[],[]]",
+                "expectedOutput": "[null,null,null,1,1,false]"
+            }
+        ]
+    },
+    {
+        "title": "Power of Two",
+        "description": "Given an integer `n`, return `true` if it is a power of two. Otherwise, return `false`. An integer n is a power of two if there exists an integer x such that n == 2^x.",
+        "difficulty": "Easy",
+        "category": "Bit Manipulation",
+        "tags": [
+            "Math",
+            "Bit Manipulation",
+            "Recursion"
+        ],
+        "testCases": [
+            {
+                "input": "1",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "16",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "false"
+            }
+        ]
+    },
+    {
+        "title": "Count Primes",
+        "description": "Given an integer `n`, return the number of prime numbers that are strictly less than `n`. Use the Sieve of Eratosthenes for efficiency.",
+        "difficulty": "Medium",
+        "category": "Math",
+        "tags": [
+            "Arrays",
+            "Math",
+            "Enumeration"
+        ],
+        "testCases": [
+            {
+                "input": "10",
+                "expectedOutput": "4"
+            },
+            {
+                "input": "0",
+                "expectedOutput": "0"
+            }
+        ]
+    },
+    {
+        "title": "Number of 1 Bits",
+        "description": "Write a function that takes the binary representation of a positive integer and returns the number of set bits (1 bits) it has (also known as the Hamming weight).",
+        "difficulty": "Easy",
+        "category": "Bit Manipulation",
+        "tags": [
+            "Bit Manipulation"
+        ],
+        "testCases": [
+            {
+                "input": "11",
+                "expectedOutput": "3"
+            },
+            {
+                "input": "128",
+                "expectedOutput": "1"
+            }
+        ]
+    },
+    {
+        "title": "Missing Number",
+        "description": "Given an array `nums` containing `n` distinct numbers in the range `[0, n]`, return the only number in the range that is missing from the array.",
+        "difficulty": "Easy",
+        "category": "Bit Manipulation",
+        "tags": [
+            "Arrays",
+            "Math",
+            "Bit Manipulation",
+            "Hash Table",
+            "Sorting"
+        ],
+        "testCases": [
+            {
+                "input": "[3,0,1]",
+                "expectedOutput": "2"
+            },
+            {
+                "input": "[0,1]",
+                "expectedOutput": "2"
+            }
+        ]
+    },
+    {
+        "title": "Perfect Squares",
+        "description": "Given an integer `n`, return the least number of perfect square numbers that sum to `n`. A perfect square is an integer that is the square of an integer.",
+        "difficulty": "Medium",
+        "category": "Dynamic Programming",
+        "tags": [
+            "Math",
+            "Dynamic Programming",
+            "Breadth-First Search"
+        ],
+        "testCases": [
+            {
+                "input": "12",
+                "expectedOutput": "3"
+            },
+            {
+                "input": "13",
+                "expectedOutput": "2"
+            }
+        ]
+    },
+    {
+        "title": "Game of Life",
+        "description": "The Board of Game of Life is made up of an `m x n` grid of cells, where each cell has an initial state: live (1) or dead (0). Apply the four rules of the Game of Life simultaneously to every cell.",
+        "difficulty": "Medium",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Matrix",
+            "Simulation"
+        ],
+        "testCases": [
+            {
+                "input": "[[0,1,0],[0,0,1],[1,1,1],[0,0,0]]",
+                "expectedOutput": "[[0,0,0],[1,0,1],[0,1,1],[0,1,0]]"
+            }
+        ]
+    },
+    {
+        "title": "Find Peak Element",
+        "description": "A peak element is an element that is strictly greater than its neighbors. Given a 0-indexed integer array `nums`, find a peak element, and return its index. If multiple peaks exist, return the index of any one.",
+        "difficulty": "Medium",
+        "category": "Binary Search",
+        "tags": [
+            "Arrays",
+            "Binary Search"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3,1]",
+                "expectedOutput": "2"
+            },
+            {
+                "input": "[1,2,1,3,5,6,4]",
+                "expectedOutput": "5"
+            }
+        ]
+    },
+    {
+        "title": "Flatten Binary Tree to Linked List",
+        "description": "Given the root of a binary tree, flatten the tree into a linked list. The linked list should use the same TreeNode class with right child pointer pointing to the next node and left child set to null.",
+        "difficulty": "Medium",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Depth-First Search",
+            "Linked List",
+            "Stacks"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,5,3,4,null,6]",
+                "expectedOutput": "[1,null,2,null,3,null,4,null,5,null,6]"
+            }
+        ]
+    },
+    {
+        "title": "Populating Next Right Pointers in Each Node",
+        "description": "You are given a perfect binary tree where all leaves are on the same level. Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.",
+        "difficulty": "Medium",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Breadth-First Search",
+            "Linked List"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3,4,5,6,7]",
+                "expectedOutput": "[1,#,2,3,#,4,5,6,7,#]"
+            }
+        ]
+    },
+    {
+        "title": "Sum of Two Integers",
+        "description": "Given two integers `a` and `b`, return the sum of the two integers without using the operators + and -.",
+        "difficulty": "Medium",
+        "category": "Bit Manipulation",
+        "tags": [
+            "Math",
+            "Bit Manipulation"
+        ],
+        "testCases": [
+            {
+                "input": "1\n2",
+                "expectedOutput": "3"
+            },
+            {
+                "input": "2\n3",
+                "expectedOutput": "5"
+            }
+        ]
+    },
+    {
+        "title": "Spiral Matrix",
+        "description": "Given an `m x n` matrix, return all elements of the matrix in spiral order.",
+        "difficulty": "Medium",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Matrix",
+            "Simulation"
+        ],
+        "testCases": [
+            {
+                "input": "[[1,2,3],[4,5,6],[7,8,9]]",
+                "expectedOutput": "[1,2,3,6,9,8,7,4,5]"
+            },
+            {
+                "input": "[[1,2,3,4],[5,6,7,8],[9,10,11,12]]",
+                "expectedOutput": "[1,2,3,4,8,12,11,10,9,5,6,7]"
+            }
+        ]
+    },
+    {
+        "title": "Set Matrix Zeroes",
+        "description": "Given an `m x n` integer matrix, if an element is 0, set its entire row and column to 0's. You must do it in place.",
+        "difficulty": "Medium",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Hash Table",
+            "Matrix"
+        ],
+        "testCases": [
+            {
+                "input": "[[1,1,1],[1,0,1],[1,1,1]]",
+                "expectedOutput": "[[1,0,1],[0,0,0],[1,0,1]]"
+            },
+            {
+                "input": "[[0,1,2,0],[3,4,5,2],[1,3,1,5]]",
+                "expectedOutput": "[[0,0,0,0],[0,4,5,0],[0,3,1,0]]"
+            }
+        ]
+    },
+    {
+        "title": "Pow(x, n)",
+        "description": "Implement `pow(x, n)`, which calculates `x` raised to the power `n` (i.e., x^n).",
+        "difficulty": "Medium",
+        "category": "Math",
+        "tags": [
+            "Math",
+            "Recursion"
+        ],
+        "testCases": [
+            {
+                "input": "2.00000\n10",
+                "expectedOutput": "1024.00000"
+            },
+            {
+                "input": "2.10000\n3",
+                "expectedOutput": "9.26100"
+            }
+        ]
+    }
+]

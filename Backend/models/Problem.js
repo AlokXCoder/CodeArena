@@ -1,6 +1,11 @@
 import mongoose from 'mongoose';
 
 const problemSchema = new mongoose.Schema({
+    problemNumber: {
+        type: Number,
+        unique: true,
+        sparse: true,
+    },
     title: {
         type: String,
         required: true,
@@ -18,6 +23,9 @@ const problemSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    tags: [{
+        type: String,
+    }],
     testCases: [{
         input: { type: String, required: true },
         expectedOutput: { type: String, required: true },

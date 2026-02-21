@@ -1,0 +1,1002 @@
+[
+    {
+        "title": "Two Sum",
+        "description": "Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`. You may assume that each input would have exactly one solution, and you may not use the same element twice.",
+        "difficulty": "Easy",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Hash Table"
+        ],
+        "testCases": [
+            {
+                "input": "[2,7,11,15]\n9",
+                "expectedOutput": "[0,1]"
+            },
+            {
+                "input": "[3,2,4]\n6",
+                "expectedOutput": "[1,2]"
+            }
+        ]
+    },
+    {
+        "title": "Add Two Numbers",
+        "description": "You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.",
+        "difficulty": "Medium",
+        "category": "Linked List",
+        "tags": [
+            "Linked List",
+            "Math"
+        ],
+        "testCases": [
+            {
+                "input": "[2,4,3]\n[5,6,4]",
+                "expectedOutput": "[7,0,8]"
+            },
+            {
+                "input": "[0]\n[0]",
+                "expectedOutput": "[0]"
+            }
+        ]
+    },
+    {
+        "title": "Longest Substring Without Repeating Characters",
+        "description": "Given a string `s`, find the length of the longest substring without repeating characters.",
+        "difficulty": "Medium",
+        "category": "Strings",
+        "tags": [
+            "Strings",
+            "Sliding Window",
+            "Hash Table"
+        ],
+        "testCases": [
+            {
+                "input": "abcabcbb",
+                "expectedOutput": "3"
+            },
+            {
+                "input": "bbbbb",
+                "expectedOutput": "1"
+            }
+        ]
+    },
+    {
+        "title": "Median of Two Sorted Arrays",
+        "description": "Given two sorted arrays `nums1` and `nums2` of size `m` and `n` respectively, return the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).",
+        "difficulty": "Hard",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Binary Search"
+        ],
+        "testCases": [
+            {
+                "input": "[1,3]\n[2]",
+                "expectedOutput": "2.0"
+            },
+            {
+                "input": "[1,2]\n[3,4]",
+                "expectedOutput": "2.5"
+            }
+        ]
+    },
+    {
+        "title": "Longest Palindromic Substring",
+        "description": "Given a string `s`, return the longest palindromic substring in `s`.",
+        "difficulty": "Medium",
+        "category": "Strings",
+        "tags": [
+            "Strings",
+            "Dynamic Programming"
+        ],
+        "testCases": [
+            {
+                "input": "babad",
+                "expectedOutput": "bab"
+            },
+            {
+                "input": "cbbd",
+                "expectedOutput": "bb"
+            }
+        ]
+    },
+    {
+        "title": "Reverse Integer",
+        "description": "Given a signed 32-bit integer `x`, return `x` with its digits reversed. If reversing `x` causes the value to go outside the signed 32-bit integer range, then return 0.",
+        "difficulty": "Medium",
+        "category": "Math",
+        "tags": [
+            "Math"
+        ],
+        "testCases": [
+            {
+                "input": "123",
+                "expectedOutput": "321"
+            },
+            {
+                "input": "-123",
+                "expectedOutput": "-321"
+            }
+        ]
+    },
+    {
+        "title": "Palindrome Number",
+        "description": "Given an integer `x`, return `true` if `x` is a palindrome, and `false` otherwise. An integer is a palindrome when it reads the same forward and backward.",
+        "difficulty": "Easy",
+        "category": "Math",
+        "tags": [
+            "Math"
+        ],
+        "testCases": [
+            {
+                "input": "121",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "-121",
+                "expectedOutput": "false"
+            }
+        ]
+    },
+    {
+        "title": "Regular Expression Matching",
+        "description": "Given an input string `s` and a pattern `p`, implement regular expression matching with support for `.` and `*` where `.` matches any single character and `*` matches zero or more of the preceding element.",
+        "difficulty": "Hard",
+        "category": "Dynamic Programming",
+        "tags": [
+            "Strings",
+            "Dynamic Programming",
+            "Recursion"
+        ],
+        "testCases": [
+            {
+                "input": "aa\na",
+                "expectedOutput": "false"
+            },
+            {
+                "input": "aa\na*",
+                "expectedOutput": "true"
+            }
+        ]
+    },
+    {
+        "title": "Container With Most Water",
+        "description": "You are given an integer array `height` of length `n`. Find two lines that together with the x-axis form a container, such that the container contains the most water. Return the maximum amount of water a container can store.",
+        "difficulty": "Medium",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Two Pointers",
+            "Greedy"
+        ],
+        "testCases": [
+            {
+                "input": "[1,8,6,2,5,4,8,3,7]",
+                "expectedOutput": "49"
+            },
+            {
+                "input": "[1,1]",
+                "expectedOutput": "1"
+            }
+        ]
+    },
+    {
+        "title": "Roman to Integer",
+        "description": "Given a roman numeral, convert it to an integer. Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.",
+        "difficulty": "Easy",
+        "category": "Strings",
+        "tags": [
+            "Strings",
+            "Math",
+            "Hash Table"
+        ],
+        "testCases": [
+            {
+                "input": "III",
+                "expectedOutput": "3"
+            },
+            {
+                "input": "LVIII",
+                "expectedOutput": "58"
+            }
+        ]
+    },
+    {
+        "title": "Longest Common Prefix",
+        "description": "Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string.",
+        "difficulty": "Easy",
+        "category": "Strings",
+        "tags": [
+            "Strings"
+        ],
+        "testCases": [
+            {
+                "input": "[\"flower\",\"flow\",\"flight\"]",
+                "expectedOutput": "fl"
+            },
+            {
+                "input": "[\"dog\",\"racecar\",\"car\"]",
+                "expectedOutput": "(empty string)"
+            }
+        ]
+    },
+    {
+        "title": "3Sum",
+        "description": "Given an integer array nums, return all the triplets `[nums[i], nums[j], nums[k]]` such that `i != j`, `i != k`, and `j != k`, and `nums[i] + nums[j] + nums[k] == 0`. The solution set must not contain duplicate triplets.",
+        "difficulty": "Medium",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Two Pointers",
+            "Sorting"
+        ],
+        "testCases": [
+            {
+                "input": "[-1,0,1,2,-1,-4]",
+                "expectedOutput": "[[-1,-1,2],[-1,0,1]]"
+            },
+            {
+                "input": "[0,1,1]",
+                "expectedOutput": "[]"
+            }
+        ]
+    },
+    {
+        "title": "Letter Combinations of a Phone Number",
+        "description": "Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. A mapping of digits to letters is given just like on a telephone buttons.",
+        "difficulty": "Medium",
+        "category": "Backtracking",
+        "tags": [
+            "Strings",
+            "Backtracking"
+        ],
+        "testCases": [
+            {
+                "input": "23",
+                "expectedOutput": "[\"ad\",\"ae\",\"af\",\"bd\",\"be\",\"bf\",\"cd\",\"ce\",\"cf\"]"
+            },
+            {
+                "input": "2",
+                "expectedOutput": "[\"a\",\"b\",\"c\"]"
+            }
+        ]
+    },
+    {
+        "title": "Remove Nth Node From End of List",
+        "description": "Given the head of a linked list, remove the `nth` node from the end of the list and return its head.",
+        "difficulty": "Medium",
+        "category": "Linked List",
+        "tags": [
+            "Linked List",
+            "Two Pointers"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3,4,5]\n2",
+                "expectedOutput": "[1,2,3,5]"
+            },
+            {
+                "input": "[1]\n1",
+                "expectedOutput": "[]"
+            }
+        ]
+    },
+    {
+        "title": "Valid Parentheses",
+        "description": "Given a string `s` containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. An input string is valid if open brackets are closed by the same type and in the correct order.",
+        "difficulty": "Easy",
+        "category": "Stacks",
+        "tags": [
+            "Strings",
+            "Stacks"
+        ],
+        "testCases": [
+            {
+                "input": "()",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "()[]{}",
+                "expectedOutput": "true"
+            }
+        ]
+    },
+    {
+        "title": "Merge Two Sorted Lists",
+        "description": "You are given the heads of two sorted linked lists `list1` and `list2`. Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.",
+        "difficulty": "Easy",
+        "category": "Linked List",
+        "tags": [
+            "Linked List",
+            "Recursion"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,4]\n[1,3,4]",
+                "expectedOutput": "[1,1,2,3,4,4]"
+            },
+            {
+                "input": "[]\n[]",
+                "expectedOutput": "[]"
+            }
+        ]
+    },
+    {
+        "title": "Generate Parentheses",
+        "description": "Given `n` pairs of parentheses, write a function to generate all combinations of well-formed parentheses.",
+        "difficulty": "Medium",
+        "category": "Backtracking",
+        "tags": [
+            "Strings",
+            "Backtracking",
+            "Dynamic Programming"
+        ],
+        "testCases": [
+            {
+                "input": "3",
+                "expectedOutput": "[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]"
+            },
+            {
+                "input": "1",
+                "expectedOutput": "[\"()\"]"
+            }
+        ]
+    },
+    {
+        "title": "Merge k Sorted Lists",
+        "description": "You are given an array of `k` linked-lists, each linked-list is sorted in ascending order. Merge all the linked-lists into one sorted linked-list and return it.",
+        "difficulty": "Hard",
+        "category": "Linked List",
+        "tags": [
+            "Linked List",
+            "Heap",
+            "Divide and Conquer"
+        ],
+        "testCases": [
+            {
+                "input": "[[1,4,5],[1,3,4],[2,6]]",
+                "expectedOutput": "[1,1,2,3,4,4,5,6]"
+            },
+            {
+                "input": "[]",
+                "expectedOutput": "[]"
+            }
+        ]
+    },
+    {
+        "title": "Swap Nodes in Pairs",
+        "description": "Given a linked list, swap every two adjacent nodes and return its head. You must solve the problem without modifying the values in the list's nodes.",
+        "difficulty": "Medium",
+        "category": "Linked List",
+        "tags": [
+            "Linked List",
+            "Recursion"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3,4]",
+                "expectedOutput": "[2,1,4,3]"
+            },
+            {
+                "input": "[]",
+                "expectedOutput": "[]"
+            }
+        ]
+    },
+    {
+        "title": "Remove Duplicates from Sorted Array",
+        "description": "Given an integer array `nums` sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. Return the number of unique elements.",
+        "difficulty": "Easy",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Two Pointers"
+        ],
+        "testCases": [
+            {
+                "input": "[1,1,2]",
+                "expectedOutput": "2"
+            },
+            {
+                "input": "[0,0,1,1,1,2,2,3,3,4]",
+                "expectedOutput": "5"
+            }
+        ]
+    },
+    {
+        "title": "Find the Index of the First Occurrence in a String",
+        "description": "Given two strings `needle` and `haystack`, return the index of the first occurrence of `needle` in `haystack`, or -1 if `needle` is not part of `haystack`.",
+        "difficulty": "Easy",
+        "category": "Strings",
+        "tags": [
+            "Strings",
+            "Two Pointers"
+        ],
+        "testCases": [
+            {
+                "input": "sadbutsad\nsad",
+                "expectedOutput": "0"
+            },
+            {
+                "input": "leetcode\nleeto",
+                "expectedOutput": "-1"
+            }
+        ]
+    },
+    {
+        "title": "Search in Rotated Sorted Array",
+        "description": "Given the array `nums` after the possible rotation and an integer `target`, return the index of `target` if it is in `nums`, or -1 if it is not. You must write an algorithm with O(log n) runtime complexity.",
+        "difficulty": "Medium",
+        "category": "Binary Search",
+        "tags": [
+            "Arrays",
+            "Binary Search"
+        ],
+        "testCases": [
+            {
+                "input": "[4,5,6,7,0,1,2]\n0",
+                "expectedOutput": "4"
+            },
+            {
+                "input": "[4,5,6,7,0,1,2]\n3",
+                "expectedOutput": "-1"
+            }
+        ]
+    },
+    {
+        "title": "Find First and Last Position of Element in Sorted Array",
+        "description": "Given an array of integers `nums` sorted in non-decreasing order, find the starting and ending position of a given `target` value. If target is not found return [-1,-1]. You must write O(log n) algorithm.",
+        "difficulty": "Medium",
+        "category": "Binary Search",
+        "tags": [
+            "Arrays",
+            "Binary Search"
+        ],
+        "testCases": [
+            {
+                "input": "[5,7,7,8,8,10]\n8",
+                "expectedOutput": "[3,4]"
+            },
+            {
+                "input": "[5,7,7,8,8,10]\n6",
+                "expectedOutput": "[-1,-1]"
+            }
+        ]
+    },
+    {
+        "title": "Search Insert Position",
+        "description": "Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.",
+        "difficulty": "Easy",
+        "category": "Binary Search",
+        "tags": [
+            "Arrays",
+            "Binary Search"
+        ],
+        "testCases": [
+            {
+                "input": "[1,3,5,6]\n5",
+                "expectedOutput": "2"
+            },
+            {
+                "input": "[1,3,5,6]\n2",
+                "expectedOutput": "1"
+            }
+        ]
+    },
+    {
+        "title": "Combination Sum",
+        "description": "Given an array of distinct integers `candidates` and a target integer `target`, return a list of all unique combinations of `candidates` where the chosen numbers sum to `target`. You may use the same number unlimited times.",
+        "difficulty": "Medium",
+        "category": "Backtracking",
+        "tags": [
+            "Arrays",
+            "Backtracking"
+        ],
+        "testCases": [
+            {
+                "input": "[2,3,6,7]\n7",
+                "expectedOutput": "[[2,2,3],[7]]"
+            },
+            {
+                "input": "[2,3,5]\n8",
+                "expectedOutput": "[[2,2,2,2],[2,3,3],[3,5]]"
+            }
+        ]
+    },
+    {
+        "title": "Trapping Rain Water",
+        "description": "Given `n` non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.",
+        "difficulty": "Hard",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Two Pointers",
+            "Stack",
+            "Dynamic Programming"
+        ],
+        "testCases": [
+            {
+                "input": "[0,1,0,2,1,0,1,3,2,1,2,1]",
+                "expectedOutput": "6"
+            },
+            {
+                "input": "[4,2,0,3,2,5]",
+                "expectedOutput": "9"
+            }
+        ]
+    },
+    {
+        "title": "Permutations",
+        "description": "Given an array `nums` of distinct integers, return all the possible permutations. You can return the answer in any order.",
+        "difficulty": "Medium",
+        "category": "Backtracking",
+        "tags": [
+            "Arrays",
+            "Backtracking"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3]",
+                "expectedOutput": "[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]"
+            },
+            {
+                "input": "[0,1]",
+                "expectedOutput": "[[0,1],[1,0]]"
+            }
+        ]
+    },
+    {
+        "title": "Rotate Image",
+        "description": "You are given an `n x n` 2D matrix representing an image, rotate the image by 90 degrees clockwise. You have to rotate the image in-place.",
+        "difficulty": "Medium",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Math",
+            "Matrix"
+        ],
+        "testCases": [
+            {
+                "input": "[[1,2,3],[4,5,6],[7,8,9]]",
+                "expectedOutput": "[[7,4,1],[8,5,2],[9,6,3]]"
+            },
+            {
+                "input": "[[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]",
+                "expectedOutput": "[[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]"
+            }
+        ]
+    },
+    {
+        "title": "Group Anagrams",
+        "description": "Given an array of strings `strs`, group the anagrams together. You can return the answer in any order. An Anagram is a word formed by rearranging the letters of a different word.",
+        "difficulty": "Medium",
+        "category": "Strings",
+        "tags": [
+            "Strings",
+            "Hash Table",
+            "Sorting"
+        ],
+        "testCases": [
+            {
+                "input": "[\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]",
+                "expectedOutput": "[[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]"
+            },
+            {
+                "input": "[\"\"]",
+                "expectedOutput": "[[\"\"]]"
+            }
+        ]
+    },
+    {
+        "title": "Maximum Subarray",
+        "description": "Given an integer array `nums`, find the subarray with the largest sum, and return its sum.",
+        "difficulty": "Medium",
+        "category": "Dynamic Programming",
+        "tags": [
+            "Arrays",
+            "Dynamic Programming",
+            "Divide and Conquer"
+        ],
+        "testCases": [
+            {
+                "input": "[-2,1,-3,4,-1,2,1,-5,4]",
+                "expectedOutput": "6"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "1"
+            }
+        ]
+    },
+    {
+        "title": "Jump Game",
+        "description": "You are given an integer array `nums`. You are initially positioned at the array's first index. Each element represents your maximum jump length at that position. Return true if you can reach the last index.",
+        "difficulty": "Medium",
+        "category": "Greedy",
+        "tags": [
+            "Arrays",
+            "Dynamic Programming",
+            "Greedy"
+        ],
+        "testCases": [
+            {
+                "input": "[2,3,1,1,4]",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "[3,2,1,0,4]",
+                "expectedOutput": "false"
+            }
+        ]
+    },
+    {
+        "title": "Merge Intervals",
+        "description": "Given an array of `intervals` where `intervals[i] = [starti, endi]`, merge all overlapping intervals, and return an array of the non-overlapping intervals.",
+        "difficulty": "Medium",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Sorting"
+        ],
+        "testCases": [
+            {
+                "input": "[[1,3],[2,6],[8,10],[15,18]]",
+                "expectedOutput": "[[1,6],[8,10],[15,18]]"
+            },
+            {
+                "input": "[[1,4],[4,5]]",
+                "expectedOutput": "[[1,5]]"
+            }
+        ]
+    },
+    {
+        "title": "Unique Paths",
+        "description": "There is a robot on an `m x n` grid. The robot is initially located at the top-left corner. The robot can only move either down or right. Given `m` and `n`, return the number of possible unique paths.",
+        "difficulty": "Medium",
+        "category": "Dynamic Programming",
+        "tags": [
+            "Math",
+            "Dynamic Programming"
+        ],
+        "testCases": [
+            {
+                "input": "3\n7",
+                "expectedOutput": "28"
+            },
+            {
+                "input": "3\n2",
+                "expectedOutput": "3"
+            }
+        ]
+    },
+    {
+        "title": "Climbing Stairs",
+        "description": "You are climbing a staircase. It takes `n` steps to reach the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?",
+        "difficulty": "Easy",
+        "category": "Dynamic Programming",
+        "tags": [
+            "Math",
+            "Dynamic Programming"
+        ],
+        "testCases": [
+            {
+                "input": "2",
+                "expectedOutput": "2"
+            },
+            {
+                "input": "3",
+                "expectedOutput": "3"
+            }
+        ]
+    },
+    {
+        "title": "Edit Distance",
+        "description": "Given two strings `word1` and `word2`, return the minimum number of operations required to convert `word1` to `word2`. You have insert, delete, or replace a character.",
+        "difficulty": "Medium",
+        "category": "Dynamic Programming",
+        "tags": [
+            "Strings",
+            "Dynamic Programming"
+        ],
+        "testCases": [
+            {
+                "input": "horse\nros",
+                "expectedOutput": "3"
+            },
+            {
+                "input": "intention\nexecution",
+                "expectedOutput": "5"
+            }
+        ]
+    },
+    {
+        "title": "Sort Colors",
+        "description": "Given an array `nums` with `n` objects colored red, white, or blue (0, 1, 2), sort them in-place so that objects of the same color are adjacent in the order red, white, and blue.",
+        "difficulty": "Medium",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Two Pointers",
+            "Sorting"
+        ],
+        "testCases": [
+            {
+                "input": "[2,0,2,1,1,0]",
+                "expectedOutput": "[0,0,1,1,2,2]"
+            },
+            {
+                "input": "[2,0,1]",
+                "expectedOutput": "[0,1,2]"
+            }
+        ]
+    },
+    {
+        "title": "Minimum Window Substring",
+        "description": "Given two strings `s` and `t` of lengths `m` and `n`, return the minimum window substring of `s` such that every character in `t` is included in the window. If there is no such substring return empty string.",
+        "difficulty": "Hard",
+        "category": "Strings",
+        "tags": [
+            "Strings",
+            "Sliding Window",
+            "Hash Table"
+        ],
+        "testCases": [
+            {
+                "input": "ADOBECODEBANC\nABC",
+                "expectedOutput": "BANC"
+            },
+            {
+                "input": "a\na",
+                "expectedOutput": "a"
+            }
+        ]
+    },
+    {
+        "title": "Subsets",
+        "description": "Given an integer array `nums` of unique elements, return all possible subsets (the power set). The solution set must not contain duplicate subsets.",
+        "difficulty": "Medium",
+        "category": "Backtracking",
+        "tags": [
+            "Arrays",
+            "Backtracking",
+            "Bit Manipulation"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,3]",
+                "expectedOutput": "[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]"
+            },
+            {
+                "input": "[0]",
+                "expectedOutput": "[[],[0]]"
+            }
+        ]
+    },
+    {
+        "title": "Word Search",
+        "description": "Given an `m x n` grid of characters `board` and a string `word`, return true if `word` exists in the grid. The word can be constructed from sequentially adjacent cells horizontally or vertically.",
+        "difficulty": "Medium",
+        "category": "Backtracking",
+        "tags": [
+            "Arrays",
+            "Backtracking",
+            "Matrix"
+        ],
+        "testCases": [
+            {
+                "input": "[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\nABCCED",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\nSEE",
+                "expectedOutput": "true"
+            }
+        ]
+    },
+    {
+        "title": "Largest Rectangle in Histogram",
+        "description": "Given an array of integers `heights` representing the histogram's bar height where the width of each bar is 1, return the area of the largest rectangle in the histogram.",
+        "difficulty": "Hard",
+        "category": "Stacks",
+        "tags": [
+            "Arrays",
+            "Stacks"
+        ],
+        "testCases": [
+            {
+                "input": "[2,1,5,6,2,3]",
+                "expectedOutput": "10"
+            },
+            {
+                "input": "[2,4]",
+                "expectedOutput": "4"
+            }
+        ]
+    },
+    {
+        "title": "Binary Tree Inorder Traversal",
+        "description": "Given the root of a binary tree, return the inorder traversal of its nodes' values.",
+        "difficulty": "Easy",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Stacks",
+            "Depth-First Search"
+        ],
+        "testCases": [
+            {
+                "input": "[1,null,2,3]",
+                "expectedOutput": "[1,3,2]"
+            },
+            {
+                "input": "[]",
+                "expectedOutput": "[]"
+            }
+        ]
+    },
+    {
+        "title": "Validate Binary Search Tree",
+        "description": "Given the root of a binary tree, determine if it is a valid binary search tree (BST). A valid BST has left subtree values less than root and right subtree values greater.",
+        "difficulty": "Medium",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Depth-First Search",
+            "Binary Search Tree"
+        ],
+        "testCases": [
+            {
+                "input": "[2,1,3]",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "[5,1,4,null,null,3,6]",
+                "expectedOutput": "false"
+            }
+        ]
+    },
+    {
+        "title": "Symmetric Tree",
+        "description": "Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).",
+        "difficulty": "Easy",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Depth-First Search",
+            "Breadth-First Search"
+        ],
+        "testCases": [
+            {
+                "input": "[1,2,2,3,4,4,3]",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "[1,2,2,null,3,null,3]",
+                "expectedOutput": "false"
+            }
+        ]
+    },
+    {
+        "title": "Binary Tree Level Order Traversal",
+        "description": "Given the root of a binary tree, return the level order traversal of its nodes' values (i.e., from left to right, level by level).",
+        "difficulty": "Medium",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Breadth-First Search"
+        ],
+        "testCases": [
+            {
+                "input": "[3,9,20,null,null,15,7]",
+                "expectedOutput": "[[3],[9,20],[15,7]]"
+            },
+            {
+                "input": "[1]",
+                "expectedOutput": "[[1]]"
+            }
+        ]
+    },
+    {
+        "title": "Maximum Depth of Binary Tree",
+        "description": "Given the root of a binary tree, return its maximum depth. A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.",
+        "difficulty": "Easy",
+        "category": "Trees",
+        "tags": [
+            "Trees",
+            "Depth-First Search",
+            "Breadth-First Search"
+        ],
+        "testCases": [
+            {
+                "input": "[3,9,20,null,null,15,7]",
+                "expectedOutput": "3"
+            },
+            {
+                "input": "[1,null,2]",
+                "expectedOutput": "2"
+            }
+        ]
+    },
+    {
+        "title": "Best Time to Buy and Sell Stock",
+        "description": "You are given an array `prices` where `prices[i]` is the price of a given stock on the `ith` day. You want to maximize your profit by choosing a single day to buy and sell. Return the maximum profit.",
+        "difficulty": "Easy",
+        "category": "Arrays",
+        "tags": [
+            "Arrays",
+            "Dynamic Programming"
+        ],
+        "testCases": [
+            {
+                "input": "[7,1,5,3,6,4]",
+                "expectedOutput": "5"
+            },
+            {
+                "input": "[7,6,4,3,1]",
+                "expectedOutput": "0"
+            }
+        ]
+    },
+    {
+        "title": "Single Number",
+        "description": "Given a non-empty array of integers `nums`, every element appears twice except for one. Find that single one. You must implement a solution with linear runtime and use only constant extra space.",
+        "difficulty": "Easy",
+        "category": "Bit Manipulation",
+        "tags": [
+            "Arrays",
+            "Bit Manipulation"
+        ],
+        "testCases": [
+            {
+                "input": "[2,2,1]",
+                "expectedOutput": "1"
+            },
+            {
+                "input": "[4,1,2,1,2]",
+                "expectedOutput": "4"
+            }
+        ]
+    },
+    {
+        "title": "Linked List Cycle",
+        "description": "Given `head`, the head of a linked list, determine if the linked list has a cycle in it. There is a cycle if some node can be reached again by continuously following the next pointer.",
+        "difficulty": "Easy",
+        "category": "Linked List",
+        "tags": [
+            "Linked List",
+            "Two Pointers",
+            "Hash Table"
+        ],
+        "testCases": [
+            {
+                "input": "[3,2,0,-4]\n1",
+                "expectedOutput": "true"
+            },
+            {
+                "input": "[1,2]\n0",
+                "expectedOutput": "true"
+            }
+        ]
+    },
+    {
+        "title": "LRU Cache",
+        "description": "Design a data structure that follows the constraints of a Least Recently Used (LRU) cache. Implement the `LRUCache` class with `get` and `put` methods that run in O(1) average time complexity.",
+        "difficulty": "Medium",
+        "category": "Design",
+        "tags": [
+            "Hash Table",
+            "Linked List",
+            "Design"
+        ],
+        "testCases": [
+            {
+                "input": "[\"LRUCache\",\"put\",\"put\",\"get\",\"put\",\"get\"]\n[[2],[1,1],[2,2],[1],[3,3],[2]]",
+                "expectedOutput": "[null,null,null,1,null,-1]"
+            },
+            {
+                "input": "[\"LRUCache\",\"put\",\"get\"]\n[[1],[2,1],[2]]",
+                "expectedOutput": "[null,null,1]"
+            }
+        ]
+    }
+]
