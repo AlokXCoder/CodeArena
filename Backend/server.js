@@ -11,6 +11,7 @@ import explainRoutes from './routes/explain.js';
 import hintRoutes from './routes/hint.js';
 import editorialRoutes from './routes/editorial.js';
 import leaderboardRoutes from './routes/leaderboard.js';
+import roadmapRoutes from './routes/roadmap.js';
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ app.use('/api/explain', explainRoutes);
 app.use('/api/hint', hintRoutes);
 app.use('/api/editorial', editorialRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
+app.use('/api/roadmap', roadmapRoutes);
 
 const PORT = process.env.PORT || 5000;
 

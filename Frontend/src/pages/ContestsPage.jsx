@@ -84,6 +84,7 @@ const ContestsPage = () => {
         <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-8 custom-scrollbar text-sm bg-transparent min-h-full">
             <div className="max-w-6xl mx-auto flex flex-col gap-8 overflow-hidden">
 
+
                 {/* Hero Header */}
                 <div className="relative flex flex-col md:flex-row justify-between items-start md:items-end gap-6 bg-gradient-to-br from-[#1a1310] via-[#1f1510] to-[#120a06] p-5 md:p-10 rounded-2xl border border-[var(--color-primary)]/20 shadow-[0_0_60px_rgba(246,107,21,0.08)] overflow-hidden">
                     {/* Background decoration */}
@@ -314,6 +315,7 @@ const ContestsPage = () => {
                                                 className={`w-full py-3 font-bold rounded-lg transition-all flex items-center justify-center gap-2 ${isRegistered
                                                     ? 'bg-green-500/10 text-green-500 cursor-default border border-green-500/20'
                                                     : 'bg-[var(--color-primary)]/10 text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white border border-[var(--color-primary)]/20 hover:border-[var(--color-primary)] hover:shadow-[0_0_20px_rgba(246,107,21,0.2)]'
+
                                                     }`}
                                             >
                                                 {isRegistered ? '✓ Registered Successfully' : <><Swords size={16} /> Register Now</>}

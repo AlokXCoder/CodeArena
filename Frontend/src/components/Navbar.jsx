@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { User, Swords, Menu, X, LayoutDashboard, Target, Trophy, Network, UploadCloud } from 'lucide-react';
+import { User, Bot, Swords, Menu, X, LayoutDashboard, Target, Trophy, Network, UploadCloud } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
@@ -40,12 +40,10 @@ const Navbar = () => {
                 }`}
         >
             <div className="max-w-screen-2xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
-                {/* Left Section - Logo */}
                 <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                     <img src="/code-arena_logo.png" alt="logo png" width={180} height={180} />
                 </Link>
 
-                {/* Center Section - Navigation Links (Desktop) */}
                 <div className="hidden md:flex flex-1 justify-center items-center gap-8">
                     {navLinks.map((link) => (
                         <Link
@@ -62,16 +60,23 @@ const Navbar = () => {
                     ))}
                 </div>
 
-                {/* Right Section (Always Visible) */}
                 <div className="flex items-center gap-4 ml-auto">
-                    {/* Profile */}
+                    <Link
+                        to="/ai-roadmap"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[var(--color-primary)]/10 to-orange-500/10 border border-[var(--color-primary)]/30 hover:border-[var(--color-primary)] text-[var(--color-primary)] hover:text-white transition-all text-xs font-bold shadow-[0_0_10px_rgba(220,68,5,0.15)] hover:shadow-[0_0_15px_rgba(220,68,5,0.3)]"
+                    >
+                        <Bot size={14} />
+                        AI Roadmap
+                    </Link>
                     {localStorage.getItem('token') ? (
-                        <Link
-                            to="/profile"
-                            className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#1a1a1a] to-[#2a2a2a] flex items-center justify-center overflow-hidden border border-osu/30 hover:border-osu transition-colors shadow-[0_0_10px_rgba(220,68,5,0.2)]"
-                        >
-                            <User size={16} className="text-gray-300" />
-                        </Link>
+                        <>
+                            <Link
+                                to="/profile"
+                                className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#1a1a1a] to-[#2a2a2a] flex items-center justify-center overflow-hidden border border-osu/30 hover:border-osu transition-colors shadow-[0_0_10px_rgba(220,68,5,0.2)]"
+                            >
+                                <User size={16} className="text-gray-300" />
+                            </Link>
+                        </>
                     ) : (
                         <Link
                             to="/auth"
