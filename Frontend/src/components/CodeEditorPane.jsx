@@ -46,7 +46,7 @@ const CodeEditorPane = ({ code, setCode, disabled }) => {
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
                     disabled={disabled}
-                    className="flex-1 p-4 bg-transparent text-[#d4d4d4] font-mono leading-6 resize-none focus:outline-none custom-scrollbar whitespace-pre disabled:cursor-not-allowed"
+                    className="flex-1 p-4 bg-black text-[#d4d4d4] font-mono leading-6 resize-none focus:outline-none custom-scrollbar whitespace-pre disabled:cursor-not-allowed"
                     spellCheck="false"
                     placeholder={disabled ? "// TIME LIMIT EXCEEDED. EDITOR LOCKED." : "// Start coding here..."}
                 />
