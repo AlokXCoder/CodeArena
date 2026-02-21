@@ -90,7 +90,7 @@ const ProblemsetPage = () => {
             : <ChevronDown size={13} className="ml-1 text-[var(--color-primary)]" />;
     };
 
-<<<<<<< HEAD
+
     // Seed button
     const handleSeedData = async () => {
         setLoading(true);
@@ -103,8 +103,7 @@ const ProblemsetPage = () => {
         }
     };
 
-=======
->>>>>>> 2a8b26ca01fe473d62ed4440bf717300ed11a4e0
+
     // Difficulty color
     const diffColor = (d) => d === 'Easy' ? 'text-emerald-400' : d === 'Medium' ? 'text-amber-400' : 'text-red-400';
     const diffBg = (d) => d === 'Easy' ? 'bg-emerald-500/10 border-emerald-500/30' : d === 'Medium' ? 'bg-amber-500/10 border-amber-500/30' : 'bg-red-500/10 border-red-500/30';
@@ -137,7 +136,7 @@ const ProblemsetPage = () => {
                 </div>
 
                 {/* Toolbar */}
-                <div className="flex flex-col gap-4 bg-[#1a1310] p-4 rounded-xl border border-[#2d1e16]">
+                <div className="flex flex-col gap-4 bg-black/90 p-4 rounded-xl border border-osu/40 shadow-2xl shadow-osu/10 hover:shadow-osu/20 transition-all duration-300">
                     {/* Category Tabs */}
                     <div className="flex gap-2 w-full overflow-x-auto no-scrollbar pb-1 flex-wrap">
                         {CATEGORIES.map(cat => (
@@ -196,7 +195,7 @@ const ProblemsetPage = () => {
                 </div>
 
                 {/* Problem Table */}
-                <div className="bg-[#1a1310] border border-[#2d1e16] rounded-xl overflow-hidden shadow-xl">
+                <div className="bg-black/90 border border-osu/40 rounded-xl overflow-hidden shadow-2xl shadow-osu/10 hover:shadow-osu/20 transition-all duration-300">
                     <table className="w-full text-left">
                         <thead className="text-xs text-gray-500 uppercase tracking-widest border-b border-[#2d1e16] bg-[#120a06]">
                             <tr>
@@ -292,7 +291,7 @@ const ProblemsetPage = () => {
 
                 {/* Pagination */}
                 {totalPages > 1 && (
-                    <div className="flex items-center justify-between bg-[#1a1310] border border-[#2d1e16] rounded-xl px-4 py-3">
+                    <div className="flex items-center justify-between bg-black/90 border border-osu/40 rounded-xl px-4 py-3 shadow-2xl shadow-osu/10 hover:shadow-osu/20 transition-all duration-300">
                         <span className="text-gray-500 text-xs">
                             Showing {((page - 1) * limit) + 1}–{Math.min(page * limit, totalCount)} of {totalCount}
                         </span>

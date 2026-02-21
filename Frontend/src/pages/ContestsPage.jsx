@@ -86,7 +86,7 @@ const ContestsPage = () => {
 
 
                 {/* Hero Header */}
-                <div className="relative flex flex-col md:flex-row justify-between items-start md:items-end gap-6 bg-gradient-to-br from-[#1a1310] via-[#1f1510] to-[#120a06] p-5 md:p-10 rounded-2xl border border-[var(--color-primary)]/20 shadow-[0_0_60px_rgba(246,107,21,0.08)] overflow-hidden">
+                <div className="relative flex flex-col md:flex-row justify-between items-start md:items-end gap-6 bg-gradient-to-br from-black/95 via-black/90 to-black/95 p-5 md:p-10 rounded-2xl border border-osu/40 shadow-2xl shadow-osu/10 hover:shadow-osu/20 transition-all duration-300 overflow-hidden">
                     {/* Background decoration */}
                     <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-primary)]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
                     <div className="absolute bottom-0 left-0 w-48 h-48 bg-[var(--color-primary)]/3 rounded-full blur-2xl translate-y-1/2 -translate-x-1/4 pointer-events-none"></div>
@@ -146,7 +146,7 @@ const ContestsPage = () => {
                 </div>
 
                 {/* Filter Tabs */}
-                <div className="flex items-center gap-1.5 md:gap-2 bg-[#1a1310] p-1.5 rounded-xl border border-[#2d1e16] w-full md:w-fit overflow-x-auto custom-scrollbar">
+                <div className="flex items-center gap-1.5 md:gap-2 bg-black/90 p-1.5 rounded-xl border border-osu/40 shadow-2xl shadow-osu/10 w-full md:w-fit overflow-x-auto custom-scrollbar">
                     {[
                         { key: 'all', label: 'All Contests', icon: Swords },
                         { key: 'live', label: 'Live Now', icon: Flame },
@@ -171,7 +171,7 @@ const ContestsPage = () => {
                     {loading ? (
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             {[...Array(4)].map((_, i) => (
-                                <div key={i} className="bg-[#1a1310] border border-[#2d1e16] rounded-xl p-6 animate-pulse">
+                                <div key={i} className="bg-black/90 border border-osu/40 rounded-xl p-6 animate-pulse shadow-2xl shadow-osu/10">
                                     <div className="h-4 w-20 bg-[#2d1e16] rounded mb-4" />
                                     <div className="h-6 w-48 bg-[#2d1e16] rounded mb-2" />
                                     <div className="h-3 w-32 bg-[#2d1e16] rounded mb-6" />
@@ -182,7 +182,7 @@ const ContestsPage = () => {
                             ))}
                         </div>
                     ) : filteredContests.length === 0 ? (
-                        <div className="bg-[#1a1310] border border-[#2d1e16] rounded-xl p-16 text-center">
+                        <div className="bg-black/90 border border-osu/40 rounded-xl p-16 text-center shadow-2xl shadow-osu/10">
                             <Trophy size={56} className="mx-auto mb-4 text-[#2d1e16]" />
                             <p className="text-lg font-bold text-gray-400 mb-2">No contests found</p>
                             <p className="text-sm text-gray-500">{filter === 'all' ? 'Check back later for upcoming contests!' : `No ${filter} contests at the moment.`}</p>
@@ -205,9 +205,9 @@ const ContestsPage = () => {
                                 return (
                                     <div
                                         key={contest._id}
-                                        className={`bg-[#1a1310] border rounded-xl p-6 transition-all group flex flex-col h-full relative overflow-hidden ${status === 'live'
-                                            ? 'border-green-500/30 hover:border-green-500/60 shadow-[0_0_20px_rgba(34,197,94,0.05)]'
-                                            : 'border-[#2d1e16] hover:border-[var(--color-primary)]/50'
+                                        className={`bg-black/90 border rounded-xl p-6 transition-all duration-300 group flex flex-col h-full relative overflow-hidden shadow-2xl ${status === 'live'
+                                            ? 'border-green-500/40 hover:border-green-500/60 shadow-green-500/10 hover:shadow-green-500/20'
+                                            : 'border-osu/40 hover:border-osu/70 shadow-osu/10 hover:shadow-osu/20'
                                             }`}
                                     >
                                         {/* Top Row: Status + Strict Badge */}
