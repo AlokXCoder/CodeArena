@@ -31,6 +31,9 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Health check (wake-up ping)
+app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);

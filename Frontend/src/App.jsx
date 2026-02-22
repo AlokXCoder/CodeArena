@@ -19,6 +19,11 @@ function AppContent() {
   const location = useLocation();
   const isWorkspace = location.pathname.startsWith('/workspace');
 
+  // Silent wake-up ping to Render backend (fires once on app load)
+  React.useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/health`).catch(() => { });
+  }, []);
+
   return (
     <div className={`flex flex-col bg-[var(--color-dark-bg)] text-white font-sans relative ${isWorkspace ? 'h-screen overflow-hidden' : 'min-h-screen'}`}>
       <div className="pointer-events-none fixed inset-0 z-0">
