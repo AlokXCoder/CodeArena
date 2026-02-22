@@ -60,13 +60,13 @@ const Navbar = () => {
                     ))}
                 </div>
 
-                <div className="flex items-center gap-4 ml-auto">
+                <div className="flex items-center gap-3 md:gap-4 ml-auto">
                     <Link
                         to="/ai-roadmap"
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[var(--color-primary)]/10 to-orange-500/10 border border-[var(--color-primary)]/30 hover:border-[var(--color-primary)] text-[var(--color-primary)] hover:text-white transition-all text-xs font-bold shadow-[0_0_10px_rgba(220,68,5,0.15)] hover:shadow-[0_0_15px_rgba(220,68,5,0.3)]"
+                        className="w-8 h-8 md:w-auto md:h-auto flex items-center justify-center gap-1.5 md:px-3 md:py-1.5 rounded-full md:rounded-lg bg-gradient-to-r from-[var(--color-primary)]/10 to-orange-500/10 border border-[var(--color-primary)]/30 hover:border-[var(--color-primary)] text-[var(--color-primary)] hover:text-white transition-all text-xs font-bold shadow-[0_0_10px_rgba(220,68,5,0.15)] hover:shadow-[0_0_15px_rgba(220,68,5,0.3)]"
                     >
                         <Bot size={14} />
-                        AI Roadmap
+                        <span className="hidden md:inline">AI Roadmap</span>
                     </Link>
                     {localStorage.getItem('token') ? (
                         <>

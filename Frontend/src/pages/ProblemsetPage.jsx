@@ -27,7 +27,7 @@ const ProblemsetPage = () => {
         fetchProblems();
     }, []);
 
-    const categories = ['All', 'Arrays', 'Dynamic Programming', 'Stacks', 'Graphs', 'Trees'];
+    const categories = ['All', ...Array.from(new Set(problems.map(p => p.category))).sort()];
 
     const filteredProblems = categoryFilter === 'All'
         ? problems
