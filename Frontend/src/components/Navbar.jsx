@@ -62,29 +62,7 @@ const Navbar = () => {
                 </div>
 
                 <div className="flex items-center gap-3 md:gap-4 ml-auto">
-                    <Link
-                        to="/ai-roadmap"
-                        className="w-8 h-8 md:w-auto md:h-auto flex items-center justify-center gap-1.5 md:px-3 md:py-1.5 rounded-full md:rounded-lg bg-gradient-to-r from-[var(--color-primary)]/10 to-orange-500/10 border border-[var(--color-primary)]/30 hover:border-[var(--color-primary)] text-[var(--color-primary)] hover:text-white transition-all text-xs font-bold shadow-[0_0_10px_rgba(220,68,5,0.15)] hover:shadow-[0_0_15px_rgba(220,68,5,0.3)]"
-                    >
-                        <Bot size={14} />
-                        <span className="hidden md:inline">AI Roadmap</span>
-                    </Link>
 
-                    <div className="hidden md:flex flex-1 justify-center items-center gap-8">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                to={link.path}
-                                className={`flex items-center gap-2 text-sm font-semibold transition-all duration-300 ${location.pathname === link.path
-                                    ? 'text-osu'
-                                    : 'text-gray-400 hover:text-white'
-                                    }`}
-                            >
-                                <link.icon size={16} />
-                                {link.name}
-                            </Link>
-                        ))}
-                    </div>
 
                     <div className="flex items-center gap-4 ml-auto">
                         <Link

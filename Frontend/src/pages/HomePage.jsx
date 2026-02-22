@@ -2,7 +2,6 @@ import Hero from "../components/homepage/Hero";
 import SectionDivider from "../components/homepage/SectionDivider";
 import Features from "../components/homepage/Features";
 import FAQ from "../components/homepage/FAQ";
-import HomepageFooter from "../components/homepage/HomepageFooter";
 
 export default function HomePage() {
     return (

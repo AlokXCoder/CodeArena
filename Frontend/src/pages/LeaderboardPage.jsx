@@ -41,102 +41,106 @@ const LeaderboardPage = () => {
     const isMe = (userId) => currentUser && currentUser._id === userId;
     const getInitial = (name) => (name || '?')[0].toUpperCase();
 
+    const avatarColors = ['bg-indigo-900 text-indigo-300', 'bg-teal-900 text-teal-300', 'bg-blue-900 text-blue-300', 'bg-purple-900 text-purple-300', 'bg-orange-900 text-orange-300', 'bg-rose-900 text-rose-300', 'bg-emerald-900 text-emerald-300', 'bg-cyan-900 text-cyan-300'];
+
     return (
-        <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-10 custom-scrollbar text-sm bg-black min-h-screen">
-            <div className="max-w-6xl mx-auto flex flex-col gap-8 pb-10">
+        <div className="flex-1 overflow-y-auto w-full mx-auto px-3 sm:px-4 md:px-10 py-4 md:py-10 custom-scrollbar text-sm bg-black min-h-screen">
+            <div className="max-w-6xl mx-auto flex flex-col gap-6 md:gap-8 pb-10">
 
                 {/* Header */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mt-4">
-                    <div>
-                        <div className="flex items-center gap-3 mb-2">
-                            <h1 className="text-4xl font-extrabold text-white tracking-tight">Global Ranking</h1>
-                            <span className="px-3 py-1 bg-[#2a1a10] border border-[var(--color-primary)] text-[var(--color-primary)] rounded-md text-[10px] font-bold tracking-wider uppercase">
-                                Official
-                            </span>
+                <div className="flex flex-col gap-3 mt-2 md:mt-4">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3">
+                        <div>
+                            <div className="flex items-center gap-2 sm:gap-3 mb-1 sm:mb-2">
+                                <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">Global Ranking</h1>
+                                <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-[#2a1a10] border border-[var(--color-primary)] text-[var(--color-primary)] rounded-md text-[9px] sm:text-[10px] font-bold tracking-wider uppercase">
+                                    Official
+                                </span>
+                            </div>
+                            <p className="text-gray-400 text-xs sm:text-sm md:text-base">
+                                Real-time updates • {totalUsers.toLocaleString()} Participants
+                            </p>
                         </div>
-                        <p className="text-gray-400 text-base">
-                            Real-time updates • {totalUsers.toLocaleString()} Participants fighting for the top spot.
-                        </p>
-                    </div>
-                    <div className="flex items-center gap-2 text-gray-500 text-xs">
-                        <Clock size={14} /> Last updated: just now
+                        <div className="flex items-center gap-2 text-gray-500 text-xs">
+                            <Clock size={14} /> Last updated: just now
+                        </div>
                     </div>
                 </div>
 
                 {/* Podium */}
                 {top3.length === 3 && (
-                    <div className="flex flex-col md:flex-row items-end justify-center gap-4 mt-12 mb-8 md:h-[250px]">
+                    <div className="flex flex-col items-center gap-4 mt-4 sm:mt-8 mb-4 sm:mb-8 md:flex-row md:items-end md:justify-center md:h-[250px]">
 
                         {/* 2nd Place */}
-                        <div className="w-full md:w-[280px] bg-black/90 border border-osu/40 rounded-xl flex flex-col items-center p-6 relative md:h-[200px] mt-12 md:mt-0 hover:border-osu/70 hover:shadow-osu/20 shadow-2xl shadow-osu/10 transition-all duration-300">
-                            <div className="absolute top-4 right-4 text-4xl font-black text-[#2d1e16]/50">02</div>
-                            <div className="w-16 h-16 rounded-full border-4 border-[#1a1310] relative -mt-12 bg-[#2d1e16] shadow-xl overflow-hidden mb-3 flex items-center justify-center text-white font-bold text-xl">
+                        <div className="w-full max-w-[320px] md:w-[260px] lg:w-[280px] bg-black/90 border border-osu/40 rounded-xl flex flex-col items-center p-4 sm:p-6 relative md:h-[200px] mt-8 md:mt-0 hover:border-osu/70 hover:shadow-osu/20 shadow-2xl shadow-osu/10 transition-all duration-300 order-2 md:order-1">
+                            <div className="absolute top-3 right-3 sm:top-4 sm:right-4 text-3xl sm:text-4xl font-black text-[#2d1e16]/50">02</div>
+                            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full border-4 border-[#1a1310] relative -mt-10 sm:-mt-12 bg-[#2d1e16] shadow-xl overflow-hidden mb-2 sm:mb-3 flex items-center justify-center text-white font-bold text-lg sm:text-xl">
                                 {getInitial(top3[1].name)}
                             </div>
-                            <h3 className="text-lg font-bold text-white mb-1">{top3[1].name || 'Anonymous'}</h3>
-                            <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-6">
+                            <h3 className="text-base sm:text-lg font-bold text-white mb-0.5 sm:mb-1 text-center truncate max-w-full">{top3[1].name || 'Anonymous'}</h3>
+                            <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-gray-400 mb-4 sm:mb-6">
                                 {top3[1].location || 'Unknown'}
                             </div>
-                            <div className="flex w-full justify-between items-center text-center px-4 border-t border-[#2d1e16] pt-4 mt-auto">
+                            <div className="flex w-full justify-between items-center text-center px-3 sm:px-4 border-t border-[#2d1e16] pt-3 sm:pt-4 mt-auto">
                                 <div>
-                                    <div className="text-[10px] text-gray-500 font-bold tracking-wider mb-1 uppercase">Solved</div>
-                                    <div className="text-xl font-bold text-white tracking-tight">{top3[1].solved}</div>
+                                    <div className="text-[9px] sm:text-[10px] text-gray-500 font-bold tracking-wider mb-1 uppercase">Solved</div>
+                                    <div className="text-lg sm:text-xl font-bold text-white tracking-tight">{top3[1].solved}</div>
                                 </div>
-                                <div className="w-[1px] h-8 bg-[#2d1e16]"></div>
+                                <div className="w-[1px] h-6 sm:h-8 bg-[#2d1e16]"></div>
                                 <div>
-                                    <div className="text-[10px] text-gray-500 font-bold tracking-wider mb-1 uppercase">Accept</div>
-                                    <div className="text-base font-bold text-gray-300">{top3[1].acceptRate}<span className="text-xs text-gray-500 font-normal">%</span></div>
+                                    <div className="text-[9px] sm:text-[10px] text-gray-500 font-bold tracking-wider mb-1 uppercase">Accept</div>
+                                    <div className="text-sm sm:text-base font-bold text-gray-300">{top3[1].acceptRate}<span className="text-xs text-gray-500 font-normal">%</span></div>
                                 </div>
                             </div>
                         </div>
 
                         {/* 1st Place */}
-                        <div className="w-full md:w-[320px] bg-gradient-to-b from-black/95 to-black/90 border border-osu/60 rounded-xl flex flex-col items-center p-6 relative md:h-[240px] mt-16 md:mt-0 shadow-2xl shadow-osu/20 hover:shadow-osu/30 z-10 transform md:-translate-y-4 transition-all duration-300">
-                            <div className="absolute -top-10">
-                                <svg width="40" height="40" viewBox="0 0 24 24" fill="var(--color-primary)" xmlns="http://www.w3.org/2000/svg">
+                        <div className="w-full max-w-[340px] md:w-[290px] lg:w-[320px] bg-gradient-to-b from-black/95 to-black/90 border border-osu/60 rounded-xl flex flex-col items-center p-4 sm:p-6 relative md:h-[240px] mt-10 sm:mt-12 md:mt-0 shadow-2xl shadow-osu/20 hover:shadow-osu/30 z-10 transform md:-translate-y-4 transition-all duration-300 order-1 md:order-2">
+                            <div className="absolute -top-8 sm:-top-10">
+                                <svg width="32" height="32" className="sm:w-10 sm:h-10" viewBox="0 0 24 24" fill="var(--color-primary)" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
                                 </svg>
                             </div>
-                            <div className="absolute top-4 right-4 text-5xl font-black text-[var(--color-primary)]/20">01</div>
-                            <div className="w-20 h-20 rounded-full border-4 border-[#2a1a10] relative -mt-14 bg-[var(--color-primary)] shadow-[0_0_20px_rgba(246,107,21,0.5)] overflow-hidden mb-4 flex items-center justify-center text-white font-bold text-2xl">
+                            <div className="absolute top-3 right-3 sm:top-4 sm:right-4 text-4xl sm:text-5xl font-black text-[var(--color-primary)]/20">01</div>
+                            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-[#2a1a10] relative -mt-12 sm:-mt-14 bg-[var(--color-primary)] shadow-[0_0_20px_rgba(246,107,21,0.5)] overflow-hidden mb-3 sm:mb-4 flex items-center justify-center text-white font-bold text-xl sm:text-2xl">
                                 {getInitial(top3[0].name)}
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-1">{top3[0].name || 'Anonymous'}</h3>
-                            <div className="flex items-center gap-1.5 text-xs text-[var(--color-primary)] mb-8 font-medium">
+                            <h3 className="text-lg sm:text-xl font-bold text-white mb-0.5 sm:mb-1 text-center truncate max-w-full">{top3[0].name || 'Anonymous'}</h3>
+                            <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-[var(--color-primary)] mb-5 sm:mb-8 font-medium">
                                 {top3[0].location || 'Unknown'}
                             </div>
-                            <div className="flex w-full justify-between items-center text-center px-6 border-t border-[var(--color-primary)]/30 pt-5 mt-auto">
+                            <div className="flex w-full justify-between items-center text-center px-4 sm:px-6 border-t border-[var(--color-primary)]/30 pt-4 sm:pt-5 mt-auto">
                                 <div>
-                                    <div className="text-[10px] text-[var(--color-primary)] font-bold tracking-wider mb-1 uppercase">Total Solved</div>
-                                    <div className="text-3xl font-bold text-white tracking-tight">{top3[0].solved}</div>
+                                    <div className="text-[9px] sm:text-[10px] text-[var(--color-primary)] font-bold tracking-wider mb-1 uppercase">Total Solved</div>
+                                    <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight">{top3[0].solved}</div>
                                 </div>
-                                <div className="w-[1px] h-10 bg-[var(--color-primary)]/20"></div>
+                                <div className="w-[1px] h-8 sm:h-10 bg-[var(--color-primary)]/20"></div>
                                 <div>
-                                    <div className="text-[10px] text-[var(--color-primary)]/70 font-bold tracking-wider mb-1 uppercase">Accept</div>
-                                    <div className="text-xl font-bold text-gray-300">{top3[0].acceptRate}<span className="text-sm text-gray-500 font-normal">%</span></div>
+                                    <div className="text-[9px] sm:text-[10px] text-[var(--color-primary)]/70 font-bold tracking-wider mb-1 uppercase">Accept</div>
+                                    <div className="text-lg sm:text-xl font-bold text-gray-300">{top3[0].acceptRate}<span className="text-xs sm:text-sm text-gray-500 font-normal">%</span></div>
                                 </div>
                             </div>
                         </div>
 
                         {/* 3rd Place */}
-                        <div className="w-full md:w-[280px] bg-black/90 border border-osu/40 rounded-xl flex flex-col items-center p-6 relative md:h-[180px] mt-12 md:mt-0 hover:border-osu/70 hover:shadow-osu/20 shadow-2xl shadow-osu/10 transition-all duration-300">
-                            <div className="absolute top-4 right-4 text-4xl font-black text-[#2d1e16]/50">03</div>
-                            <div className="w-14 h-14 rounded-full border-4 border-[#1a1310] relative -mt-11 bg-[#2d1e16] shadow-xl overflow-hidden mb-2 flex items-center justify-center text-white font-bold text-lg">
+                        <div className="w-full max-w-[320px] md:w-[260px] lg:w-[280px] bg-black/90 border border-osu/40 rounded-xl flex flex-col items-center p-4 sm:p-6 relative md:h-[180px] mt-8 md:mt-0 hover:border-osu/70 hover:shadow-osu/20 shadow-2xl shadow-osu/10 transition-all duration-300 order-3">
+                            <div className="absolute top-3 right-3 sm:top-4 sm:right-4 text-3xl sm:text-4xl font-black text-[#2d1e16]/50">03</div>
+                            <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-full border-4 border-[#1a1310] relative -mt-9 sm:-mt-11 bg-[#2d1e16] shadow-xl overflow-hidden mb-1.5 sm:mb-2 flex items-center justify-center text-white font-bold text-base sm:text-lg">
                                 {getInitial(top3[2].name)}
                             </div>
-                            <h3 className="text-lg font-bold text-white mb-1">{top3[2].name || 'Anonymous'}</h3>
-                            <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-5">
+                            <h3 className="text-base sm:text-lg font-bold text-white mb-0.5 sm:mb-1 text-center truncate max-w-full">{top3[2].name || 'Anonymous'}</h3>
+                            <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-gray-400 mb-3 sm:mb-5">
                                 {top3[2].location || 'Unknown'}
                             </div>
-                            <div className="flex w-full justify-between items-center text-center px-4 border-t border-[#2d1e16] pt-3 mt-auto">
+                            <div className="flex w-full justify-between items-center text-center px-3 sm:px-4 border-t border-[#2d1e16] pt-2.5 sm:pt-3 mt-auto">
                                 <div>
-                                    <div className="text-[10px] text-gray-500 font-bold tracking-wider mb-1 uppercase">Solved</div>
-                                    <div className="text-xl font-bold text-white tracking-tight">{top3[2].solved}</div>
+                                    <div className="text-[9px] sm:text-[10px] text-gray-500 font-bold tracking-wider mb-1 uppercase">Solved</div>
+                                    <div className="text-lg sm:text-xl font-bold text-white tracking-tight">{top3[2].solved}</div>
                                 </div>
-                                <div className="w-[1px] h-8 bg-[#2d1e16]"></div>
+                                <div className="w-[1px] h-6 sm:h-8 bg-[#2d1e16]"></div>
                                 <div>
-                                    <div className="text-[10px] text-gray-500 font-bold tracking-wider mb-1 uppercase">Accept</div>
-                                    <div className="text-base font-bold text-gray-300">{top3[2].acceptRate}<span className="text-xs text-gray-500 font-normal">%</span></div>
+                                    <div className="text-[9px] sm:text-[10px] text-gray-500 font-bold tracking-wider mb-1 uppercase">Accept</div>
+                                    <div className="text-sm sm:text-base font-bold text-gray-300">{top3[2].acceptRate}<span className="text-xs text-gray-500 font-normal">%</span></div>
                                 </div>
                             </div>
                         </div>
@@ -144,8 +148,8 @@ const LeaderboardPage = () => {
                 )}
 
                 {/* Toolbar */}
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-black/90 p-4 rounded-xl border border-osu/40 shadow-2xl shadow-osu/10 hover:shadow-osu/20 transition-all duration-300">
-                    <div className="relative w-full md:w-96">
+                <div className="flex flex-col gap-3 bg-black/90 p-3 sm:p-4 rounded-xl border border-osu/40 shadow-2xl shadow-osu/10 hover:shadow-osu/20 transition-all duration-300">
+                    <div className="relative w-full">
                         <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
                         <input
                             type="text"
@@ -156,147 +160,189 @@ const LeaderboardPage = () => {
                         />
                     </div>
 
-                    <div className="flex items-center gap-3 w-full md:w-auto overflow-x-auto">
-                        <button className="flex items-center gap-2 whitespace-nowrap bg-[#120a06] border border-[#2d1e16] text-gray-300 text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-[#1f1510] transition-colors">
-                            Country: All <ChevronDown size={16} className="text-gray-500" />
+                    <div className="flex flex-wrap items-center gap-2">
+                        <button className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap bg-[#120a06] border border-[#2d1e16] text-gray-300 text-xs sm:text-sm font-medium rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 hover:bg-[#1f1510] transition-colors">
+                            Country: All <ChevronDown size={14} className="text-gray-500" />
                         </button>
-                        <button className="flex items-center gap-2 whitespace-nowrap bg-[#120a06] border border-[#2d1e16] text-gray-300 text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-[#1f1510] transition-colors">
-                            Language: All <ChevronDown size={16} className="text-gray-500" />
+                        <button className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap bg-[#120a06] border border-[#2d1e16] text-gray-300 text-xs sm:text-sm font-medium rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 hover:bg-[#1f1510] transition-colors">
+                            Language: All <ChevronDown size={14} className="text-gray-500" />
                         </button>
-                        <button className="flex items-center gap-2 whitespace-nowrap bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white text-sm font-bold rounded-lg px-5 py-2.5 shadow-[0_0_15px_rgba(246,107,21,0.2)] transition-all">
-                            <Users size={16} className="fill-current" /> Find Friends
+                        <button className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white text-xs sm:text-sm font-bold rounded-lg px-3 sm:px-5 py-2 sm:py-2.5 shadow-[0_0_15px_rgba(246,107,21,0.2)] transition-all ml-auto">
+                            <Users size={14} className="fill-current" /> Find Friends
                         </button>
                     </div>
                 </div>
 
-                {/* Table */}
-                <div className="bg-black/90 border border-osu/40 rounded-xl overflow-x-auto shadow-2xl shadow-osu/10 hover:shadow-osu/20 transition-all duration-300">
+                {/* Leaderboard — Table on md+, Cards on mobile */}
+                <div className="bg-black/90 border border-osu/40 rounded-xl overflow-hidden shadow-2xl shadow-osu/10 hover:shadow-osu/20 transition-all duration-300">
+
+                    {/* Loading skeleton */}
                     {loading && leaderboard.length === 0 ? (
-                        <table className="w-full text-left whitespace-nowrap">
-                            <thead className="text-[10px] text-gray-500 uppercase tracking-widest border-b border-[#2d1e16] bg-[#120a06]">
-                                <tr>
-                                    <th className="px-6 py-4 font-bold">Rank</th>
-                                    <th className="px-6 py-4 font-bold w-1/3">Contestant</th>
-                                    <th className="px-6 py-4 font-bold text-center">Score</th>
-                                    <th className="px-6 py-4 font-bold text-center">Attempts</th>
-                                    <th className="px-6 py-4 font-bold text-center">Accept %</th>
-                                    <th className="px-6 py-4 font-bold text-center">Rating</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-[#2d1e16]">
-                                {[...Array(8)].map((_, i) => (
-                                    <tr key={i} className="animate-pulse">
-                                        <td className="px-6 py-5"><div className="h-4 w-6 bg-[#2d1e16] rounded" /></td>
-                                        <td className="px-6 py-5">
-                                            <div className="flex items-center gap-3">
-                                                <div className="w-8 h-8 rounded-full bg-[#2d1e16]" />
-                                                <div>
-                                                    <div className="h-4 w-28 bg-[#2d1e16] rounded mb-1" />
-                                                    <div className="h-3 w-16 bg-[#2d1e16] rounded" />
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-5 text-center"><div className="h-5 w-8 bg-[#2d1e16] rounded mx-auto" /></td>
-                                        <td className="px-6 py-5 text-center"><div className="h-4 w-8 bg-[#2d1e16] rounded mx-auto" /></td>
-                                        <td className="px-6 py-5 text-center"><div className="h-4 w-10 bg-[#2d1e16] rounded mx-auto" /></td>
-                                        <td className="px-6 py-5 text-center"><div className="h-4 w-8 bg-[#2d1e16] rounded mx-auto" /></td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                        <div className="divide-y divide-[#2d1e16]">
+                            {[...Array(6)].map((_, i) => (
+                                <div key={i} className="flex items-center gap-3 p-4 animate-pulse">
+                                    <div className="w-6 h-4 bg-[#2d1e16] rounded flex-shrink-0" />
+                                    <div className="w-8 h-8 rounded-full bg-[#2d1e16] flex-shrink-0" />
+                                    <div className="flex-1 min-w-0">
+                                        <div className="h-4 w-24 sm:w-32 bg-[#2d1e16] rounded mb-1" />
+                                        <div className="h-3 w-16 bg-[#2d1e16] rounded" />
+                                    </div>
+                                    <div className="h-5 w-8 bg-[#2d1e16] rounded flex-shrink-0" />
+                                </div>
+                            ))}
+                        </div>
                     ) : tableUsers.length === 0 && top3.length === 0 ? (
-                        <div className="flex flex-col items-center justify-center py-20 text-gray-500">
-                            <Trophy size={48} className="mb-4 text-[#2d1e16]" />
-                            <p className="font-bold text-lg text-gray-400">No contestants found</p>
-                            <p className="text-sm mt-1">Submit solutions to problems to appear on the leaderboard!</p>
+                        <div className="flex flex-col items-center justify-center py-16 sm:py-20 text-gray-500 px-4">
+                            <Trophy size={40} className="sm:w-12 sm:h-12 mb-4 text-[#2d1e16]" />
+                            <p className="font-bold text-base sm:text-lg text-gray-400">No contestants found</p>
+                            <p className="text-xs sm:text-sm mt-1 text-center">Submit solutions to problems to appear on the leaderboard!</p>
                         </div>
                     ) : (
-                        <table className="w-full text-left whitespace-nowrap">
-                            <thead className="text-[10px] text-gray-500 uppercase tracking-widest border-b border-[#2d1e16] bg-[#120a06]">
-                                <tr>
-                                    <th className="px-6 py-4 font-bold">Rank</th>
-                                    <th className="px-6 py-4 font-bold w-1/3">Contestant</th>
-                                    <th className="px-6 py-4 font-bold text-center">Score</th>
-                                    <th className="px-6 py-4 font-bold text-center">Attempts</th>
-                                    <th className="px-6 py-4 font-bold text-center">Accept %</th>
-                                    <th className="px-6 py-4 font-bold text-center">Rating</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-[#2d1e16] text-sm">
+                        <>
+                            {/* Desktop Table — hidden on mobile */}
+                            <div className="hidden md:block">
+                                <table className="w-full text-left">
+                                    <thead className="text-[10px] text-gray-500 uppercase tracking-widest border-b border-[#2d1e16] bg-[#120a06]">
+                                        <tr>
+                                            <th className="px-4 lg:px-6 py-4 font-bold">Rank</th>
+                                            <th className="px-4 lg:px-6 py-4 font-bold w-1/3">Contestant</th>
+                                            <th className="px-4 lg:px-6 py-4 font-bold text-center">Score</th>
+                                            <th className="px-4 lg:px-6 py-4 font-bold text-center">Attempts</th>
+                                            <th className="px-4 lg:px-6 py-4 font-bold text-center">Accept %</th>
+                                            <th className="px-4 lg:px-6 py-4 font-bold text-center">Rating</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-[#2d1e16] text-sm">
+                                        {tableUsers.map((user) => {
+                                            const isCurrent = isMe(user.userId);
+                                            const colorClass = avatarColors[user.rank % avatarColors.length];
+
+                                            return (
+                                                <tr
+                                                    key={user.userId}
+                                                    className={`transition-colors group ${isCurrent
+                                                        ? 'bg-[var(--color-primary)]/10 hover:bg-[var(--color-primary)]/20 border-y border-[var(--color-primary)]/30'
+                                                        : 'hover:bg-[#1f1510]'
+                                                        }`}
+                                                >
+                                                    <td className={`px-4 lg:px-6 py-4 font-bold ${isCurrent ? 'text-[var(--color-primary)]' : 'text-gray-400'}`}>
+                                                        {user.rank}
+                                                    </td>
+                                                    <td className="px-4 lg:px-6 py-4">
+                                                        <div className="flex items-center gap-3">
+                                                            {isCurrent ? (
+                                                                <div className="w-8 h-8 rounded-full bg-[var(--color-primary)] flex items-center justify-center text-white font-bold text-xs ring-2 ring-[var(--color-primary)] shadow-[0_0_10px_rgba(246,107,21,0.5)] flex-shrink-0">You</div>
+                                                            ) : (
+                                                                <div className={`w-8 h-8 rounded-full ${colorClass} flex items-center justify-center font-bold text-xs ring-2 ring-[#2d1e16] transition-all flex-shrink-0`}>
+                                                                    {getInitial(user.name)}
+                                                                </div>
+                                                            )}
+                                                            <div className="min-w-0">
+                                                                <div className={`font-bold text-white ${isCurrent ? '' : 'group-hover:text-[var(--color-primary)]'} transition-colors cursor-pointer flex items-center gap-2 truncate`}>
+                                                                    {user.name || user.email?.split('@')[0] || 'Anonymous'}
+                                                                    {isCurrent && (
+                                                                        <span className="bg-[var(--color-primary)] text-white text-[9px] px-1.5 py-0.5 rounded font-bold uppercase flex-shrink-0">Me</span>
+                                                                    )}
+                                                                </div>
+                                                                <div className="text-xs text-gray-500 flex items-center gap-1">
+                                                                    {user.location || 'Unknown'}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td className={`px-4 lg:px-6 py-4 font-bold text-center text-lg ${isCurrent ? 'text-[var(--color-primary)]' : 'text-white'}`}>
+                                                        {user.solved}
+                                                    </td>
+                                                    <td className="px-4 lg:px-6 py-4 text-gray-400 text-center">
+                                                        {user.totalAttempts}
+                                                    </td>
+                                                    <td className="px-4 lg:px-6 py-4 text-center">
+                                                        <span className={`font-bold ${user.acceptRate >= 70 ? 'text-green-500' : user.acceptRate >= 40 ? 'text-yellow-500' : 'text-red-400'}`}>
+                                                            {user.acceptRate}%
+                                                        </span>
+                                                    </td>
+                                                    <td className="px-4 lg:px-6 py-4 text-gray-300 text-center font-medium">
+                                                        {user.rating || 0}
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            {/* Mobile Card Layout — visible only on mobile */}
+                            <div className="md:hidden divide-y divide-[#2d1e16]">
                                 {tableUsers.map((user) => {
                                     const isCurrent = isMe(user.userId);
-                                    const avatarColors = ['bg-indigo-900 text-indigo-300', 'bg-teal-900 text-teal-300', 'bg-blue-900 text-blue-300', 'bg-purple-900 text-purple-300', 'bg-orange-900 text-orange-300', 'bg-rose-900 text-rose-300', 'bg-emerald-900 text-emerald-300', 'bg-cyan-900 text-cyan-300'];
                                     const colorClass = avatarColors[user.rank % avatarColors.length];
-                                    const hoverRingColors = ['group-hover:ring-indigo-500', 'group-hover:ring-teal-500', 'group-hover:ring-blue-500', 'group-hover:ring-purple-500', 'group-hover:ring-[var(--color-primary)]', 'group-hover:ring-rose-500', 'group-hover:ring-emerald-500', 'group-hover:ring-cyan-500'];
-                                    const ringHover = hoverRingColors[user.rank % hoverRingColors.length];
 
                                     return (
-                                        <tr
+                                        <div
                                             key={user.userId}
-                                            className={`transition-colors group ${isCurrent
-                                                ? 'bg-[var(--color-primary)]/10 hover:bg-[var(--color-primary)]/20 border-y border-[var(--color-primary)]/30'
-                                                : 'hover:bg-[#1f1510]'
+                                            className={`p-3 sm:p-4 transition-colors ${isCurrent
+                                                ? 'bg-[var(--color-primary)]/10 border-l-2 border-l-[var(--color-primary)]'
+                                                : ''
                                                 }`}
                                         >
-                                            <td className={`px-6 py-5 font-bold ${isCurrent ? 'text-[var(--color-primary)]' : 'text-gray-400'}`}>
-                                                {user.rank}
-                                            </td>
-                                            <td className="px-6 py-5">
-                                                <div className="flex items-center gap-3">
-                                                    {isCurrent ? (
-                                                        <div className="w-8 h-8 rounded-full bg-[var(--color-primary)] flex items-center justify-center text-white font-bold text-xs ring-2 ring-[var(--color-primary)] shadow-[0_0_10px_rgba(246,107,21,0.5)]">You</div>
-                                                    ) : (
-                                                        <div className={`w-8 h-8 rounded-full ${colorClass} flex items-center justify-center font-bold text-xs ring-2 ring-[#2d1e16] ${ringHover} transition-all`}>
-                                                            {getInitial(user.name)}
-                                                        </div>
-                                                    )}
+                                            <div className="flex items-center gap-3">
+                                                {/* Rank */}
+                                                <div className={`text-sm font-bold w-7 text-center flex-shrink-0 ${isCurrent ? 'text-[var(--color-primary)]' : 'text-gray-500'}`}>
+                                                    {user.rank}
+                                                </div>
+
+                                                {/* Avatar */}
+                                                {isCurrent ? (
+                                                    <div className="w-9 h-9 rounded-full bg-[var(--color-primary)] flex items-center justify-center text-white font-bold text-[10px] ring-2 ring-[var(--color-primary)] shadow-[0_0_8px_rgba(246,107,21,0.4)] flex-shrink-0">You</div>
+                                                ) : (
+                                                    <div className={`w-9 h-9 rounded-full ${colorClass} flex items-center justify-center font-bold text-xs ring-2 ring-[#2d1e16] flex-shrink-0`}>
+                                                        {getInitial(user.name)}
+                                                    </div>
+                                                )}
+
+                                                {/* Name & Location */}
+                                                <div className="flex-1 min-w-0">
+                                                    <div className={`font-bold text-sm truncate ${isCurrent ? 'text-[var(--color-primary)]' : 'text-white'}`}>
+                                                        {user.name || user.email?.split('@')[0] || 'Anonymous'}
+                                                        {isCurrent && <span className="ml-1.5 bg-[var(--color-primary)] text-white text-[8px] px-1.5 py-0.5 rounded font-bold uppercase">Me</span>}
+                                                    </div>
+                                                    <div className="text-[11px] text-gray-500">{user.location || 'Unknown'}</div>
+                                                </div>
+
+                                                {/* Stats */}
+                                                <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0 text-center">
                                                     <div>
-                                                        <div className={`font-bold text-white ${isCurrent ? '' : 'group-hover:text-[var(--color-primary)]'} transition-colors cursor-pointer flex items-center gap-2`}>
-                                                            {user.name || user.email?.split('@')[0] || 'Anonymous'}
-                                                            {isCurrent && (
-                                                                <span className="bg-[var(--color-primary)] text-white text-[9px] px-1.5 py-0.5 rounded font-bold uppercase">Me</span>
-                                                            )}
-                                                        </div>
-                                                        <div className="text-xs text-gray-500 flex items-center gap-1">
-                                                            {user.location || 'Unknown'}
+                                                        <div className="text-[8px] sm:text-[9px] text-gray-500 font-bold uppercase">Solved</div>
+                                                        <div className={`text-sm font-bold ${isCurrent ? 'text-[var(--color-primary)]' : 'text-white'}`}>{user.solved}</div>
+                                                    </div>
+                                                    <div>
+                                                        <div className="text-[8px] sm:text-[9px] text-gray-500 font-bold uppercase">Accept</div>
+                                                        <div className={`text-sm font-bold ${user.acceptRate >= 70 ? 'text-green-500' : user.acceptRate >= 40 ? 'text-yellow-500' : 'text-red-400'}`}>
+                                                            {user.acceptRate}%
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td>
-                                            <td className={`px-6 py-5 font-bold text-center text-lg ${isCurrent ? 'text-[var(--color-primary)]' : 'text-white'}`}>
-                                                {user.solved}
-                                            </td>
-                                            <td className="px-6 py-5 text-gray-400 text-center">
-                                                {user.totalAttempts}
-                                            </td>
-                                            <td className="px-6 py-5 text-center">
-                                                <span className={`font-bold ${user.acceptRate >= 70 ? 'text-green-500' : user.acceptRate >= 40 ? 'text-yellow-500' : 'text-red-400'}`}>
-                                                    {user.acceptRate}%
-                                                </span>
-                                            </td>
-                                            <td className="px-6 py-5 text-gray-300 text-center font-medium">
-                                                {user.rating || 0}
-                                            </td>
-                                        </tr>
+                                            </div>
+                                        </div>
                                     );
                                 })}
-                            </tbody>
-                        </table>
+                            </div>
+                        </>
                     )}
 
                     {/* Pagination */}
                     {totalPages > 0 && (
-                        <div className="flex flex-col md:flex-row items-center justify-between px-6 py-4 bg-[#120a06] border-t border-[#2d1e16] gap-4">
-                            <div className="text-sm text-gray-500">
-                                Showing <span className="font-bold text-white">{((page - 1) * limit) + 1}</span> to <span className="font-bold text-white">{Math.min(page * limit, totalUsers)}</span> of <span className="font-bold text-white">{totalUsers.toLocaleString()}</span> entries
+                        <div className="flex flex-col sm:flex-row items-center justify-between px-3 sm:px-6 py-3 sm:py-4 bg-[#120a06] border-t border-[#2d1e16] gap-3">
+                            <div className="text-xs sm:text-sm text-gray-500 text-center sm:text-left">
+                                Showing <span className="font-bold text-white">{((page - 1) * limit) + 1}</span> to <span className="font-bold text-white">{Math.min(page * limit, totalUsers)}</span> of <span className="font-bold text-white">{totalUsers.toLocaleString()}</span>
                             </div>
                             <div className="flex items-center gap-1">
                                 <button
                                     onClick={() => setPage(p => Math.max(1, p - 1))}
                                     disabled={page <= 1}
-                                    className="px-3 py-1.5 text-sm font-medium text-gray-400 hover:text-white bg-[#1a1310] border border-[#2d1e16] rounded-md hover:border-gray-500 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                                    className="px-2 sm:px-3 py-1.5 text-xs sm:text-sm font-medium text-gray-400 hover:text-white bg-[#1a1310] border border-[#2d1e16] rounded-md hover:border-gray-500 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                                 >
-                                    Previous
+                                    Prev
                                 </button>
                                 {[...Array(Math.min(5, totalPages))].map((_, i) => {
                                     const pageNum = i + 1;
@@ -304,7 +350,7 @@ const LeaderboardPage = () => {
                                         <button
                                             key={pageNum}
                                             onClick={() => setPage(pageNum)}
-                                            className={`w-8 h-8 flex items-center justify-center text-sm font-bold rounded-md transition-colors ${page === pageNum
+                                            className={`w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-xs sm:text-sm font-bold rounded-md transition-colors ${page === pageNum
                                                 ? 'text-white bg-[var(--color-primary)] shadow-[0_0_10px_rgba(246,107,21,0.2)]'
                                                 : 'text-gray-400 hover:text-white hover:bg-[#2d1e16]'
                                                 }`}
@@ -313,11 +359,11 @@ const LeaderboardPage = () => {
                                         </button>
                                     );
                                 })}
-                                {totalPages > 5 && <div className="w-8 h-8 flex items-center justify-center text-sm font-medium text-gray-500">...</div>}
+                                {totalPages > 5 && <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center text-xs sm:text-sm font-medium text-gray-500">...</div>}
                                 <button
                                     onClick={() => setPage(p => Math.min(totalPages, p + 1))}
                                     disabled={page >= totalPages}
-                                    className="px-3 py-1.5 text-sm font-medium text-gray-400 hover:text-white bg-[#1a1310] border border-[#2d1e16] rounded-md hover:border-gray-500 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                                    className="px-2 sm:px-3 py-1.5 text-xs sm:text-sm font-medium text-gray-400 hover:text-white bg-[#1a1310] border border-[#2d1e16] rounded-md hover:border-gray-500 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                                 >
                                     Next
                                 </button>
