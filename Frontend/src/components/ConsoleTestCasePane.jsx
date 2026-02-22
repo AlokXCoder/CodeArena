@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { CheckCircle2, TerminalSquare, ChevronDown, Play, CloudUpload, Plus, Loader2, Bot, ArrowDown } from 'lucide-react';
+import { CheckCircle2, TerminalSquare, ChevronDown, Play, CloudUpload, Plus, Loader2, Bot, ArrowDown, Expand, Minimize2 } from 'lucide-react';
 import { marked } from 'marked';
 
 const ConsoleTestCasePane = ({
     testCases = [], code, problemId, isLoading,
     wrongAttempts, setWrongAttempts, setShowHintOverlay,
-    submissions, setSubmissions, setRequestTabChange, disabled
+    submissions, setSubmissions, setRequestTabChange, disabled,
+    isMaximized, onMaximize
 }) => {
     const visibleCases = testCases || [];
     const [activeTab, setActiveTab] = useState(0);
@@ -29,7 +30,7 @@ const ConsoleTestCasePane = ({
 
         try {
             const token = localStorage.getItem('token');
-            const res = await fetch(`http://localhost:5000/api/submissions/${problemId}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/submissions/${problemId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -99,7 +100,7 @@ const ConsoleTestCasePane = ({
     }
 
     return (
-        <div className="flex-1 flex flex-col min-h-0 bg-[var(--color-dark-surface)] border border-[var(--color-dark-border)] rounded-md overflow-hidden relative">
+        <div className="flex-1 flex flex-col min-h-0 h-full bg-[var(--color-dark-surface)] border border-[var(--color-dark-border)] rounded-md overflow-hidden relative">
             {/* Header Tabs */}
             <div className="flex items-center justify-between bg-[#1a1a1a] border-b border-[var(--color-dark-border)]">
                 <div className="flex">
@@ -118,8 +119,12 @@ const ConsoleTestCasePane = ({
                         <TerminalSquare size={14} className={viewMode === 'CONSOLE' ? 'text-[var(--color-primary)]' : ''} /> CONSOLE
                     </button>
                 </div>
-                <button className="px-4 text-gray-500 hover:text-white transition-colors h-full flex items-center justify-center border-l border-[var(--color-dark-border)]">
-                    <ChevronDown size={16} />
+                <button
+                    onClick={onMaximize}
+                    className="px-4 text-gray-500 hover:text-white transition-colors h-full flex items-center justify-center border-l border-[var(--color-dark-border)]"
+                    title={isMaximized ? 'Restore' : 'Maximize Console'}
+                >
+                    {isMaximized ? <Minimize2 size={14} /> : <Expand size={14} />}
                 </button>
             </div>
 
@@ -134,13 +139,13 @@ const ConsoleTestCasePane = ({
                                     onClick={() => setActiveTab(index)}
                                     className={`whitespace-nowrap px-4 py-1.5 rounded-md font-medium transition-colors ${activeTab === index
                                         ? 'bg-[#2a2a2a] text-[var(--color-primary)] font-semibold border border-[var(--color-primary)]/30'
-                                        : 'bg-transparent text-gray-400 hover:text-gray-200 hover:bg-[#2a2a2a]'
+                                        : 'bg-black text-gray-400 hover:text-gray-200 hover:bg-[#2a2a2a]'
                                         }`}
                                 >
                                     Case {index + 1}
                                 </button>
                             ))}
-                            <button className="px-4 py-1.5 rounded-md bg-transparent text-[var(--color-primary)]/80 hover:text-[var(--color-primary)] font-medium transition-colors flex items-center gap-1 ml-auto whitespace-nowrap">
+                            <button className="px-4 py-1.5 rounded-md bg-black text-[var(--color-primary)]/80 hover:text-[var(--color-primary)] font-medium transition-colors flex items-center gap-1 ml-auto whitespace-nowrap">
                                 <Plus size={14} /> Custom
                             </button>
                         </div>

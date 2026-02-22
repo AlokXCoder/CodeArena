@@ -24,7 +24,7 @@ const OnboardingPage = () => {
 
         setLoading(true);
         try {
-            const res = await fetch('http://localhost:5000/api/auth/complete-profile', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/complete-profile`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -88,8 +88,8 @@ const OnboardingPage = () => {
                                 <div
                                     onClick={() => setPreference('user')}
                                     className={`cursor-pointer border-2 rounded-xl p-5 flex flex-col items-center gap-3 transition-all ${preference === 'user'
-                                            ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/10 shadow-[0_0_15px_rgba(246,107,21,0.2)]'
-                                            : 'border-[#2d1e16] bg-[#120a06] hover:border-gray-600'
+                                        ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/10 shadow-[0_0_15px_rgba(246,107,21,0.2)]'
+                                        : 'border-[#2d1e16] bg-[#120a06] hover:border-gray-600'
                                         }`}
                                 >
                                     <div className={`p-3 rounded-full ${preference === 'user' ? 'bg-[var(--color-primary)] text-white' : 'bg-[#1a1310] text-gray-400'}`}>
@@ -105,8 +105,8 @@ const OnboardingPage = () => {
                                 <div
                                     onClick={() => setPreference('company')}
                                     className={`cursor-pointer border-2 rounded-xl p-5 flex flex-col items-center gap-3 transition-all ${preference === 'company'
-                                            ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/10 shadow-[0_0_15px_rgba(246,107,21,0.2)]'
-                                            : 'border-[#2d1e16] bg-[#120a06] hover:border-gray-600'
+                                        ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/10 shadow-[0_0_15px_rgba(246,107,21,0.2)]'
+                                        : 'border-[#2d1e16] bg-[#120a06] hover:border-gray-600'
                                         }`}
                                 >
                                     <div className={`p-3 rounded-full ${preference === 'company' ? 'bg-[var(--color-primary)] text-white' : 'bg-[#1a1310] text-gray-400'}`}>

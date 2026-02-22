@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
     const location = useLocation();
+    const isHome = location.pathname === '/';
     const [scrolled, setScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -34,9 +35,9 @@ const Navbar = () => {
     return (
 
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-                ? 'bg-black/80 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/20'
-                : 'bg-transparent border-b border-transparent'
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isHome
+                ? (scrolled ? 'bg-black' : 'bg-transparent')
+                : 'bg-black'
                 }`}
         >
             <div className="max-w-screen-2xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
@@ -68,41 +69,67 @@ const Navbar = () => {
                         <Bot size={14} />
                         <span className="hidden md:inline">AI Roadmap</span>
                     </Link>
-                    {localStorage.getItem('token') ? (
-                        <>
+
+                    <div className="hidden md:flex flex-1 justify-center items-center gap-8">
+                        {navLinks.map((link) => (
                             <Link
-                                to="/profile"
-                                className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#1a1a1a] to-[#2a2a2a] flex items-center justify-center overflow-hidden border border-osu/30 hover:border-osu transition-colors shadow-[0_0_10px_rgba(220,68,5,0.2)]"
+                                key={link.name}
+                                to={link.path}
+                                className={`flex items-center gap-2 text-sm font-semibold transition-all duration-300 ${location.pathname === link.path
+                                    ? 'text-osu'
+                                    : 'text-gray-400 hover:text-white'
+                                    }`}
                             >
-                                <User size={16} className="text-gray-300" />
+                                <link.icon size={16} />
+                                {link.name}
                             </Link>
-                        </>
-                    ) : (
-                        <Link
-                            to="/auth"
-                            className="hidden sm:block text-sm text-gray-300 hover:text-white transition-colors"
-                        >
-                            Log In
-                        </Link>
-                    )}
+                        ))}
+                    </div>
 
-                    {/* Mobile Menu Toggle Button */}
-                    <button
-                        className="md:hidden text-gray-300 hover:text-white transition-colors"
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    >
-                        {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
-                    </button>
-
-                    {/* Desktop SignUp Button */}
-                    {!localStorage.getItem('token') && (
+                    <div className="flex items-center gap-4 ml-auto">
                         <Link
-                            to="/auth"
-                            className="hidden md:block bg-osu hover:bg-osu-light text-white text-sm font-medium px-4 py-2 rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(220,68,5,0.3)]"
+                            to="/ai-roadmap"
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[var(--color-primary)]/10 to-orange-500/10 border border-[var(--color-primary)]/30 hover:border-[var(--color-primary)] text-[var(--color-primary)] hover:text-white transition-all text-xs font-bold shadow-[0_0_10px_rgba(220,68,5,0.15)] hover:shadow-[0_0_15px_rgba(220,68,5,0.3)]"
                         >
-                            Sign Up
+                            <Bot size={14} />
+                            AI Roadmap
                         </Link>
-                    )}
+                        {localStorage.getItem('token') ? (
+                            <>
+                                <Link
+                                    to="/profile"
+                                    className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#1a1a1a] to-[#2a2a2a] flex items-center justify-center overflow-hidden border border-osu/30 hover:border-osu transition-colors shadow-[0_0_10px_rgba(220,68,5,0.2)]"
+                                >
+                                    <User size={16} className="text-gray-300" />
+                                </Link>
+                            </>
+                        ) : (
+                            <Link
+                                to="/auth"
+                                className="hidden sm:block text-sm text-gray-300 hover:text-white transition-colors"
+                            >
+                                Log In
+                            </Link>
+                        )}
+
+                        {/* Mobile Menu Toggle Button */}
+                        <button
+                            className="md:hidden text-gray-300 hover:text-white transition-colors"
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        >
+                            {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
+                        </button>
+
+                        {/* Desktop SignUp Button */}
+                        {!localStorage.getItem('token') && (
+                            <Link
+                                to="/auth"
+                                className="hidden md:block bg-osu hover:bg-osu-light text-white text-sm font-medium px-4 py-2 rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(220,68,5,0.3)]"
+                            >
+                                Sign Up
+                            </Link>
+                        )}
+                    </div>
                 </div>
             </div>
 

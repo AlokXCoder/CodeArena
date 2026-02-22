@@ -41,7 +41,7 @@ const SuperadminDashboard = () => {
 
         setIsCreatingProb(true);
         try {
-            const res = await fetch('http://localhost:5000/api/problems/superadmin', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/problems/superadmin`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({
@@ -68,7 +68,7 @@ const SuperadminDashboard = () => {
     };
 
     return (
-        <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-8 custom-scrollbar text-sm bg-transparent min-h-full">
+        <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-8 custom-scrollbar text-sm bg-black min-h-screen">
             <div className="max-w-4xl mx-auto flex flex-col gap-6">
 
                 <div className="flex items-center gap-4 mb-4">

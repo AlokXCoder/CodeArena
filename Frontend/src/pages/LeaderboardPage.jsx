@@ -17,7 +17,7 @@ const LeaderboardPage = () => {
         try {
             const params = new URLSearchParams({ page, limit });
             if (searchQuery) params.append('search', searchQuery);
-            const res = await fetch(`http://localhost:5000/api/leaderboard?${params}`);
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/leaderboard?${params}`);
             const data = await res.json();
             setLeaderboard(data.leaderboard || []);
             setTotalPages(data.totalPages || 1);
@@ -42,7 +42,7 @@ const LeaderboardPage = () => {
     const getInitial = (name) => (name || '?')[0].toUpperCase();
 
     return (
-        <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-10 custom-scrollbar text-sm bg-black min-h-full">
+        <div className="flex-1 overflow-y-auto w-full mx-auto p-4 md:p-10 custom-scrollbar text-sm bg-black min-h-screen">
             <div className="max-w-6xl mx-auto flex flex-col gap-8 pb-10">
 
                 {/* Header */}
@@ -68,7 +68,7 @@ const LeaderboardPage = () => {
                     <div className="flex flex-col md:flex-row items-end justify-center gap-4 mt-12 mb-8 md:h-[250px]">
 
                         {/* 2nd Place */}
-                        <div className="w-full md:w-[280px] bg-[#1a1310] border border-[#2d1e16] rounded-xl flex flex-col items-center p-6 relative md:h-[200px] mt-12 md:mt-0 hover:border-[var(--color-primary)] transition-colors">
+                        <div className="w-full md:w-[280px] bg-black/90 border border-osu/40 rounded-xl flex flex-col items-center p-6 relative md:h-[200px] mt-12 md:mt-0 hover:border-osu/70 hover:shadow-osu/20 shadow-2xl shadow-osu/10 transition-all duration-300">
                             <div className="absolute top-4 right-4 text-4xl font-black text-[#2d1e16]/50">02</div>
                             <div className="w-16 h-16 rounded-full border-4 border-[#1a1310] relative -mt-12 bg-[#2d1e16] shadow-xl overflow-hidden mb-3 flex items-center justify-center text-white font-bold text-xl">
                                 {getInitial(top3[1].name)}
@@ -91,7 +91,7 @@ const LeaderboardPage = () => {
                         </div>
 
                         {/* 1st Place */}
-                        <div className="w-full md:w-[320px] bg-gradient-to-b from-[#2a1a10] to-[#1a1310] border border-[var(--color-primary)] rounded-xl flex flex-col items-center p-6 relative md:h-[240px] mt-16 md:mt-0 shadow-[0_0_30px_rgba(246,107,21,0.15)] z-10 transform md:-translate-y-4">
+                        <div className="w-full md:w-[320px] bg-gradient-to-b from-black/95 to-black/90 border border-osu/60 rounded-xl flex flex-col items-center p-6 relative md:h-[240px] mt-16 md:mt-0 shadow-2xl shadow-osu/20 hover:shadow-osu/30 z-10 transform md:-translate-y-4 transition-all duration-300">
                             <div className="absolute -top-10">
                                 <svg width="40" height="40" viewBox="0 0 24 24" fill="var(--color-primary)" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
@@ -119,7 +119,7 @@ const LeaderboardPage = () => {
                         </div>
 
                         {/* 3rd Place */}
-                        <div className="w-full md:w-[280px] bg-[#1a1310] border border-[#2d1e16] rounded-xl flex flex-col items-center p-6 relative md:h-[180px] mt-12 md:mt-0 hover:border-[var(--color-primary)] transition-colors">
+                        <div className="w-full md:w-[280px] bg-black/90 border border-osu/40 rounded-xl flex flex-col items-center p-6 relative md:h-[180px] mt-12 md:mt-0 hover:border-osu/70 hover:shadow-osu/20 shadow-2xl shadow-osu/10 transition-all duration-300">
                             <div className="absolute top-4 right-4 text-4xl font-black text-[#2d1e16]/50">03</div>
                             <div className="w-14 h-14 rounded-full border-4 border-[#1a1310] relative -mt-11 bg-[#2d1e16] shadow-xl overflow-hidden mb-2 flex items-center justify-center text-white font-bold text-lg">
                                 {getInitial(top3[2].name)}
@@ -144,7 +144,7 @@ const LeaderboardPage = () => {
                 )}
 
                 {/* Toolbar */}
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-[#1a1310] p-4 rounded-xl border border-[#2d1e16]">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-black/90 p-4 rounded-xl border border-osu/40 shadow-2xl shadow-osu/10 hover:shadow-osu/20 transition-all duration-300">
                     <div className="relative w-full md:w-96">
                         <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
                         <input
@@ -170,7 +170,7 @@ const LeaderboardPage = () => {
                 </div>
 
                 {/* Table */}
-                <div className="bg-[#1a1310] border border-[#2d1e16] rounded-xl overflow-x-auto shadow-xl">
+                <div className="bg-black/90 border border-osu/40 rounded-xl overflow-x-auto shadow-2xl shadow-osu/10 hover:shadow-osu/20 transition-all duration-300">
                     {loading && leaderboard.length === 0 ? (
                         <table className="w-full text-left whitespace-nowrap">
                             <thead className="text-[10px] text-gray-500 uppercase tracking-widest border-b border-[#2d1e16] bg-[#120a06]">

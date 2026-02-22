@@ -4,19 +4,54 @@ import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// @desc    Get all problems (with optional category filter)
+// @desc    Get all problems (with search, filter, sort, pagination)
 // @route   GET /api/problems
 // @access  Public
 router.get('/', async (req, res) => {
     try {
-        const { category, isMock } = req.query;
+        const { category, isMock, search, difficulty, sortBy, order, page, limit } = req.query;
         let query = {};
 
-        if (category) query.category = category;
+        if (category && category !== 'All') query.category = category;
         if (isMock) query.isMock = isMock === 'true';
+        if (difficulty && difficulty !== 'All') query.difficulty = difficulty;
+        if (search) query.title = { $regex: search, $options: 'i' };
 
-        const problems = await Problem.find(query).select('-testCases.expectedOutput'); // Hide expected output
-        res.status(200).json(problems);
+        // Sorting
+        let sortObj = { problemNumber: 1 }; // default sort by problem number
+        if (sortBy) {
+            const sortOrder = order === 'desc' ? -1 : 1;
+            if (sortBy === 'difficulty') {
+                // Custom sort order for difficulty: Easy=1, Medium=2, Hard=3
+                // We'll handle this in post-processing or use a simple string sort
+                sortObj = { [sortBy]: sortOrder };
+            } else {
+                sortObj = { [sortBy]: sortOrder };
+            }
+        }
+
+        // Count total matching documents
+        const totalCount = await Problem.countDocuments(query);
+
+        // Pagination
+        const pageNum = Math.max(1, parseInt(page) || 1);
+        const limitNum = Math.min(100, Math.max(1, parseInt(limit) || 20));
+        const totalPages = Math.ceil(totalCount / limitNum);
+        const skip = (pageNum - 1) * limitNum;
+
+        const problems = await Problem.find(query)
+            .select('-testCases.expectedOutput')
+            .sort(sortObj)
+            .skip(skip)
+            .limit(limitNum);
+
+        res.status(200).json({
+            problems,
+            totalCount,
+            page: pageNum,
+            totalPages,
+            limit: limitNum,
+        });
     } catch (error) {
         res.status(500).json({ message: 'Server Error fetching problems' });
     }

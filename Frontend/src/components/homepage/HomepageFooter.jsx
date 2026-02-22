@@ -25,7 +25,6 @@ const footerLinks = {
 export default function HomepageFooter() {
     return (
         <footer id="footer">
-            <div className="w-11/12 mx-auto h-px bg-neutral-900/50" />
 
             <section className="max-w-screen-xl mx-auto py-20 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-x-12 gap-y-8 px-6">
                 <div className="col-span-full xl:col-span-2 flex justify-center">
