@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { User, Bot, Swords, Menu, X, LayoutDashboard, Target, Trophy, Network, UploadCloud } from 'lucide-react';
+import { User, Bot, Menu, X, LayoutDashboard, Target, Trophy, Network, UploadCloud } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
@@ -18,7 +18,7 @@ const Navbar = () => {
 
     const baseLinks = [
         { name: 'Home', path: '/', icon: LayoutDashboard },
-        { name: 'Contests', path: '/contests', icon: Swords },
+        { name: 'Contests', path: '/contests', icon: Target },
         { name: 'Problemset', path: '/problemset', icon: Target },
         { name: 'Leaderboard', path: '/leaderboard', icon: Trophy },
     ];
@@ -28,43 +28,46 @@ const Navbar = () => {
         : baseLinks;
 
     if (user?.role === 'superadmin') {
-        // Superadmin gets upload practice option
         navLinks = [...navLinks, { name: 'Upload Practice', path: '/superadmin', icon: UploadCloud }];
     }
 
     return (
-
         <nav
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isHome
-                ? (scrolled ? 'bg-black' : 'bg-transparent')
-                : 'bg-black'
+                    ? (scrolled ? 'bg-black' : 'bg-transparent')
+                    : 'bg-black'
                 }`}
         >
-            <div className="max-w-screen-2xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
-                <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                    <img src="/code-arena_logo.png" alt="logo png" width={180} height={180} />
-                </Link>
+            <div
+                className={`transition-all duration-500 ease-in-out border ${isHome
+                        ? (scrolled
+                            ? 'mx-4 md:mx-8 my-2 rounded-2xl bg-black/70 backdrop-blur-2xl border-osu/30 shadow-[0_8px_32px_rgba(220,68,5,0.12)]'
+                            : 'border-transparent')
+                        : 'border-b border-osu/20 bg-black'
+                    }`}
+            >
+                <div className="max-w-screen-2xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
+                    <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                        <img src="/code-arena_logo.png" alt="logo png" width={180} height={180} />
+                    </Link>
 
-                <div className="hidden md:flex flex-1 justify-center items-center gap-8">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            to={link.path}
-                            className={`flex items-center gap-2 text-sm font-semibold transition-all duration-300 ${location.pathname === link.path
-                                ? 'text-osu'
-                                : 'text-gray-400 hover:text-white'
-                                }`}
-                        >
-                            <link.icon size={16} />
-                            {link.name}
-                        </Link>
-                    ))}
-                </div>
+                    <div className="hidden md:flex flex-1 justify-center items-center gap-8">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.name}
+                                to={link.path}
+                                className={`flex items-center gap-2 text-sm font-semibold transition-all duration-300 ${location.pathname === link.path
+                                    ? 'text-osu'
+                                    : 'text-gray-400 hover:text-white'
+                                    }`}
+                            >
+                                <link.icon size={16} />
+                                {link.name}
+                            </Link>
+                        ))}
+                    </div>
 
-                <div className="flex items-center gap-3 md:gap-4 ml-auto">
-
-
-                    <div className="flex items-center gap-4 ml-auto">
+                    <div className="flex items-center gap-3 md:gap-4 ml-auto">
                         <Link
                             to="/ai-roadmap"
                             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[var(--color-primary)]/10 to-orange-500/10 border border-[var(--color-primary)]/30 hover:border-[var(--color-primary)] text-[var(--color-primary)] hover:text-white transition-all text-xs font-bold shadow-[0_0_10px_rgba(220,68,5,0.15)] hover:shadow-[0_0_15px_rgba(220,68,5,0.3)]"
@@ -73,14 +76,12 @@ const Navbar = () => {
                             AI Roadmap
                         </Link>
                         {localStorage.getItem('token') ? (
-                            <>
-                                <Link
-                                    to="/profile"
-                                    className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#1a1a1a] to-[#2a2a2a] flex items-center justify-center overflow-hidden border border-osu/30 hover:border-osu transition-colors shadow-[0_0_10px_rgba(220,68,5,0.2)]"
-                                >
-                                    <User size={16} className="text-gray-300" />
-                                </Link>
-                            </>
+                            <Link
+                                to="/profile"
+                                className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#1a1a1a] to-[#2a2a2a] flex items-center justify-center overflow-hidden border border-osu/30 hover:border-osu transition-colors shadow-[0_0_10px_rgba(220,68,5,0.2)]"
+                            >
+                                <User size={16} className="text-gray-300" />
+                            </Link>
                         ) : (
                             <Link
                                 to="/auth"
@@ -90,7 +91,7 @@ const Navbar = () => {
                             </Link>
                         )}
 
-                        {/* Mobile Menu Toggle Button */}
+                        {/* Mobile Menu Toggle */}
                         <button
                             className="md:hidden text-gray-300 hover:text-white transition-colors"
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -98,7 +99,7 @@ const Navbar = () => {
                             {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
                         </button>
 
-                        {/* Desktop SignUp Button */}
+                        {/* Desktop Sign Up */}
                         {!localStorage.getItem('token') && (
                             <Link
                                 to="/auth"
@@ -119,13 +120,12 @@ const Navbar = () => {
                 />
             )}
 
-            {/* Mobile Slide-out Menu (Right Side) */}
+            {/* Mobile Slide-out Menu */}
             <div
                 className={`md:hidden fixed top-0 right-0 h-screen w-[280px] bg-[#0a0a0a]/95 backdrop-blur-xl border-l border-osu/20 z-[50] shadow-2xl transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
                     }`}
             >
                 <div className="flex flex-col h-full p-6">
-                    {/* Menu Header with Close Button */}
                     <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
                         <span className="font-bold text-lg text-white">Menu</span>
                         <button
@@ -136,7 +136,6 @@ const Navbar = () => {
                         </button>
                     </div>
 
-                    {/* Navigation Links */}
                     <div className="flex flex-col gap-6 flex-1">
                         {navLinks.map((link) => (
                             <Link
@@ -154,7 +153,6 @@ const Navbar = () => {
                         ))}
                     </div>
 
-                    {/* Auth / Profile Footer inside Mobile Menu */}
                     <div className="pt-6 border-t border-white/10 mt-auto">
                         {localStorage.getItem('token') ? (
                             <Link
